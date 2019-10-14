@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Ixcute 注册界面</title>
+<link rel='stylesheet' type='text/css' href='../CSS/Reg.css'/>
+</head>
+
+<body>
+	<div id='regform'>
+    	<p id='welcome'>欢迎注册Ixcute</p>
+        <table id='table' width="100%" border="0">
+          <tr>
+            <td>真实姓名：</td>
+            <td><input type='text' id='realname' class='minput' onblur="regExpCheck(realname,/^[\u4e00-\u9fa5]{2,4}$/,namecheck);" placeholder="2-4个汉字"/></td>
+            <td id='namecheck' class='false'></td>
+          </tr>
+          <tr>
+            <td>身份证号：</td>
+            <td><input type='text' id='idnumber' class='minput' onblur='regExpCheck(ID,/\d{15}(\d\d[0-9]xX)?/,idcheck);'/></td>
+            <td id='idcheck' class='false'></td>
+          </tr>
+          <tr>
+            <td>用户名：</td>
+            <td><input type='text' id='user' class='minput' placeholder="按格式要求" onblur="regExpCheck(user,/[A-z]{3,}/,usercheck);"/></td>
+            <td id='usercheck' class='false'></td>
+          </tr>
+          <tr>
+            <td>密码：</td>
+            <td><input type='password' id='password' class='minput' placeholder="长度为6-18位" 
+            onblur='regExpCheck(psd,/(?=^.{6,18}$)(?=.*\d)(?=.*[A-z]).*$/,psdcheck)'/></td>
+            <td id='psdcheck' class='false'></td>
+          </tr>
+          <tr>
+            <td>确认密码</td>
+            <td><input type='password' id='password2' class='minput' onblur='psdconfirm();'/></td>
+            <td id='psdcheck2' class='false'></td>
+          </tr>
+          <tr>
+            <td colspan="3"><input type='button' id='register' value='立即注册' onclick="regcheck();"/></td>
+          </tr>
+        </table>
+        <script src='js/jquery-1.9.1.js' type='text/javascript' charset='UTF-8'></script>
+        <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+		<script src="https://www.jq22.com/jquery/jquery-ui-1.11.0.js"></script>
+		<script src="layui/layui.js" type="text/javascript"></script>
+		<script src="../JS/Particleground.js" type="text/javascript"></script>
+		<script src="../JS/Treatment.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			function showCheck(a) {
+				CodeVal = a;
+				var c = document.getElementById("myCanvas");
+				var ctx = c.getContext("2d");
+				ctx.clearRect(0, 0, 1000, 1000);
+				ctx.font = "80px 'Hiragino Sans GB'";
+				ctx.fillStyle = "#E8DFE8";
+				ctx.fillText(a, 0, 100);
+			}
+			//粒子背景特效
+						$('body').particleground({
+							dotColor: '#E8DFE8',
+							lineColor: '#133b88'
+						});
+						$('input[type="text"]').focus(function() {
+							$(this).prev().animate({
+								'opacity': '1'
+							}, 200);
+						});
+			
+			//全屏
+			var fullscreen = function() {
+				elem = document.body;
+				if(elem.webkitRequestFullScreen) {
+					elem.webkitRequestFullScreen();
+				} else if(elem.mozRequestFullScreen) {
+					elem.mozRequestFullScreen();
+				} else if(elem.requestFullScreen) {
+					elem.requestFullscreen();
+				} else {
+					//浏览器不支持全屏API或已被禁用  
+				}
+			}
+		</script>
+    	
+        <script type="text/javascript" src="../JS/RequestAnimationFrame.js"></script>
+    	<script type="text/javascript" src='../JS/Reg.js'></script>
+        
+        
+        
+    </div>
+</body>
+</html>

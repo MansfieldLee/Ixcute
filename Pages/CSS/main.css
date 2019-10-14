@@ -1,0 +1,30 @@
+/* CSS Document */
+*{
+	margin:1px;
+}
+#container{
+	width:1500px;
+	height:300px;
+	border:1px solid #000;
+}
+#head{
+	width:1500px;
+	height:40px;
+	border:1px solid red;
+}
+#menu{
+	width:100px;
+	height:258px;
+	border:1px solid green;
+	float:left;
+}
+#show_desk{
+	width:1390px;
+	height:258px;
+	border:1px solid blue;
+	float:left;
+}
+a{
+	text-decoration:none;
+}
+
