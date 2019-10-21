@@ -42,59 +42,228 @@ $('#click3').click(function(){
 	}
 })
 })
-
+function myshow(showed){
+	$('.table').hide(100);
+	$('#content_'+showed).show(200);
+}
 //加载统计图区域：
-//$('#show_desk').load('../main/bar.html #content').hide().fadeIn('slow');
-$('#fun1 .1').on('click',function(e){
-	e.preventDefault();
-	console.log('1');
-	var xhr =new XMLHttpRequest()   
-	var $content = $('#show_desk');
-	$('#content').remove();
-	/**function ck(){     
-		xhr.open("GET", "../main/test.txt", true);//注意路径问题读取data.txt文件的内容。    
-		xhr.send(null);    
-		xhr.onreadystatechange = function() {      
-			if (xhr.readyState == 4) {        
-				if (xhr.status == 200||xhr.status==0) {//请求本地txt文件时状态码是0。     
-					 alert(xhr.responseText);  
-				} 
-				else {          
-					 alert(xhr.status);        
-				}      
-			}  
-		};};
-	console.log(xhr.status);
-	console.log(xhr.responseText); 
-	$content.html(xhr.responseText);
-});**/
+//bar区：
+$(function() {
+    var edubalance = echarts.init(document.getElementById('edubalance'));
+    option = {
+        tooltip: {
+            trigger: 'axis',
+            formatter: '{b}</br>{a}: {c}</br>{a1}: {c1}</br>{a2}: {c2}</br>{a3}: {c3}'
+        },
+        toolbox: {
+            show:false,
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        legend: {
+            data:['test1','test2','test3','test4'],
+            right:"5%",
+            textStyle:{
+                color:'#000'
+            }
+        },
+        grid:{
+            top:'18%',
+            right:'5%',
+            bottom:'8%',
+            left:'5%',
+            containLabel: true
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: ['工藤新一','工藤新2','工藤新3','工藤新4'],
+                splitLine:{
+                    show:false,
+                    lineStyle:{
+                        color: '#000'
+                    }
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLabel:{
+                    textStyle:{
+                        color:"#000"
+                    },
+                    lineStyle:{
+                        color: '#000'
+                    },
+                    alignWithLabel: true,
+                    interval:0,
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
 
+                nameTextStyle:{
+                    color:'#000'
+                },
+                interval: 5,
+                max:30,
+                min: 0,
+                splitLine:{
+                    show:true,
+                    lineStyle:{
+                        color: '#000'
+                    }
+                },
+                axisLine: {
+                    show:false,
+                    lineStyle: {
+                        color: '#000'
+                    }
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLabel:{
+                    textStyle:{
+                        color:"#000"
+                    },
+                    alignWithLabel: true,
+                    interval:0
 
-	htmlobj = $.ajax({
-		type:'GET',
-		url:'../main/bar.html',
-		async:false,
-		beforeSend: function(){
-			console.log('2');
-			$content.append("<div id='load'>Loading</div>");
-		},
-		complete:function(){
-			$('#load').remove();
-			console.log('3');
-			console.log($content.load('../main/bar.html #content'));
-		},
-		success: function(){
-			console.log('4');
-			//$content.html($(data).find('#content')).hide().fadeIn(300);
-			$content.load('../main/bar.html #content').hide().fadeIn('400');
-		},
-		fail:function(){
-			console.log('5');
-			alert('false!');
-		}
-	});
-	//$content.html(htmlobj.responseText);
-	//$content.load('../main/bar.html #content');
-	
-	});
+                }
+            }
+        ],
+        color:"yellow",
+        series: [
+            {
+                name:'test1',
+                type:'bar',
+                data:[21, 14, 17, 12],
+                itemStyle: {
+                    normal: {
+                        color: '#76da91'
+                        },label: {
+                            show: true,
+                            position: 'top',
+                            formatter: '{c}'
+                        }
+                    }
+            },
+            {
+                name:'test2',
+                type:'bar',
+                data:[12, 14, 17, 23],
+                itemStyle: {
+                    normal: {
+                        color: '#f8cb7f'},
+                    label: {
+                            show: true,
+                            position: 'top',
+                            formatter: '{c}'
+                        }
+                    }
+            },
+            {
+                name:'test3',
+                type:'bar',
+                data:[12, 14, 17, 13],
+                itemStyle: {
+                    normal: {
+                        color: '#f89588'},
+                    label: {
+                            show: true,
+                            position: 'top',
+                            formatter: '{c}'
+
+                    }
+                }
+            },
+            {
+                name:'test4',
+                type:'bar',
+                data:[2, 4, 7, 3],
+                itemStyle: {
+                    normal: {
+                        color: '#7cd6cf'},
+                    label: {
+                            show: true,
+                            position: 'top',
+                            formatter: '{c}'
+                        }
+                }
+            }
+        ]
+    };
+    edubalance.setOption(option);
+	$('#content_bar').hide(0);
+/*  =====-=*/
+//pie区：
+    var courserate = echarts.init(document.getElementById('courserate'));
+    option = {
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            right: '5%',
+            y:'middle',
+            textStyle:{
+                color:"#000"
+            },
+
+            formatter:function(name){
+                var oa = option.series[0].data;
+                var num = oa[0].value + oa[1].value + oa[2].value + oa[3].value+oa[4].value+oa[5].value;
+                for(var i = 0; i < option.series[0].data.length; i++){
+                    if(name==oa[i].name){
+                        return name +  ' '+oa[i].value;
+                    }
+                }
+            },
+            data: ['test1','test2','test3','test4','test5','text6']
+        },
+        series : [
+            {
+                name: 'FK',
+                type: 'pie',
+                radius : '65%',
+                color:['#27c2c1','#9ccb63','#fcd85a','#60c1de','#0084c8','#d8514b'],
+                center: ['30%', '50%'],
+                data:[
+                    {value:335, name:'test1'},
+                    {value:310, name:'test2'},
+                    {value:234, name:'test3'},
+                    {value:135, name:'test4'},
+                    {value:234, name:'test5'},
+                    {value:234, name:'text6'}
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        label:{
+                            show: true,
+                            position:'outside',
+                            formatter: '{b}'
+                        }
+                    },
+                    labelLine :{show:true}
+                }
+            }
+        ]
+    };
+    courserate.setOption(option);
+	$('#content_pie').hide(0);
+})
 //统计图区域结束

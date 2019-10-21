@@ -34,7 +34,7 @@ body{
 .main{
     padding: 0 30px 30px;
 }
-.main-left,
+/*.main-left,
 .main-right{
     float: left;
     width: 28%;
@@ -44,8 +44,12 @@ body{
     float: left;
     width: 44%;
     padding: 0 10px;
+}*/
+.table{
+	float:left;
+	width:40%;
+	padding:0 10px
 }
-
 .border-container {
     position: relative;
     margin-top: 15px;
@@ -107,8 +111,6 @@ body{
 }
 .teacher-pie{
     border-bottom: 1px solid #2c768a;
-    margin: -10px;
-    margin-bottom: 0;
 }
 .three-pie li,
 .teacher-pie li{

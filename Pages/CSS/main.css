@@ -4,27 +4,34 @@
 }
 #container{
 	width:1500px;
-	height:300px;
 	border:1px solid #000;
+	clear:both;
 }
+#content_map{
+	height:400px;width:600px;border:1px solid blue;
+} 
 #head{
 	width:1500px;
 	height:40px;
 	border:1px solid red;
 }
 #menu{
-	width:100px;
-	height:258px;
+	width:200px;
 	border:1px solid green;
 	float:left;
 }
 #show_desk{
-	width:1390px;
-	height:258px;
+	width:1290px;
 	border:1px solid blue;
 	float:left;
 }
 a{
 	text-decoration:none;
+}
+.show{
+	display:block;
+}
+.hide{
+	display:none;
 }
 
