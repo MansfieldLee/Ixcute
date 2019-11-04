@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper  
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- 需要修改 -->
+ <mapper namespace="org.hit.mapper.LoginMapper">
+ <!-- 通过namespace + id 来定位namesql -->
+ 
+ <!-- 修改内容
+   <select id="QueryStudentByStuno" parameterType="int" resultType="Student">
+   		select * from student where stuno=#{stuno}
+   </select> -->
+    
+    <insert id="addUser" parameterType="org.hit.entity.User">
+    	insert into Login(id,username,userpwd,usertype) values(#{id},#{uname},#{upwd},#{utype})
+    </insert>
+    
+
+    </mapper>

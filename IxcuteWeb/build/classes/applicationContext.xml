@@ -2,6 +2,54 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 加载dp.properties文件 -->
+	<bean id="config" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+		<property name="locations">
+			<array>
+				<value>classpath:db.properties</value>
+			</array>
+		</property>
+	</bean>
 
-
+	<!-- 替代MyBatis配置文件conf.xml 数据源-->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${driver}"></property>
+		<property name="url" value="${url}"></property>
+		<property name="username" value="${username}"></property>
+		<property name="password" value="${password}"></property>
+		<property name="maxActive" value="${maxActive}"></property>
+		<property name="maxIdle" value="${maxIdle}"></property>
+	</bean>
+	
+	
+	<!-- 配置MyBatis的核心类Sqlsessionfactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- 加载MyBatis配置文件 -->
+		<property name="configLocation" value="classpath:conf.xml"></property>
+	</bean>
+	
+	<!-- Spring整合MyBatis 将MyBatis的SqlSessionfactory交给spring-->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+		<property name="basePackage" value="org.hit.mapper"></property>
+		<!-- 上面这句话所在的Properties的作用
+		将org.hit.mapper包中，所有的接口 产生的与之相对应的 动态代理对象
+		（对象名就是首字母小写的接口名）：loginMapper.query()
+		 -->
+	</bean>
+	
+	
+	
+	
+	<bean id="userDao" class="org.hit.dao.Impl.LoginDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	<bean id="userService" class="org.hit.service.Impl.LoginServiceImpl">
+		<property name="loginMapper" ref="userDao"></property>
+	</bean>
+	
+	
+	
 </beans>
