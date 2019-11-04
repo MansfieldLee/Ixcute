@@ -42,14 +42,14 @@
 	
 	
 	
-	
-	<bean id="userDao" class="org.hit.dao.Impl.LoginDaoImpl">
-		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
-	</bean>
-	<bean id="userService" class="org.hit.service.Impl.LoginServiceImpl">
-		<property name="loginMapper" ref="userDao"></property>
+	<!-- 给Service注入Dao -->
+	<bean id="loginService" class="org.hit.service.Impl.LoginService">
+	<property name="loginMapper" ref="loginMapper"></property>
 	</bean>
 	
-	
+	<!-- 
+	<bean id="loginController" class="org.hit.controller.LoginController">
+	<property name="loginService" ref="loginService"></property>
+	</bean> -->
 	
 </beans>

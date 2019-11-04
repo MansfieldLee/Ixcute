@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 
-<a href="Login/queryUserByNo/1">查询学生</a>
 
 <script type="text/javascript" src="jquery-3.4.1.js">
 	</script>
@@ -30,5 +29,13 @@
 	<input type="text" name="checkcode" id="checkcodeID" size="4"/>
 	<img src="img.jsp" />
 	<span id="tip"></span>
+	
+	
+	<form action="Login/loginUser" method="post">
+	用户名：<input name="uname" type="text"/>
+	密码<input name="upwd" type="text"/>
+	<input type="submit" value="提交"/>
+	</form>
+
 </body>
 </html>
