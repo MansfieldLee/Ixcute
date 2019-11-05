@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
+    <meta name="renderer" content="webkit">
+    <title>bar_html</title>
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css">
+	<link rel='stylesheet' type='text/css' href='../CSS/echarts_ele.css'>
+	<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.2.0-rc.2/echarts.min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.1&services=false"></script>
+    <style type="text/css">  
+        html{height:100%}  
+        body{height:100%;margin:0px;padding:0px}  
+        #milkMap{height:400px;width:600px;border:1px solid blue;}  
+	</style>
+</head>
+	<div id="milkMap"></div>
+<body>
+<!--主体-->
+<div id='map' style='width:500;height:400;'>
+    
+</div>
+
+</body>
+<script type="text/javascript"> 
+	//引入百度地图，logo是不能去掉的 
+    var map = new BMap.Map("milkMap");          // 创建地图实例  
+    var point = new BMap.Point(114.355, 22.707);  // 创建点坐标  
+    map.centerAndZoom(point, 12);                 // 初始化地图，设置中心点坐标和地图级别
+	
+	map.addControl(new BMap.OverviewMapControl({isOpen:1})); //为地图添加鹰眼
+	
+	//map.addControl(new BMap.NavigationControl()); //为地图添加鱼骨（默认）
+	map.addControl(new BMap.NavigationControl({type: BMAP_NAVIGATION_CONTROL_SMALL})); //为地图添加鱼骨（迷你型）
+	
+	//map.addControl(new BMap.ScaleControl()); //添加一个带上偏移量的比例尺 
+	map.addControl(new BMap.ScaleControl({offset: new BMap.Size(5, 40)})); //添加一个带上偏移量的比
+	var myCopyright = new BMap.CopyrightControl({offset: new BMap.Size(82, 0)}) //设置版权信息偏移
+	
+	//红色感叹号标签
+	var pointMarker = new BMap.Point(114.387804,22.722123); // 创建标注的坐标
+	var marker = new BMap.Marker(pointMarker); // 创建标注 
+	map.addOverlay(marker); // 将标注添加到地图
+	var infoWindow = new BMap.InfoWindow("这是高频区！！！"); // 创建信息窗口对象
+	marker.addEventListener("mouseover", function(){ //给标注添加点击事件
+	this.openInfoWindow(infoWindow);
+	})
+	marker.addEventListener("mouseout", function(){ //给标注添加点击事件
+	this.closeInfoWindow(infoWindow);
+	});
+	
+	//自定义标签
+	var zsIcon = new BMap.Icon("http://ui-love.com/baidumap/bank/marker.gif", //图片地址
+	new BMap.Size(40, 64), // 标注显示大小
+	{
+	offset: new BMap.Size(20, 64), // 标注底部小尖尖的偏移量
+	imageOffset: new BMap.Size(0, 0) // 这里相当于CSS sprites
+	});
+	var pointMarker1 = new BMap.Point(114.397804,22.712123); // 创建标注的坐标
+	var marker = new BMap.Marker(pointMarker); // 创建标注 
+	var marker1 = new BMap.Marker(pointMarker1, {icon: zsIcon}); // 创建招商银行标注
+	map.addOverlay(marker1);
+	
+	
+	</script>
+</html>

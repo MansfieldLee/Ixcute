@@ -1,11 +1,15 @@
 package org.hit.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.hit.entity.User;
 import org.hit.service.Impl.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("Login")
@@ -14,20 +18,25 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 	
-	@RequestMapping("loginUser")
-	public String loginUser(User user) {
-		System.out.println(user.getUname()+"-"+user.getUpwd()+"-"+user.getId());
+	@Autowired
+	private User user;
+	
+    
+	@RequestMapping("LoginServlet")
+	public String loginUser(@RequestParam("upwd") String pwd,@RequestParam("uname") String name,
+			@RequestParam("checkcode") String result,HttpServletRequest request) {
+
+		user.setUname(name);
+		user.setUpwd(pwd);
 		User loginUser = loginService.selectloginbyname(user);
-		if(loginUser != null) {
+		String Correct = (String) request.getSession().getAttribute("CHECKCODE");
+		System.out.println(name+"-"+pwd+"-"+result+"-"+Correct);
+		
+		if(loginUser != null&&result.equals(Correct)) {
 			return "success";
 		}else {
 			return "redirect:/index.jsp";
 		}
-	}
-	
-	@RequestMapping("test")
-	public String test() {
-		return "success";
 	}
 	
 	public void setLoginService(LoginService loginService) {

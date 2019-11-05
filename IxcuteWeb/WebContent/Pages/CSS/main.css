@@ -1,0 +1,37 @@
+/* CSS Document */
+*{
+	margin:1px;
+}
+#container{
+	width:1500px;
+	border:1px solid #000;
+	clear:both;
+}
+#content_map{
+	height:400px;width:600px;border:1px solid blue;
+} 
+#head{
+	width:1500px;
+	height:40px;
+	border:1px solid red;
+}
+#menu{
+	width:200px;
+	border:1px solid green;
+	float:left;
+}
+#show_desk{
+	width:1290px;
+	border:1px solid blue;
+	float:left;
+}
+a{
+	text-decoration:none;
+}
+.show{
+	display:block;
+}
+.hide{
+	display:none;
+}
+

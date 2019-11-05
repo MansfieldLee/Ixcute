@@ -1,40 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<% String path=request.getContextPath(); %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Ixcute</title>
-<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
 <link rel='stylesheet' type='text/css' href='Pages/CSS/Login.css'/>
+
+	<script type="text/javascript" src="JS/jquery-3.4.1.js">
+	</script>
 	<script type="text/javascript">
 	
 		function reloadcc(){
 			$("img").attr("src", "img.jsp?t="+(new Date().getTime()));
 		}
 	
-		function Login(){
-				var checkcode = $("#checkcodeID").val();
-				var user_name = $("#user").val();
-				var password = $("#pwd").val();
+		$(document).ready(function(){
+			$("#checkcodeID").blur(function(){
+				var $checkcode = $("#checkcodeID").val();
 				$.post(
-						"Login/LoginServlet",
-						{"checkcode":checkcode, 
-						 "uname":user_name,
-						 "upwd":password},
+						"CheckCodeServlet",
+						{"checkcode":$checkcode},
 						function(result){
-							alert(result);
+							$("#tip").html(result);
 						}
 				);
-		}
-		
+			});
+		});
 	</script>
 	
 </head>
 
 <body>
-<input type="button" onclick="Login();" value="send"/>
-
     <div id='small_body'>
         <div id='head'>
             <div id='logo'>

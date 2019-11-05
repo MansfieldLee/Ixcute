@@ -39,7 +39,7 @@
 		（对象名就是首字母小写的接口名）：loginMapper.query()
 		 -->
 	</bean>
-	
+	<bean class="org.hit.entity.User"></bean>
 	
 	
 	<!-- 给Service注入Dao -->
