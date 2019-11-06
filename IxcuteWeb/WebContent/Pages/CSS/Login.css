@@ -1,4 +1,4 @@
-<!--澶т綋甯冨眬閮ㄥ垎 -->
+<!--婢堆傜秼鐢啫鐪柈銊ュ瀻 -->
 	#small_body{
 		text-align:center;
 	}
@@ -31,16 +31,16 @@
 				  transform-origin: 161px 100%;
 		  -webkit-transform: rotateX(0deg);
 				  transform: rotateX(0deg);
-				  /*浠ヤ笂涓洪槾褰�*/
+				  /*娴犮儰绗傛稉娲Ь瑜帮拷*/
 		width:420px;
 		height:380px;
 		background-color:#fff;
 		margin-left:15%;
 		padding-left:0;
 		border-radius:1em;
-		font-family:'鏂规鍏颁涵瓒呯粏榛�';
+		font-family:'閺傝顒滈崗棰佹兜鐡掑懐绮忔锟�';
 		float:left;
-		/*background:transparent;濡傛灉鎯宠鑳屾櫙閫忔槑*/
+		/*background:transparent;婵″倹鐏夐幆瀹狀洣閼冲本娅欓柅蹇旀*/
 	}
 	#reg{
 		margin-left:0;
@@ -53,7 +53,7 @@
 		padding-top:100px;
 	}
 	<!-- -->
-	<!--鍥剧墖鍙婃牱寮忛儴鍒� -->
+	<!--閸ュ墽澧栭崣濠冪壉瀵繘鍎撮崚锟� -->
 	input{
 		color:#39F!important;
 	}
@@ -72,7 +72,6 @@
 	}
 	#logo div pre{
 		font-size:25px;
-		font-family:'鏂规鑸掍綋';
 	}
 	.form_list{
 		text-align:left;
@@ -140,6 +139,6 @@
 		height::10px;
 		line-height:10px;
 		font-size:8px;
-		font-family:'鏂规鍏颁涵瓒呯粏榛�';
+		font-family:'閺傝顒滈崗棰佹兜鐡掑懐绮忔锟�';
 	}
 	<!-- -->
