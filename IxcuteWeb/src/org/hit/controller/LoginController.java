@@ -25,6 +25,7 @@ public class LoginController {
 	@RequestMapping("LoginServlet")
 	public String loginUser(@RequestParam("psd") String pwd,@RequestParam("user") String name,
 			@RequestParam("checkcode") String result,HttpServletRequest request) {
+
 		user.setUname(name);
 		user.setUpwd(pwd);
 		User loginUser = loginService.selectloginbyname(user);

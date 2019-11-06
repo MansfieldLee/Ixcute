@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <title>Ixcute</title>
 <script type="text/javascript" src="Pages/JS/jquery-3.4.1.js"></script>
 <link rel='stylesheet' type='text/css' href='Pages/CSS/Login.css'/>
@@ -57,7 +57,7 @@
                             </td>
                           </tr>
                           <tr>
-                            <td class='form_list' colspan='2'><input type='submit' value="登录""/></td>
+                            <td class='form_list' colspan='2'><input type='submit' value="登录" id='login'/></td>
                           </tr>
                         </table>
 
