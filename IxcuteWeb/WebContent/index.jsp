@@ -1,10 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <title>Ixcute</title>
-<script type="text/javascript" src="Pages/JS/jquery-3.4.1.js"></script>
+
+<!-- <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script> -->
+<script type="text/javascript" src="Pages/JS/jquery.js"></script>
+
 <link rel='stylesheet' type='text/css' href='Pages/CSS/Login.css'/>
 	<script type="text/javascript">
 	
