@@ -30,7 +30,6 @@ public class LoginController {
 	
 	@ResponseBody
 	@RequestMapping("LoginServlet")
-
 	public String loginUser(@RequestParam("psd") String pwd,@RequestParam("user") String name,
 			@RequestParam("checkcode") String result,HttpServletRequest request) {
 
@@ -41,9 +40,9 @@ public class LoginController {
 		System.out.println(name + "-" + pwd + "-" + result + "-" + Correct);
 
 		if (loginUser != null && result.equals(Correct)) {
-			return 1;
+			return "success";
 		} else {
-			return 0;
+			return "forward:/index.jsp";
 		}
 	}
 
