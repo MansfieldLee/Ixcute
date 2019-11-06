@@ -30,21 +30,12 @@ public class LoginController {
 		user.setUpwd(pwd);
 		User loginUser = loginService.selectloginbyname(user);
 		String Correct = (String) request.getSession().getAttribute("CHECKCODE");
-<<<<<<< HEAD
 		System.out.println(name + "-" + pwd + "-" + result + "-" + Correct);
 
 		if (loginUser != null && result.equals(Correct)) {
 			return "success";
 		} else {
 			return "forward:/index.jsp";
-=======
-		System.out.println(name+"-"+pwd+"-"+result+"-"+Correct);
-		
-		if(loginUser != null&&result.equals(Correct)) {
-			return "success";
-		}else {
-			return "redirect:/index.jsp";
->>>>>>> parent of 875b0c2... Merge branch 'master' of https://github.com/will-hit/Ixcute
 		}
 	}
 	

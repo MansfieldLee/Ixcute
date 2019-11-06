@@ -20,12 +20,5 @@
 	
 	<!-- SpringMVC标配 -->
 	<mvc:annotation-driven></mvc:annotation-driven>
-<<<<<<< HEAD
-
 	<mvc:resources location="Pages/" mapping="Pages/**"></mvc:resources>
-	
-
-=======
-	<mvc:resources mapping="Pages/**" location="Pages/"/>
->>>>>>> parent of 875b0c2... Merge branch 'master' of https://github.com/will-hit/Ixcute
 </beans>
