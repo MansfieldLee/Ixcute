@@ -36,7 +36,6 @@ public class LoginController {
 			return "success";
 		} else {
 			return "forward:/index.jsp";
-		}
 	}
 	
 	public void setLoginService(LoginService loginService) {

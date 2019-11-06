@@ -20,5 +20,5 @@
 	
 	<!-- SpringMVC标配 -->
 	<mvc:annotation-driven></mvc:annotation-driven>
-	<mvc:resources location="Pages/" mapping="Pages/**"></mvc:resources>
+	<mvc:resources mapping="Pages/**" location="Pages/"/>
 </beans>
