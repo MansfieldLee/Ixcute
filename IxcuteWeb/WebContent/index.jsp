@@ -1,11 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<% String path=request.getContextPath(); %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Ixcute</title>
-<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<!-- <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script> -->
+<script type="text/javascript" src="Pages/JS/jquery.js"></script>
 <link rel='stylesheet' type='text/css' href='Pages/CSS/Login.css'/>
 	<script type="text/javascript">
 	
@@ -16,24 +17,21 @@
 		function Login(){
 				var checkcode = $("#checkcodeID").val();
 				var user_name = $("#user").val();
-				var password = $("#pwd").val();
+				var password = $("#psd").val();
 				$.post(
 						"Login/LoginServlet",
 						{"checkcode":checkcode, 
 						 "uname":user_name,
 						 "upwd":password},
 						function(result){
-							alert(result);
+							alert(result)
 						}
-				);
-		}
-		
+				);}
 	</script>
 	
 </head>
 
 <body>
-<input type="button" onclick="Login();" value="send"/>
 
     <div id='small_body'>
         <div id='head'>
@@ -96,6 +94,5 @@
         </div>
     </div>
     
-	<script src='Pages/JS/Login.js'></script>
 </body>
 </html>

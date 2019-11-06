@@ -1,4 +1,3 @@
-<!--大体布局部分 -->
 	#small_body{
 		text-align:center;
 	}
@@ -31,15 +30,15 @@
 				  transform-origin: 161px 100%;
 		  -webkit-transform: rotateX(0deg);
 				  transform: rotateX(0deg);
-				  /*以上为阴影*/
+				  /*浠ヤ笂涓洪槾褰�*/
 		width:45%;
 		height:350px;
 		background-color:#fff;
 		margin-left:350px;
 		padding-left:0px;
 		border-radius:1em;
-		font-family:'方正兰亭超细黑';
-		/*background:transparent;如果想要背景透明*/
+		font-family:'鏂规鍏颁涵瓒呯粏榛�';
+		/*background:transparent;濡傛灉鎯宠鑳屾櫙閫忔槑*/
 	}
 	#reg{
 		margin-left:0;
@@ -52,7 +51,7 @@
 		padding-top:100px;
 	}
 	<!-- -->
-	<!--图片及样式部分 -->
+	<!--鍥剧墖鍙婃牱寮忛儴鍒� -->
 	input{
 		color:#39F!important;
 	}
@@ -71,7 +70,7 @@
 	}
 	#logo div pre{
 		font-size:25px;
-		font-family:'方正舒体';
+		font-family:'鏂规鑸掍綋';
 	}
 	.form_list{
 		text-align:left;
@@ -139,6 +138,6 @@
 		height::10px;
 		line-height:10px;
 		font-size:8px;
-		font-family:'方正兰亭超细黑';
+		font-family:'鏂规鍏颁涵瓒呯粏榛�';
 	}
 	<!-- -->
