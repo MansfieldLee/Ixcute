@@ -1,31 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<% String path=request.getContextPath(); %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Ixcute</title>
-<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="Pages/JS/jquery-3.4.1.js"></script>
 <link rel='stylesheet' type='text/css' href='Pages/CSS/Login.css'/>
 	<script type="text/javascript">
 	
 		function reloadcc(){
 			$("img").attr("src", "img.jsp?t="+(new Date().getTime()));
-		}
-	
-		function Login(){
-				var checkcode = $("#checkcodeID").val();
-				var user_name = $("#user").val();
-				var password = $("#pwd").val();
-				$.post(
-						"Login/LoginServlet",
-						{"checkcode":checkcode, 
-						 "uname":user_name,
-						 "upwd":password},
-						function(result){
-							alert(result);
-						}
-				);
 		}
 		
 	</script>
@@ -33,8 +17,6 @@
 </head>
 
 <body>
-<input type="button" onclick="Login();" value="send"/>
-
     <div id='small_body'>
         <div id='head'>
             <div id='logo'>
@@ -50,7 +32,7 @@
                     <h2 id='login_title'>Ixcute登录</h2>
                 </div>
                 <div>
-                    <form>
+                    <form action="Login/LoginServlet" method="post">
                     	<table >
                           <tr>
                             <td class='form_list' colspan='2'>账户</td>
@@ -63,7 +45,7 @@
                             <td class='form_list' colspan='2'>密码</td>
                           </tr>
                           <tr>
-                            <td class='form_list' colspan='2'><input type='password' name='password'  id='psd' placeholder="请输入密码" 
+                            <td class='form_list' colspan='2'><input type='password' name='psd'  id='psd' placeholder="请输入密码" 
                             /></td>
                           </tr>
                           <tr>
@@ -71,11 +53,11 @@
                           </tr>
                           <tr>
                             <td class='form_list' colspan='2'>
-                            	<input type='text' name='checkcode' id='checkcodeID' placeholder="验证码" ><a href="javascript:reloadcc();"><img  src="img.jsp" id="codepicture"></a><span id="tip"></span>
+                            	<input type='text' name='checkcode' id='checkcode' placeholder="验证码" ><a href="javascript:reloadcc();"><img  src="img.jsp" id="codepicture"></a><span id="tip"></span>
                             </td>
                           </tr>
                           <tr>
-                            <td class='form_list' colspan='2'><input type='button' value="登录" id='login' onClick="Login();"/></td>
+                            <td class='form_list' colspan='2'><input type='submit' value="登录""/></td>
                           </tr>
                         </table>
 
@@ -95,7 +77,5 @@
             <p>Version 1.0 &reg;2019.9.17</p>
         </div>
     </div>
-    
-	<script src='Pages/JS/Login.js'></script>
 </body>
 </html>
