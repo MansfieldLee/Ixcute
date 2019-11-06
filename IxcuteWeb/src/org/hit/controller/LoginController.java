@@ -30,8 +30,9 @@ public class LoginController {
 	
 	@ResponseBody
 	@RequestMapping("LoginServlet")
-	public int loginUser(@RequestParam("upwd") String pwd, @RequestParam("uname") String name,
-			@RequestParam("checkcode") String result, HttpServletRequest request) throws IOException {
+
+	public String loginUser(@RequestParam("psd") String pwd,@RequestParam("user") String name,
+			@RequestParam("checkcode") String result,HttpServletRequest request) {
 
 		user.setUname(name);
 		user.setUpwd(pwd);

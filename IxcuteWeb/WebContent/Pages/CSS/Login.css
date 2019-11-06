@@ -1,8 +1,9 @@
+<!--澶т綋甯冨眬閮ㄥ垎 -->
 	#small_body{
 		text-align:center;
 	}
 	#head{
-		width:50%;
+		width:100%;
 		text-align:center;
 		overflow:hidden;
 		padding-top:5%;
@@ -14,7 +15,7 @@
 	#logo{
 		height:400px;
 		float:left;
-		padding-left:13%;
+		padding-left:0%;
 	}
 	#form{
 		  box-shadow: -15px 15px 15px rgba(6, 17, 47, 0.7);
@@ -31,13 +32,14 @@
 		  -webkit-transform: rotateX(0deg);
 				  transform: rotateX(0deg);
 				  /*浠ヤ笂涓洪槾褰�*/
-		width:45%;
-		height:350px;
+		width:420px;
+		height:380px;
 		background-color:#fff;
-		margin-left:350px;
-		padding-left:0px;
+		margin-left:15%;
+		padding-left:0;
 		border-radius:1em;
 		font-family:'鏂规鍏颁涵瓒呯粏榛�';
+		float:left;
 		/*background:transparent;濡傛灉鎯宠鑳屾櫙閫忔槑*/
 	}
 	#reg{
@@ -85,7 +87,7 @@
 		border-left-width:0;
 		border-right-width:0;
 	}
-	#psd:focus,#user:focus,#check:focus{
+	#psd:focus,#user:focus,#checkcodeID:focus{
 		border-color:#39F;
 		outline:none;
 	}
@@ -95,7 +97,7 @@
 	#psd{
 		background:url('../images/key1.png') 0 -5px no-repeat;
 	}
-	#check{
+	#checkcodeID{
 		width:110px;
 		border-radius:3px;
 		border-top-width:0;
