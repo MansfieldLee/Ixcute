@@ -20,5 +20,14 @@
 	
 	<!-- SpringMVC标配 -->
 	<mvc:annotation-driven></mvc:annotation-driven>
-	<mvc:resources mapping="Pages/**" location="Pages/"/>
+	<mvc:resources mapping="/Pages/**" location="/Pages/"/>
+	
+	<!-- 拦截器用于验证登录状态 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+		<mvc:mapping path="/**"/>
+		<bean class="org.hit.authorizedInterceptor.AuthorizedInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
 </beans>
