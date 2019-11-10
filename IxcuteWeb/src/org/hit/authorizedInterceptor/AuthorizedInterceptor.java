@@ -1,6 +1,7 @@
 package org.hit.authorizedInterceptor;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -15,28 +16,37 @@ public class AuthorizedInterceptor implements HandlerInterceptor{
 	
 	//@Autowired
 	//private UserService userService;
-	
+
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
     	Cookie[] cookies = request.getCookies();
 		String uri = request.getRequestURI();
 		System.out.println("uri:"+uri);
-		if(uri.equals("/IxcuteWeb/Login/LoginServlet"))
+		if(uri.equals("/IxcuteWeb/LoginServlet"))
 		{
 			return true;
 		}
-		
-		
-		
-		
-		
-		
-		response.sendRedirect("../index.jsp");
+		HttpSession session = request.getSession(false);
+		if(session==null) {
+			response.sendRedirect("/IxcuteWeb/index.jsp");
+			return false;
+		}
+		String sessionId = session.getId();
+		System.out.println(sessionId);
+		for(Cookie cookie:cookies) {
+			if(cookie.getName().equals("JSESSIONID")) {
+				if(!cookie.getValue().equals(sessionId)) {
+					response.sendRedirect("/IxcuteWeb/index.jsp");
+					return false;
+				}
+			}
+		}
 		return true;
 		
     }
 
-	
+
+
 	public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception{
 		System.out.println("postHandle");
 	}

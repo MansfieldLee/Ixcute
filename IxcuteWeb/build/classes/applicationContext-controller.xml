@@ -14,7 +14,7 @@
 	
 	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/views/"></property>
+		<property name="prefix" value="WEB-INF/views/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 	
@@ -26,6 +26,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 		<mvc:mapping path="/**"/>
+		<mvc:exclude-mapping path="/Pages/**"/>
 		<bean class="org.hit.authorizedInterceptor.AuthorizedInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
