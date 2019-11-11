@@ -32,7 +32,7 @@
                     <h2 id='login_title'>Ixcute登录</h2>
                 </div>
                 <div>
-                    <form action="Login/LoginServlet" method="post">
+                    <form action="LoginServlet" method="post">
                     	<table >
                           <tr>
                             <td class='form_list' colspan='2'>账户</td>
