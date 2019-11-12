@@ -12,6 +12,39 @@
 			$("img").attr("src", "img.jsp?t="+(new Date().getTime()));
 		}
 		
+		var xmlhttp;
+		function loadCheck(){
+			var uname=document.getElementById('user').value;
+			var pword=document.getElementById('psd').value;
+			var yzm=document.getElementById('checkcode').value;
+			if(uname.length==0||pword.length==0){alert("账号或密码为空");return;}
+			if(yzm.length==0){alert('验证码不能为空');return;}
+			if (window.XMLHttpRequest) {xmlhttp=new XMLHttpRequest();}
+			else{xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");}	
+			xmlhttp.onreadystatechange=getResult;
+			xmlhttp.open("POST","LoginServlet",true);
+			xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			xmlhttp.send("user="+uname+"&psd="+pword+"&checkcode="+yzm);		
+		}
+		
+		function getResult(){
+			if (xmlhttp.readyState==4) {	
+				if(xmlhttp.status==200){
+					var rec=xmlhttp.responseText;
+					if(rec==1){
+						window.location.href="Next";
+					}
+					else if(rec==2){
+						alert('验证码错误');
+					}else{
+						alert('账号或者密码错误');
+					}
+				}
+				else{
+					alert("连接失败");
+				}
+			}
+		}
 	</script>
 	
 </head>
@@ -57,7 +90,7 @@
                             </td>
                           </tr>
                           <tr>
-                            <td class='form_list' colspan='2'><input type='submit' value="登录" id='login'/></td>
+                            <td class='form_list' colspan='2'><input type="button" value="登录" id='login' onclick="loadCheck();"/></td>
                           </tr>
                         </table>
 

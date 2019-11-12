@@ -11,10 +11,10 @@
 	
 	<!-- 将控制器所在包加入Ioc容器中 -->
 	<context:component-scan base-package="org.hit.controller"></context:component-scan>
-	
+
 	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="WEB-INF/views/"></property>
+		<property name="prefix" value="/WEB-INF/views/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 	
