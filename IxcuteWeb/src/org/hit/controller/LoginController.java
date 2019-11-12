@@ -1,5 +1,7 @@
 package org.hit.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class LoginController {
@@ -22,9 +25,10 @@ public class LoginController {
 	private User user;
 	
     
-	@RequestMapping("LoginServlet")
-	public String loginUser(@RequestParam("psd") String pwd,@RequestParam("user") String name,
-			@RequestParam("checkcode") String result,HttpServletRequest request,HttpServletResponse response) {
+	@RequestMapping("/LoginServlet")
+	@ResponseBody
+	public int loginUser(@RequestParam("psd") String pwd,@RequestParam("user") String name,
+			@RequestParam("checkcode") String result,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		
 		user.setUname(name);
 		user.setUpwd(pwd);
@@ -32,6 +36,10 @@ public class LoginController {
 		HttpSession session = request.getSession();
 		String Correct = (String) request.getSession().getAttribute("CHECKCODE");
 		System.out.println(name + "-" + pwd + "-" + result + "-" + Correct);
+		
+		if(!result.equals(Correct)) {
+			return 2;
+		}
 		
 		if (loginUser != null && result.equals(Correct)) {
 			//success login!
@@ -41,13 +49,14 @@ public class LoginController {
 	        usernameCookie.setMaxAge(500);
 	        usernameCookie.setPath("/");
 	        response.addCookie(usernameCookie);
-			return "success";
+	        //response.sendRedirect("index.jsp");
+			return 1;
 		} else {
-			return "redirect:/index.jsp";
+			return 0;//"redirect:/index.jsp";
 		}
 	}
 	
-	@RequestMapping(value="Next")
+	@RequestMapping(value="/Next")
 	public String Next() {
 		System.out.println("COME HERE!");
 		return "next";
