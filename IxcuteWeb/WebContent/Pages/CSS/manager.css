@@ -27,6 +27,7 @@ body{
 	padding-top: 4%;
 	position: relative;
 	left: 0;
+	float:left;
 }
 
 #menu{
@@ -37,6 +38,7 @@ body{
 	float:left;
 	background-color: #3094A4;
 	padding-top:18%;
+	float:left;
 }
 
 .submit-button{
