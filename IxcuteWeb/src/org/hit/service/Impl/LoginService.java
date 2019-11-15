@@ -17,8 +17,16 @@ public class LoginService implements ILoginService{
 	}
 	
 	
-	public User selectloginbyname(User user) {
-		return loginMapper.selectloginbyname(user);
+	public User selectloginbyname(String username) {
+		return loginMapper.selectloginbyname(username);
+	}
+
+	public void addUser(User user) {
+		loginMapper.addUser(user);
+	}
+	
+	public void deleteUser(String username) {
+		loginMapper.deleteUserbyname(username);
 	}
 
 }

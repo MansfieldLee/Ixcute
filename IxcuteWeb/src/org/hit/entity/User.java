@@ -1,43 +1,48 @@
 package org.hit.entity;
 
 public class User {
-	private int id;
-	private String uname;
-	private String upwd;
-	private String utype;
+
+	private String username;
+	private String userpwd;
+	private String usertype;
+	
 	
 	public User() {
 
 	}
-	public User(int id, String uname, String upwd, String utype) {
+	public User(String username, String userpwd, String usertype) {
 		super();
-		this.id = id;
-		this.uname = uname;
-		this.upwd = upwd;
-		this.utype = utype;
+		this.username = username;
+		this.userpwd = userpwd;
+		this.usertype = usertype;
 	}
-	public int getId() {
-		return id;
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", userpwd=" + userpwd + ", usertype=" + usertype + "]";
 	}
-	public void setId(int id) {
-		this.id = id;
+
+	public String getUsername() {
+		return username;
 	}
-	public String getUname() {
-		return uname;
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	public void setUname(String uname) {
-		this.uname = uname;
+
+	public String getUserpwd() {
+		return userpwd;
 	}
-	public String getUpwd() {
-		return upwd;
+
+	public void setUserpwd(String userped) {
+		this.userpwd = userped;
 	}
-	public void setUpwd(String upwd) {
-		this.upwd = upwd;
+
+	public String getUsertype() {
+		return usertype;
 	}
-	public String getUtype() {
-		return utype;
+
+	public void setUsertype(String usertype) {
+		this.usertype = usertype;
 	}
-	public void setUtype(String utype) {
-		this.utype = utype;
-	}
+	
 }

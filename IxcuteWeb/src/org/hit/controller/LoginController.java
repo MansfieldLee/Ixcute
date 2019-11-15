@@ -35,9 +35,9 @@ public class LoginController {
 	@ResponseBody
 	public int loginUser(@RequestParam("psd") String pwd,@RequestParam("user") String name,
 			@RequestParam("checkcode") String result,HttpServletRequest request,HttpServletResponse response) throws IOException {
-		user.setUname(name);
-		user.setUpwd(pwd);
-		User loginUser = loginService.selectloginbyname(user);
+		user.setUsername(name);
+		user.setUserpwd(pwd);
+		User loginUser = loginService.selectloginbyname(name);
 		HttpSession session = request.getSession();
 		String Correct = (String) request.getSession().getAttribute("CHECKCODE");
 		System.out.println(name + "-" + pwd + "-" + result + "-" + Correct);
@@ -45,7 +45,7 @@ public class LoginController {
 		if(!result.equals(Correct)) {
 			return 2;
 		}
-		
+		System.out.println(loginUser);
 		if (loginUser != null && result.equals(Correct)) {
 			//success login!
 			session.setAttribute("username", name);
@@ -54,12 +54,40 @@ public class LoginController {
 	        usernameCookie.setMaxAge(500);
 	        usernameCookie.setPath("/");
 	        response.addCookie(usernameCookie);
-	        //response.sendRedirect("index.jsp");
+	        
+	        if(loginUser.getUsertype().equals("管理员")) {
+	        	return 3;
+	        }
 			return 1;
 		} else {
 			return 0;//"redirect:/index.jsp";
 		}
 	}
+	
+	@RequestMapping("/registerServlet")
+	@ResponseBody
+	public int register(@RequestParam("name") String name,@RequestParam("pwd") String pwd,@RequestParam("authority") int authority,
+			HttpServletRequest request,HttpServletResponse response) throws IOException {
+		user.setUsername(name);
+		user.setUserpwd(pwd);
+		if(authority == 0) {
+			user.setUsertype("管理员");
+		}else {
+			user.setUsertype("普通人员");
+		}
+		
+		User user_res = loginService.selectloginbyname(name);
+		System.out.println("registerServlet");
+		if (user_res == null) {
+			//add new user
+			loginService.addUser(user);
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+	
+	
 	
 	@RequestMapping(value="/Next")
 	public String Next() {
@@ -77,6 +105,50 @@ public class LoginController {
 		return "next";
 	}
 	
+	@RequestMapping("/toAdmin")
+	public String toAdmin() {
+		System.out.println("toAdmin");
+		return "manager";
+	}
+	
+	
+	@RequestMapping("/findServlet")
+	@ResponseBody
+	public User findUser(@RequestParam("uname") String name,
+			HttpServletRequest request,HttpServletResponse response) throws IOException {
+
+		User user_res = loginService.selectloginbyname(name);
+		user.setUsername("");
+		System.out.println(user_res);
+		if (user_res != null) {
+			return user_res;
+		} else {
+			return user;//"redirect:/index.jsp";
+		}
+	}
+	
+	
+	@RequestMapping("/changeServlet")
+	@ResponseBody
+	public int changeUser(@RequestParam("old_name") String old_name,@RequestParam("new_name") String new_name,
+			@RequestParam("upwd") String pwd,
+			HttpServletRequest request,HttpServletResponse response) throws IOException {
+		
+		User user_res = loginService.selectloginbyname(old_name);//TODO*;
+		user.setUsername(new_name);
+		user.setUserpwd(pwd);
+		user.setUsertype(user_res.getUsertype());
+		if (user_res != null) {
+			//TODO
+			//修改用户信息，old_name是修改之前的名字，new_name是修改之后的名字，pwd是修改之后的密码
+			loginService.deleteUser(old_name);
+			loginService.addUser(user);
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+    
 	public void setLoginService(LoginService loginService) {
 		this.loginService = loginService;
 	}
