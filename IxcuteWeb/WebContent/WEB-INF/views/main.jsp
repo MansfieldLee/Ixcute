@@ -1,22 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Ixcute</title>
 <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css">
-<link rel='stylesheet' type='text/css' href='../CSS/echarts_ele.css'>
+<link rel='stylesheet' type='text/css' href='Pages/CSS/echarts_ele.css'>
 <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
-<link rel="stylesheet" type="text/css" href="../CSS/bootsnav.css">
-<link rel='stylesheet' type='text/css' href='../CSS/main.css'>
+<link rel="stylesheet" type="text/css" href="Pages/CSS/bootsnav.css">
+<link rel='stylesheet' type='text/css' href='Pages/CSS/main.css'>
 	<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
     <script src="https://cdn.bootcss.com/echarts/4.2.0-rc.2/echarts.min.js"></script>
-	<script src='../JS/pingshan.js'></script>
-	<script src='../JS/longtian.js'></script>
-	<script src='../JS/kengzi.js'></script>
-	<script src='../JS/pingshanjiedao.js'></script>
-	<script src='../JS/biling.js'></script>
-	<script src='../JS/maluan.js'></script>
-	<script src='../JS/shijing.js'></script>
+	<script src='Pages/JS/pingshan.js'></script>
+	<script src='Pages/JS/longtian.js'></script>
+	<script src='Pages/JS/kengzi.js'></script>
+	<script src='Pages/JS/pingshanjiedao.js'></script>
+	<script src='Pages/JS/biling.js'></script>
+	<script src='Pages/JS/maluan.js'></script>
+	<script src='Pages/JS/shijing.js'></script>
 	
 </head>
 <body>
@@ -29,7 +31,7 @@
             <div id='clock_box2'>
                 <canvas id="canvas2" width="380px" height="440px" style="margin:0px;left:65%;top:15%;position:relative;"/>
             </div>
-            <script src="../JS/clock.js"></script>
+            <script src="Pages/JS/clock.js"></script>
             
             <!--<script type='text/javascript'>
             
@@ -357,8 +359,8 @@
             
         </div>
     </div>
-    <script src='../JS/main.js' type='text/javascript' ></script>
+    <script src='Pages/JS/main.js' type='text/javascript' ></script>
 </body>
 	<script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
-	<script type="text/javascript" src="../JS/bootsnav.js"></script>
+	<script type="text/javascript" src="Pages/JS/bootsnav.js"></script>
 </html>

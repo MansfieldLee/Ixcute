@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+html,body{
+	width:100%;
+	height:100%;
+}
+
+body{
+	padding:0;
+	margin:0;
+}
+
+#title_back{
+	background: url('../images/bg1.jpg') no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	height: 18%;
+	position: relative;
+	left: 12%;
+	text-align:left;
+}
+
+#title{
+	font-family: "黑体";
+	font-size: 4em;
+	text-align:left;
+	color: #4B91AB;
+	font-weight: bold;
+	padding-top: 4%;
+	position:relative;
+	left:0;
+}
+
+#menu{
+	width: 12%;
+	height:100%;
+	position: relative;
+	margin-top:0;
+	float:left;
+	background-color: #3094A4;
+	padding-top:15%;
+}
+
+.menu_button{
+	height: 7%;
+	width:100%;
+	background-color: #3094A4;
+	border-top-width: 0;
+	border-bottom-width: 0;
+	border-right-width: 0;
+	border-left-width: 0;
+	font-size: 1rem;
+	font-family: '微软雅黑';
+	font-weight: bold;
+	padding: 0px;
+	color: #F1F4D5;
+}
+
+.menu_button:hover{
+	background-color: #277AA6;
+}
+
+.menu_button:focus{
+	background-color: #D6EDD9;
+	color: #3094A4;
+	outline:none;
+}
+
+
+#wp{
+	width: 88%;
+	height: 100%;
+	position: relative;
+	left: 15%;
+}
+
+.showed{
+	display:block;
+}
+.hided{
+	display:none;
+}

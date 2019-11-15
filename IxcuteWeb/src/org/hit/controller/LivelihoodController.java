@@ -19,16 +19,16 @@ public class LivelihoodController {
 	@RequestMapping(value="/Next")
 	public String Next() {
 //		System.out.println("QueryByProperties");
-		Map map = new HashMap<String, Integer>();
-		map.put("begin_time","2018-07-20");
-		map.put("end_time","2018-10-31");
-		Map result = livelihoodService.queryDataPropertiesByDate(map);
+//		Map map = new HashMap<String, Integer>();
+//		map.put("begin_time","2018-07-20");
+//		map.put("end_time","2018-10-31");
+//		Map result = livelihoodService.queryDataPropertiesByDate(map);
 		
 //		String month = "08";
 //		Map result = livelihoodService.queryKindByMonth(month);
 		
-		System.out.println("\n");
-		System.out.println(result);
-		return "next";
+//		System.out.println("\n");
+//		System.out.println(result);
+		return "main";
 	}
 }
