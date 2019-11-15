@@ -5,27 +5,121 @@ html,body{
 	height:100%;
 }
 
+body{
+	padding:0;
+	margin:0;
+}
+
+#title_back{
+	background: url('../images/bg1.jpg') no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	height: 18%;
+	position: relative;
+
+}
+
+#title{
+	font-size: 4em;
+	text-align: left;
+	color: #4B91AB;
+	font-weight: bold;
+	padding-top: 4%;
+	position: relative;
+	left: 0;
+	float:left;
+}
+
+#menu{
+	width: 12%;
+	height:100%;
+	position: relative;
+	margin-top:0;
+	float:left;
+	background-color: #3094A4;
+	padding-top:18%;
+	float:left;
+}
+
+.submit-button{
+	width: 44%;
+	margin-top: 8%;
+	position: relative;
+	left: 28%;
+	background-color: #9DD9D7;
+	border: 2px #3094A4;
+	height: 35px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 22px;
+	font-weight: bold;
+	color: #FFFFFF;
+	border-radius: 3px;
+}
+
+.submit-button:hover{
+	background-color: #C9EBDB;
+}
+
+.submit-button:active{
+	outline: none;
+	background-color: #3094A4;
+}
+
+.submit-button:focus{
+	outline:none;
+}
+
 .menu_button{
-		box
-		  opacity: 1;
-		  top: 20px;
-		  -webkit-transition-timing-function: cubic-bezier(0.68, -0.25, 0.265, 0.85);
-		  -webkit-transition-property: -webkit-transform,opacity,box-shadow,top,left;
-				  transition-property: transform,opacity,box-shadow,top,left;
-		  -webkit-transition-duration: .5s;
-				  transition-duration: .5s;
-		  -webkit-transform-origin: 161px 100%;
-			  -ms-transform-origin: 161px 100%;
-				  transform-origin: 161px 100%;
-		  -webkit-transform: rotateX(0deg);
-				  transform: rotateX(0deg);
-		top: 20px;
-		width:400px;
-		height:120px;
-		background-color:#fff;
-		margin-left:15%;
-		padding-left:0;
-		border-radius:5px;
-		font-family:'閺傝顒滈崗棰佹兜鐡掑懐绮忔锟�';
-		float:left;
+	height: 7%;
+	width:100%;
+	background-color: #3094A4;
+	border-top-width: 0;
+	border-bottom-width: 0;
+	border-right-width: 0;
+	border-left-width: 0;
+	font-size: 1rem;
+	font-family: '微软雅黑';
+	font-weight: bold;
+	padding: 0px;
+	color: #F1F4D5;
+}
+
+.menu_button:hover{
+	background-color: #277AA6;
+}
+
+.menu_button:focus{
+	outline:none;
+}
+
+.titles{
+	text-align:center;
+	
+}
+
+#page_add, #page_change{
+	position:relative;
+	padding-top:5%;
+	padding-left:35%;
+	padding-right:35%;
+}
+
+.input_frame {
+	height:35px;
+	width: 100%;
+	margin-top:5%;
+	font-size:1rem;
+}
+
+#wp{
+	width: 88%;
+	height: 100%;
+	float:left;
+}
+
+.showed{
+	display:block;
+}
+.hided{
+	display:none;
 }
