@@ -26,9 +26,9 @@
         	<div><input type='text' id="add_name" class="input_frame" placeholder="用户名"/></div>
             <div><input type='text' id="add_code" class="input_frame" placeholder="密码"/></div>
             <div>
-            	<select name="user_type" class="input_frame">
-					<option value="manager">管理员</option>
-					<option value="user">普通政府工作人员</option>
+            	<select name="user_type" id="authority-select" class="input_frame">
+					<option value=0>管理员</option>
+					<option value=1>普通政府工作人员</option>
 				</select>
 			</div>
             <button type="submit" class="submit-button" onclick="register()">添加</button>
@@ -48,18 +48,30 @@
 
 </body>
 <script type='text/javascript'>
+	function changepage_init(){
+    	$("#find_name").val("");
+    	$("#find_code").val("");
+    	$("#new_name").val("");
+    	$("#find_name").attr("disabled",false);
+    	$("#find_code").attr("disabled",true);
+    	$("#new_name").attr("disabled",true);
+    	
+		$('#change_button').removeClass('showed');
+		$('#change_button').addClass('hided');
+		$('#delete_button').removeClass('showed');
+		$('#delete_button').addClass('hided');
+	}
+	
 	$('#add').click(function(){
 		$('#page_add').removeClass('hided');
 		$('#page_add').addClass('showed');
 		$('#page_change').removeClass('showed');
 		$('#page_change').addClass('hided');
 	})
+	
 	$('#change').click(function(){ 
-		$("#find_name").attr("disabled",false);
-		$('#change_button').attr('disabled',true);
-		$('#delete_button').attr('disabled',true);
-		$('#new_name').attr('disabled',true);
-		$('#find_code').attr('disabled',true);
+		changepage_init();
+		
 		$('#page_add').removeClass('showed');
 		$('#page_add').addClass('hided');
 		$('#page_change').removeClass('hided');
@@ -70,6 +82,9 @@
 	function register(){
 		var name = document.getElementById('add_name').value;
 		var pwd = document.getElementById('add_code').value;
+		var authority = document.getElementById('authority-select').value;
+		
+		alert(authority);
 		
 		if(name.length == 0 || pwd.length == 0){
 			alert("账号和密码不能为空");
@@ -81,7 +96,8 @@
 		    type:"post",    //请求方式
 		    data:{    //这里是你要传给后台的data值
 		        "name":name,
-		        "pwd":pwd
+		        "pwd":pwd,
+		        
 		    },
 
 		    dataType:"json",    //数据类型为json类型
@@ -120,9 +136,8 @@
 		        if(result != null){    //如果后台返回的data.SuccessCode不等于0执行后面的语句
 		        	$("#find_name").val(result.uname);
 		        	$("#find_code").val(result.upwd);
+		        	
 		        	$("#find_name").attr("disabled",true);
-		        	$("#change_button").attr("disabled",false);
-		        	$("#delete_button").attr("disabled",false);
 		        	$("#new_name").attr("disabled",false);
 		        	$("#find_code").attr("disabled",false);
 		        }
