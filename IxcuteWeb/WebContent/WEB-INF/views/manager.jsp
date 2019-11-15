@@ -50,22 +50,34 @@
 
 </body>
 <script type='text/javascript'>
+	function changepage_init(){
+		$("#find_name").val("");
+		$("#find_code").val("");
+		$("#new_name").val("");
+		$("#find_name").attr("disabled",false);
+		$("#find_code").attr("disabled",true);
+		$("#new_name").attr("disabled",true);
+		
+		$('#change_button').removeClass('showed');
+		$('#change_button').addClass('hided');
+		$('#delete_button').removeClass('showed');
+		$('#delete_button').addClass('hided');
+	}
+	
 	$('#add').click(function(){
 		$('#page_add').removeClass('hided');
 		$('#page_add').addClass('showed');
 		$('#page_change').removeClass('showed');
 		$('#page_change').addClass('hided');
 	})
+	
 	$('#change').click(function(){ 
-		$("#find_name").attr("disabled",false);
-		$('#change_button').attr('disabled',true);
-		$('#delete_button').attr('disabled',true);
-		$('#new_name').attr('disabled',true);
-		$('#find_code').attr('disabled',true);
+		changepage_init();
+		
 		$('#page_add').removeClass('showed');
 		$('#page_add').addClass('hided');
 		$('#page_change').removeClass('hided');
-		$('#page_change').removeClass('showed');
+		$('#page_change').addClass('showed');
 	})
 
 	
@@ -125,19 +137,18 @@
 		        	$("#find_name").val(result.username);
 		        	$("#new_name").val(result.username);
 		        	$("#find_code").val(result.userpwd);
+		        	
+		    		$('#change_button').removeClass('hided');
+		    		$('#change_button').addClass('showed');
+		    		$('#delete_button').removeClass('hided');
+		    		$('#delete_button').addClass('showed');
+		        	
 		        	$("#find_name").attr("disabled",true);
-		        	$("#change_button").attr("disabled",false);
-		        	$("#delete_button").attr("disabled",false);
 		        	$("#new_name").attr("disabled",false);
 		        	$("#find_code").attr("disabled",false);
 		        }
 		        else{
 					alert("用户名不存在");
-					$("#find_name").attr("disabled",false);
-					$("#change_button").attr("disabled",true);
-		        	$("#delete_button").attr("disabled",true);
-		        	$("#new_name").attr("disabled",true);
-		        	$("#find_code").attr("disabled",true);
 		        }
 		    },
 
@@ -169,6 +180,7 @@
 		    dataType:"json",    //数据类型为json类型
 		    success:function(result){    //成功时返回的data值，注意这个data是后台返回的值，上面的data是要传给后台的值
 		        if(result){    //如果后台返回的data.SuccessCode不等于0执行后面的语句
+		        	changepage_init();
 		        	alert("更改成功");
 		        }
 		        else{
@@ -192,7 +204,7 @@
 		}
 		
 		$.ajax({
-		    url:"/deleteServlet",     //请求后台的地址
+		    url:"deleteServlet",     //请求后台的地址
 		    type:"post",    //请求方式
 		    data:{    //这里是你要传给后台的data值
 		        "uname":uname,
@@ -202,6 +214,7 @@
 		    dataType:"json",    //数据类型为json类型
 		    success:function(result){    //成功时返回的data值，注意这个data是后台返回的值，上面的data是要传给后台的值
 		        if(result){    //如果后台返回的data.SuccessCode不等于0执行后面的语句
+		        	changepage_init();
 		        	alert("删除成功");
 		        }
 		        else{
