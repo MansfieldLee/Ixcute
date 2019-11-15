@@ -25,9 +25,6 @@ public class LoginController {
 	private LoginService loginService;
 	
 	@Autowired
-	private LivelihoodService livelihoodService;
-	
-	@Autowired
 	private User user;
 	
 	
@@ -88,23 +85,6 @@ public class LoginController {
 	}
 	
 	
-	
-	@RequestMapping(value="/Next")
-	public String Next() {
-//		System.out.println("QueryByProperties");
-//		Map map = new HashMap<String, Integer>();
-//		map.put("begin_time","2018-10-20");
-//		map.put("end_time","2018-10-31");
-//		Map result = livelihoodService.queryDataPropertiesByDate(map);
-		
-		String month = "08";
-		Map result = livelihoodService.queryKindByMonth(month);
-		
-		
-		System.out.println(result);
-		return "next";
-	}
-	
 	@RequestMapping("/toAdmin")
 	public String toAdmin() {
 		System.out.println("toAdmin");
@@ -134,21 +114,30 @@ public class LoginController {
 			@RequestParam("upwd") String pwd,
 			HttpServletRequest request,HttpServletResponse response) throws IOException {
 		
-		User user_res = loginService.selectloginbyname(old_name);//TODO*;
+		User user_res = loginService.selectloginbyname(old_name);
+		System.out.println(user_res);
 		user.setUsername(new_name);
 		user.setUserpwd(pwd);
 		user.setUsertype(user_res.getUsertype());
+		loginService.deleteUserbyname(old_name);
+		loginService.addUser(user);
+		return 1;
+	}
+    
+	
+	@RequestMapping("/deleteServlet")
+	@ResponseBody
+	public int deleteUser(@RequestParam("uname") String name,
+			HttpServletRequest request,HttpServletResponse response) throws IOException {
+		User user_res = loginService.selectloginbyname(name);
 		if (user_res != null) {
-			//TODO
-			//修改用户信息，old_name是修改之前的名字，new_name是修改之后的名字，pwd是修改之后的密码
-			loginService.deleteUser(old_name);
-			loginService.addUser(user);
+			//删除一个用户
+			loginService.deleteUserbyname(name);
 			return 1;
 		} else {
 			return 0;
 		}
 	}
-    
 	public void setLoginService(LoginService loginService) {
 		this.loginService = loginService;
 	}

@@ -7,5 +7,5 @@ public interface ILoginService {
 	
 	public User selectloginbyname(String username);
 	
-	//public User selectloginbyid(int id);
+	public void deleteUserbyname(String username);
 }

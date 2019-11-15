@@ -24,8 +24,8 @@ public class LoginService implements ILoginService{
 	public void addUser(User user) {
 		loginMapper.addUser(user);
 	}
-	
-	public void deleteUser(String username) {
+
+	public void deleteUserbyname(String username) {
 		loginMapper.deleteUserbyname(username);
 	}
 

@@ -27,7 +27,6 @@
 		<mvc:interceptor>
 		<mvc:mapping path="/**"/>
 		<mvc:exclude-mapping path="/Pages/**"/>
-		<mvc:exclude-mapping path="../../Pages/**"/>
 		<bean class="org.hit.authorizedInterceptor.AuthorizedInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
