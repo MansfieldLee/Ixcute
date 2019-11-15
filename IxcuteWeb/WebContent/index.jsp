@@ -36,6 +36,8 @@
 					}
 					else if(rec==2){
 						alert('验证码错误');
+					}else if(rec==3){
+						window.location.href="toAdmin";
 					}else{
 						alert('账号或者密码错误');
 					}

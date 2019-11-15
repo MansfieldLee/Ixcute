@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.hit.mapper.LivelihoodMapper">
+
+	<select id="EveProBytime" parameterType="String" resultType="org.hit.entity.Livelihood_data">
+		 select * from livelihood_data where to_char(create_time,'yyyy-mm-dd') = #{create_time} 
+	</select>
+	
+	<select id="EveProBetween" parameterType="HashMap" resultType="org.hit.entity.Livelihood_data">
+		select * from livelihood_data where to_char(create_time,'yyyy-mm-dd') between #{begin_time} and #{end_time}
+	</select>
+	
+	<select id="SelectBymon" parameterType="String" resultType="org.hit.entity.Livelihood_data">
+		 select * from livelihood_data where to_char(create_time,'mm') = #{month} 
+	</select>
+	
+	<select id="SelectAll"  resultType="org.hit.entity.Livelihood_data">
+		 select * from livelihood_data 
+	</select>	
+	
+	<select id="SelectByQuarter" parameterType="int" resultType="org.hit.entity.Livelihood_data">
+		 select * from livelihood_data where to_char(create_time,'Q')=#{quarter}
+	</select>
+<!--
+	<select id="EveProBytime1" parameterType="String" resultType="HashMap">
+		 select count(*) "count",nvl(EVENT_PROPERTY_NAME,'notknown') "event_property" from livelihood_data where to_char(create_time,'yyyy-mm-dd') = #{create_time} group by EVENT_PROPERTY_NAME
+	</select>
+	
+	<select id="EveProBetween1" parameterType="HashMap" resultType="HashMap">
+		select count(*) "count",nvl(EVENT_PROPERTY_NAME,'notknown') event_property from livelihood_data where to_char(create_time,'yyyy-mm-dd') between #{begin_time} and #{end_time} group by EVENT_PROPERTY_NAME
+	</select>  -->	
+
+</mapper>
