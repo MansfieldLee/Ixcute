@@ -212,6 +212,7 @@ $(function() {
 		//var month=document.getElementById('selected_month').value;
 		//var day=document.getElementById('selected_day').value;
 		var flag=0;//0 is year,1 is month,2 is day
+		var year1='2018',month1='09',day1='01'
 		var year='',month='',day='';
 		for(var i=0;i<date.today.length;i++){
 			if(date.today[i]=='/'){flag++;continue;}
@@ -219,18 +220,21 @@ $(function() {
 			if(flag==1){month += date.today[i];}
 			if(flag==2){day += date.today[i];}
 		}
+		
 		//console.log(year,month,day);
 		if (window.XMLHttpRequest) {xmlhttp=new XMLHttpRequest();}
 		
 		else{xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");}	
 		xmlhttp.onreadystatechange=getResult;
-		xmlhttp.open("POST","LoginServlet",true);
+		xmlhttp.open("POST","DataProperties",true);
 		xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-		xmlhttp.send("year="+year+"&month="+month+"&day="+day);		
+		xmlhttp.send("year="+year+"&month="+month+"&day="+day+"&year1="+year1+"&month1="+month1+"&day1="+day1);		
 	}
 	
 	function getResult(){
-		if (xmlhttp.readyState==4) {		
+		if (xmlhttp.readyState==4) {
+			var rec=xmlhttp.responseText;
+			alert(rec);
 			if(xmlhttp.status==200){
 				var rec=xmlhttp.responseText;
 				console.log(rec);

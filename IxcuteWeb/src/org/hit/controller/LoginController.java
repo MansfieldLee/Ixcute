@@ -61,6 +61,12 @@ public class LoginController {
 		}
 	}
 	
+	@RequestMapping("/Next")
+	public String next() {
+		return "main";
+	}
+	
+	
 	@RequestMapping("/registerServlet")
 	@ResponseBody
 	public int register(@RequestParam("name") String name,@RequestParam("pwd") String pwd,@RequestParam("authority") int authority,
