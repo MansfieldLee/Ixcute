@@ -52,6 +52,7 @@
 		<property name="livelihoodMapper" ref="livelihoodMapper"></property>
 		<property name="result"><map></map></property>
 		<property name="ans"><map></map></property>
+		<property name="specialEvent"><map></map></property>
 	</bean>
 	
 	<!-- 给Service注入Dao -->

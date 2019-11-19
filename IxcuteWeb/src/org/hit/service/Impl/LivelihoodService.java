@@ -1,5 +1,7 @@
 package org.hit.service.Impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +21,8 @@ public class LivelihoodService implements ILivelihoodService {
 	
 	private Map<String,Map<String,Integer>> ans;
 	
+	private Map<String,Map<String,String>> specialEvent;
+	
 	public Map<String, Map<String, Integer>> getAns() {
 		return ans;
 	}
@@ -27,8 +31,17 @@ public class LivelihoodService implements ILivelihoodService {
 		this.ans = ans;
 	}
 
+	public Map<String, Map<String, String>> getSpecialEvent() {
+		return specialEvent;
+	}
+
 	public LivelihoodService() {
 		
+	}
+	
+
+	public void setSpecialEvent(Map<String,Map<String,String>> specialEvent) {
+		this.specialEvent = specialEvent;
 	}
 	
 	public Map<String, Integer> getResult() {
@@ -54,6 +67,7 @@ public class LivelihoodService implements ILivelihoodService {
 		String properties = "";
 		result = InitProperties();
 		for(Livelihood_data data:list) {
+			System.out.println(data.getCreate_time());
 			properties = data.getEvent_property_name();
 			if(result.containsKey(properties)) {
 				result.put(properties,result.get(properties) + 1);
@@ -200,6 +214,7 @@ public class LivelihoodService implements ILivelihoodService {
 	public Map<String, Integer> queryKindByMonth(String month){
 		List<Livelihood_data> list = livelihoodMapper.SelectBymon(month);
 		result.clear();
+		InitProblem();
 		String kind;
 		for(Livelihood_data data:list) {
 			if(data.getOvertime_archive_num() == 1) {
@@ -228,25 +243,56 @@ public class LivelihoodService implements ILivelihoodService {
 		return result;
 	}
 	
-	public Map<String,Integer> Statistic(Map map){
+	public Map<String,Integer> StatisticByall(Map map){
 		result.clear();
 		List<Livelihood_data> list = livelihoodMapper.EveProBetween(map);
-		InitStreet();
-		String properties = "";
+		String mainType = "";
 		for(Livelihood_data data:list) {
-			properties = data.getMain_type_name();
-			if(result.containsKey(properties)) {
-				result.put(properties,result.get(properties) + 1);
-			}else if(properties==null) {
+			mainType = data.getEvent_type_name();
+			if(result.containsKey(mainType)) {
+				result.put(mainType,result.get(mainType) + 1);
+			}else if(mainType==null) {
 				System.out.println("找到空字符串"+data);
 			}
 			else {
-				result.put(properties, 1);
+				result.put(mainType, 1);
 			}
 		}
 		return result;
 	}
 	
+	//no deal 
+	public Map<String,Map<String,String>> queryNoDeal(Map map){
+		List<Livelihood_data> list = livelihoodMapper.TimeBetween(map);
+		ans.clear();
+		InitEvent();
+		int condition = 0;
+		String createTime = "";
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		for(Livelihood_data data:list) {
+			condition = data.getIntime_to_archive_num();
+			if(condition == 1) {
+				createTime = data.getCreate_time();
+				
+				
+				long diff = 0L;
+				try {
+					Date date1 = format.parse(createTime);
+					Date date2 = format.parse((String) map.get("end_time"));
+					diff = date2.getTime() - date1.getTime();
+					//one day ago
+					if(diff / (1000 * 24 * 60 * 60) > 1) {
+						
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+			}
+		}
+		
+		return specialEvent;
+	}
 	
 	private Map<String, Integer> InitProperties(){
 		result.put("投诉", 0);
@@ -272,4 +318,32 @@ public class LivelihoodService implements ILivelihoodService {
 		ans.put("石井街道", map);
 	}
 
+	private void InitProblem() {
+		result.put("超期结办", 0);
+		result.put("按期结办", 0);
+		result.put("处置中", 0);
+
+	}
+	
+	private void InitEvent() {
+		Map<String,String> map = new HashMap<String, String>();
+		specialEvent.put("未结办事件", map);
+		map = new HashMap<String, String>();
+		specialEvent.put("报警事件", map);
+	}
+
+	//optional to choose abnormal(0) or alarm(1)
+	private void putData(Livelihood_data data,int optional) {
+		String createTime = data.getCreate_time();
+		String street = data.getStreet_name();
+		String community = data.getCommunity_name();
+		String source = data.getEvent_src_name();
+		String subType = data.getSub_type_name();
+		String property = data.getEvent_property_name();
+		String disposal = data.getDispose_unit_name();
+		if(optional == 0) {
+			
+		}
+	}
+	
 }
