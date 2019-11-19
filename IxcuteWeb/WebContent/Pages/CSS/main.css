@@ -108,12 +108,25 @@ a{
 .time_select:hover{
 	background-color: #87CEFA;
 }
-#time_selector table{
+#time_selector table,#time_selector_pre table{
 	text-align: center;
 	border-radius: 5px;
 }
-#time_selector table tr{
+#time_selector table tr,#time_selector_pre table tr
 	height: 30px;
+}
+#time_button{
+	width:180px;
+	margin-top:10px;
+	line-height:10px;
+	height:30px;
+	font-size:20px;
+	border-radius:10px;
+	background-color:#E2F7F8;
+	color:#6F2430;
+}
+#time_button:focus{
+	outline:none;
 }
 .time_select option{
 	text-align: center;
