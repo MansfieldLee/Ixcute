@@ -15,6 +15,7 @@ $(document).ready(function(){
 	});
 	$('#content_bar').hide(0);
 	$('#content_pie').hide(0);
+	$('#content_situation').hide(0);
 //	var date = new Object();
 //	date = get_date();
 	console.log(date);
