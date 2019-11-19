@@ -1,6 +1,6 @@
 // JavaScript Document
 $(document).ready(function(){
-	var accordionsMenu = $('.cd-accordion-menu');
+	var accordionsMenu = $('#menu');
 
 	if( accordionsMenu.length > 0 ) {
 	

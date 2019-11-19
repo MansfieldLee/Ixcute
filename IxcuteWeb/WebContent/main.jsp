@@ -80,7 +80,7 @@
         
        <div id="menu">
        		<h2 id="menu-head">Ixcute</h2>
-            <div><button class="menu-button" id="pie-button" onclick='javascript:myshow("pie","1")'><span class="glyphicon glyphicon-stats"></span> &nbsp; 问题性质汇总</button></div>
+            <div><button class="menu-button-keep" id="pie-button" onclick='javascript:myshow("pie","1")'><span class="glyphicon glyphicon-stats"></span> &nbsp; 问题性质汇总</button></div>
             <div><button class="menu-button" id="bar-button" onclick='javascript:myshow("bar","2")'><span class="glyphicon glyphicon-stats"></span> &nbsp; 各街道问题情况</button></div>
          <div><button class="menu-button" id="map-button" onclick='javascript:myshow("map","3")'><span class="glyphicon glyphicon-stats"></span> &nbsp; 热点地区</button></div>
        </div>
@@ -273,11 +273,12 @@
 									<option value='31'>31</option>
 								</select></td>
                             <td width='10%'>日</td>
-							<td><button id='time_button'>查看</button></td>
+							
                           </tr>
                         </table>
 
                     </div>
+                    <div><button id='time_button'>查看</button></div>
                     <div id="courserate" style="height:95%" align="center">
                     </div>
                 </div>

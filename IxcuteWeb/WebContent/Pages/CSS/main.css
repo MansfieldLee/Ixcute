@@ -177,7 +177,7 @@ a{
 .container{
 	width:100%;
 }
-#time_selector{
+#time_selector, #time_selector_pre{
 	left:5%;
 	top:5%;
 }
@@ -214,6 +214,7 @@ a{
 	border-radius:10px;
 	background-color:#E2F7F8;
 	color:#6F2430;
+	float:left;
 }
 #time_button:focus{
 	outline:none;
