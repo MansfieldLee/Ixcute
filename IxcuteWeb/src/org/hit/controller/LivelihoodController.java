@@ -131,6 +131,6 @@ public class LivelihoodController {
 		if(Integer.parseInt(sec)<10) {
 			sec = "0" + sec;
 		}
-		return year+"-"+month+"-"+day+"-"+hour+"-"+min+"-"+sec;
+		return year+"-"+month+"-"+day+" "+hour+":"+min+":"+sec;
 	}
 }

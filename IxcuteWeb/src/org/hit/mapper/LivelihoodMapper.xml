@@ -25,7 +25,7 @@
 	</select>
 	
 	<select id="TimeBetween" parameterType="HashMap" resultType="org.hit.entity.Livelihood_data">
-		select * from livelihood_data where to_char(create_time,'yyyy-mm-dd-hh24-mi-ss') between #{begin_time} and #{end_time}
+		select * from livelihood_data where to_char(create_time,'yyyy-mm-dd hh24:mi:ss') between #{begin_time} and #{end_time}
 	</select>	
 <!--
 	<select id="EveProBytime1" parameterType="String" resultType="HashMap">
