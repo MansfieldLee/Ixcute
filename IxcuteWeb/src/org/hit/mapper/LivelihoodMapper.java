@@ -13,6 +13,7 @@ public interface LivelihoodMapper {
 	List<Livelihood_data> SelectBymon(String month);
 	List<Livelihood_data> SelectAll();
 	List<Livelihood_data> SelectByQuarter(int Quarter);
+	List<Livelihood_data> TimeBetween(Map<String,Object> map);
 
 //	List<HashMap<String,Object>> EveProBytime1(String create_time); 
 //	List<HashMap<String,Object>> EveProBetween1(HashMap<String,Object> map);

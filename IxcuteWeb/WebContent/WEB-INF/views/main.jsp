@@ -89,19 +89,43 @@
         <div id='show_desk'>
     		<div id='content_map' class='table'>
                 <div class="border-container" style="height:95%">
-                    <div id="mapadd" style="height:95%" class='map'></div>
-                    <div id='longtian' style='height:400px;display: none;'><a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a></div>
-                    <div id='kengzi' style='height:400px;display: none;'><a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a></div>
-                    <div id='pingshanjiedao' style='height:400px;display: none;'><a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a></div>
-                    <div id='biling' style='height:400px;display: none;'><a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a></div>
-                    <div id='maluan' style='height:400px;display: none;'><a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a></div>
-                    <div id='shijing' style='height:400px;display: none;'><a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a></div>
+                    <div id="mapadd_nav" style="height:95%" class='map'></div>
+					<div id='longtian_nav'>
+						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
+						<div id='longtian' style='height:400px;'></div>
+					</div>
+                    
+					<div id='kengzi_nav'>
+						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
+						<div id='kengzi' style='height:400px;'></div>
+					</div>
+                    
+					<div id='pingshanjiedao_nav'>
+						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
+						<div id='pingshanjiedao' style='height:400px;'></div>
+					</div>
+					<div id='biling_nav'>
+						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
+						<div id='biling' style='height:400px;'></div>
+					</div>
+					<div id='maluan_nav'>
+						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
+						<div id='maluan' style='height:400px;'></div>
+					</div>
+					<div id='shijing_nav'>
+						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
+						<div id='shijing' style='height:400px;'></div>
+					</div>
+                    <span class="top-left border-span"></span>
+                    <span class="top-right border-span"></span>
+                    <span class="bottom-left border-span"></span>
+                    <span class="bottom-right border-span"></span>
                 </div>
             </div>
             <div id='content_bar' class="main clearfix table">
                 <div class="border-container" style="height:95%">
                     <div class="name-title">
-                        ===
+                        <input type='button' id='bar_button' value='check' width='50px' height='30px'>
                     </div>
                     <div id="edubalance" style="height:95%"></div>
                 </div>
@@ -110,9 +134,81 @@
             
             <div id='content_pie' class="main teacher-pie clearfix table">
             	<div class='border-container' style="height:95%">
-                    <div id='time_selector' >
+            		<div id='time_selector_pre'>
+					    <table width="60%" border="0">
+					      <tr>
+							<td width='6%'>从：</td>	
+					        <td width='21%'>
+								<select id='selected_year_pre' class='time_select'>
+									<option value='2018'>2018</option>
+									<option value='2017'>2017</option>
+									<option value='2016'>2016</option>
+									<option value='2015'>2015</option>
+									<option value='2014'>2014</option>
+									<option value='2013'>2013</option>
+									<option value='2012'>2012</option>
+								</select>
+							</td>
+					        <td width='10%'>年</td>
+					        <td width='21%'>
+								<select id='selected_month_pre' class='time_select'>
+									<option value='1'>1</option>
+									<option value='2'>2</option>
+									<option value='3'>3</option>
+									<option value='4'>4</option>
+									<option value='5'>5</option>
+									<option value='6'>6</option>
+									<option value='7'>7</option>
+									<option value='8'>8</option>
+									<option value='9'>9</option>
+									<option value='10'>10</option>
+									<option value='11'>11</option>
+									<option value='12'>12</option>
+								</select>
+							</td>
+					        <td width='10%'>月</td>
+					        <td width='21%'>
+								<select id='selected_day_pre' class='time_select'>
+									<option value='1'>1</option>
+									<option value='2'>2</option>
+									<option value='3'>3</option>
+									<option value='4'>4</option>
+									<option value='5'>5</option>
+									<option value='6'>6</option>
+									<option value='7'>7</option>
+									<option value='8'>8</option>
+									<option value='9'>9</option>
+									<option value='10'>10</option>
+									<option value='11'>11</option>
+									<option value='12'>12</option>
+									<option value='13'>13</option>
+									<option value='14'>14</option>
+									<option value='15'>15</option>
+									<option value='16'>16</option>
+									<option value='17'>17</option>
+									<option value='18'>18</option>
+									<option value='19'>19</option>
+									<option value='20'>20</option>
+									<option value='21'>21</option>
+									<option value='22'>22</option>
+									<option value='23'>23</option>
+									<option value='24'>24</option>
+									<option value='25'>25</option>
+									<option value='26'>26</option>
+									<option value='27'>27</option>
+									<option value='28'>28</option>
+									<option value='29'>29</option>
+									<option value='30'>30</option>
+									<option value='31'>31</option>
+								</select></td>
+					        <td width='10%'>日</td>
+					      </tr>
+					    </table>
+					</div>
+                    <div id='time_selector'>
                         <table width="60%" border="0">
                           <tr>
+                            <td width='6%'>至：</td>	
                             <td width='21%'>
 								<select id='selected_year' class='time_select'>
 									<option value='2018'>2018</option>

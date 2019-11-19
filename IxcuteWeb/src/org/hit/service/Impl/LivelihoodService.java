@@ -7,7 +7,6 @@ import java.util.Map;
 import org.hit.entity.Livelihood_data;
 import org.hit.mapper.LivelihoodMapper;
 import org.hit.service.ILivelihoodService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -53,6 +52,7 @@ public class LivelihoodService implements ILivelihoodService {
 		List<Livelihood_data> list = livelihoodMapper.EveProBetween(map);
 		result.clear();
 		String properties = "";
+		result = InitProperties();
 		for(Livelihood_data data:list) {
 			properties = data.getEvent_property_name();
 			if(result.containsKey(properties)) {
@@ -67,16 +67,17 @@ public class LivelihoodService implements ILivelihoodService {
 		return result;
 	}
 
-	//street
+	//streetByMonth
 	public Map<String, Map<String, Integer>> queryStreetDataByMonth(String month) {
 		List<Livelihood_data> list = livelihoodMapper.SelectBymon(month);
 		ans.clear();
+		InitStreet();
 		Map<String,Integer> map;
 		String streetName = "";
 		String main_type_name = "";
 		for(Livelihood_data data:list) {
-			System.out.println(data);
 			streetName = data.getStreet_name();
+			if(streetName==null)continue;
 			if(!ans.containsKey(streetName)) {
 				map = new HashMap<String, Integer>();
 				main_type_name = data.getMain_type_name();
@@ -110,6 +111,52 @@ public class LivelihoodService implements ILivelihoodService {
 		return ans;
 	}
 	
+	//streetToday
+	public Map<String, Map<String, Integer>> queryStreetDataToday(Map today) {
+		List<Livelihood_data> list = livelihoodMapper.TimeBetween(today);
+		ans.clear();
+		InitStreet();
+		Map<String,Integer> map;
+		String streetName = "";
+		String main_type_name = "";
+		for(Livelihood_data data:list) {
+			System.out.println(data);
+			streetName = data.getStreet_name();
+			if(streetName==null)continue;
+			if(!ans.containsKey(streetName)) {
+				map = new HashMap<String, Integer>();
+				main_type_name = data.getMain_type_name();
+				if(main_type_name!=null) {
+				map.put(main_type_name, 1);
+				}
+				ans.put(streetName, map);
+				
+			}else
+			{
+				main_type_name = data.getMain_type_name();
+				if(streetName!=null) {
+					if(ans.containsKey(streetName)) {
+						map = ans.get(streetName);
+						
+					    //exist type name;
+						if(map.containsKey(main_type_name)) {
+							map.put(main_type_name, map.get(main_type_name)+1);
+						}else if(main_type_name!=null){//not exist
+							map.put(main_type_name, 1);
+						}
+					}else {
+						map = new HashMap<String, Integer>();
+						ans.put(streetName, map);
+						
+					}
+				}
+			}
+			
+		}
+		return ans;
+	}
+	
+	
 	//hot community
 	public Map<String,Integer> queryCommunityByMonth(String month){
 		List<Livelihood_data> list = livelihoodMapper.SelectBymon(month);
@@ -130,6 +177,25 @@ public class LivelihoodService implements ILivelihoodService {
 		return result;
 	}
 
+	public Map<String,Integer> queryCommunityToday(Map today){
+		List<Livelihood_data> list = livelihoodMapper.TimeBetween(today);
+		ans.clear();
+		String community = "";
+		for(Livelihood_data data:list) {
+			community = data.getCommunity_name();
+			if(result.containsKey(community)) {
+				result.put(community,result.get(community) + 1);
+			}else if(community==null) {
+				System.out.println("ÕÒµ½¿Õ×Ö·û´®"+data);
+			}
+			else {
+				result.put(community, 1);
+			}
+			
+		}
+		return result;
+	}
+	
 	//by kind of problem
 	public Map<String, Integer> queryKindByMonth(String month){
 		List<Livelihood_data> list = livelihoodMapper.SelectBymon(month);
@@ -160,6 +226,50 @@ public class LivelihoodService implements ILivelihoodService {
 			}
 		}
 		return result;
+	}
+	
+	public Map<String,Integer> Statistic(Map map){
+		result.clear();
+		List<Livelihood_data> list = livelihoodMapper.EveProBetween(map);
+		InitStreet();
+		String properties = "";
+		for(Livelihood_data data:list) {
+			properties = data.getMain_type_name();
+			if(result.containsKey(properties)) {
+				result.put(properties,result.get(properties) + 1);
+			}else if(properties==null) {
+				System.out.println("ÕÒµ½¿Õ×Ö·û´®"+data);
+			}
+			else {
+				result.put(properties, 1);
+			}
+		}
+		return result;
+	}
+	
+	
+	private Map<String, Integer> InitProperties(){
+		result.put("Í¶Ëß", 0);
+		result.put("×ÉÑ¯",0);
+		result.put("½¨Òé",0);
+		result.put("¸ÐÐ»",0);
+		result.put("Çó¾ö",0);
+		return result;
+	}
+	
+	private void InitStreet(){
+		Map<String,Integer> map = new HashMap<String, Integer>();
+		ans.put("ÆºÉ½½ÖµÀ", map);
+		map = new HashMap<String, Integer>();
+		ans.put("¿Óè÷½ÖµÀ", map);
+		map = new HashMap<String, Integer>();
+		ans.put("ÂíÂÍ½ÖµÀ", map);
+		map = new HashMap<String, Integer>();
+		ans.put("±ÌÁë½ÖµÀ", map);
+		map = new HashMap<String, Integer>();
+		ans.put("ÁúÌï½ÖµÀ", map);
+		map = new HashMap<String, Integer>();
+		ans.put("Ê¯¾®½ÖµÀ", map);
 	}
 
 }

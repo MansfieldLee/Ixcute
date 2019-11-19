@@ -1,5 +1,5 @@
 //这里是小时钟
-var date = new Object();
+window.date = new Object();
 
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
@@ -238,21 +238,21 @@ function showTime(ms,s,m,h){
 	//ctx.fillText(time+":"+mil, 160, 280);
 	ctx.fillText(time, 140, 65);
 }
-var now = new Date();
-	var today = now.toLocaleDateString();
-	var time = now.toLocaleTimeString();
-	var day = now.getDay();
-	var hrs = now.getHours();
-	var min = now.getMinutes();
-	var sec = now.getSeconds();
-	var mil = now.getMilliseconds();
-	console.log(today);
-	console.log(time);
-	console.log(day);
-	console.log(hrs);
-	console.log(min);
-	console.log(sec);
-	console.log(mil);
+//var now = new Date();
+//	var today = now.toLocaleDateString();
+//	var time = now.toLocaleTimeString();
+//	var day = now.getDay();
+//	var hrs = now.getHours();
+//	var min = now.getMinutes();
+//	var sec = now.getSeconds();
+//	var mil = now.getMilliseconds();
+//	console.log(today);
+//	console.log(time);
+//	console.log(day);
+//	console.log(hrs);
+//	console.log(min);
+//	console.log(sec);
+//	console.log(mil);
 //小时钟结束
 
 
@@ -520,6 +520,7 @@ function showTime2(ms,s,m,h){
 	//ctx2.fillText(time+":"+mil, 160, 280);
 	ctx2.fillText(time, 140, 424);
 }
+pageInit2();
 setInterval(function(){
 				pageInit();
 				pageInit2();
@@ -556,13 +557,14 @@ function set_background_image(hrs){
 		bg2.style.backgroundAttachment = 'fixed';
 	}
 }
-
-function get_date(){
-	//console.log(date);
-	var temp = new Object();
-	temp.today = date.today;
-	temp.hrs = date.hrs;
-	temp.min = date.min;
-	temp.sec = date.sec;
-	return temp;
-}
+//
+//function get_date(){
+//	//console.log(date);
+//	var temp = new Object();
+//	temp.today = date.today;
+//	temp.hrs = date.hrs;
+//	temp.min = date.min;
+//	temp.sec = date.sec;
+//	console.log(temp);
+//	return temp;
+//}
