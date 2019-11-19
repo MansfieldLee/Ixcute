@@ -60,25 +60,36 @@ function myshow(showed,bid){
 	$("#pie-button").removeClass("menu-button-keep");
 	$("#bar-button").removeClass("menu-button-keep");
 	$("#map-button").removeClass("menu-button-keep");
+	$("#situation-button").removeClass("menu-button-keep");
 	$("#pie-button").removeClass("menu-button");
 	$("#bar-button").removeClass("menu-button");
 	$("#map-button").removeClass("menu-button");
+	$("#situation-button").removeClass("menu-button");
 	
 	
 	if(bid==1){
 		$("#pie-button").addClass("menu-button-keep");
 		$("#bar-button").addClass("menu-button");
 		$("#map-button").addClass("menu-button");
+		$("#situation-button").addClass("menu-button");
 	}
 	else if(bid==2){
 		$("#pie-button").addClass("menu-button");
 		$("#bar-button").addClass("menu-button-keep");
 		$("#map-button").addClass("menu-button");
+		$("#situation-button").addClass("menu-button");
+	}
+	else if(bid==3){
+		$("#pie-button").addClass("menu-button");
+		$("#bar-button").addClass("menu-button");
+		$("#map-button").addClass("menu-button-keep");
+		$("#situation-button").addClass("menu-button");
 	}
 	else{
 		$("#pie-button").addClass("menu-button");
 		$("#bar-button").addClass("menu-button");
-		$("#map-button").addClass("menu-button-keep");
+		$("#map-button").addClass("menu-button");
+		$("#situation-button").addClass("menu-button-keep");
 	}
 }
 
@@ -1140,3 +1151,187 @@ function paint_shijing(color){
 }
 }
 //地图块结束
+//事件结办区开始
+var xmlhttp_situation;
+function situation_issue(){
+//		var year1=document.getElementById('selected_year_pre').value;
+//		var month1=document.getElementById('selected_month_pre').value;
+//		var day1=document.getElementById('selected_day_pre').value;
+//		var year=document.getElementById('selected_year').value;
+//		var month=document.getElementById('selected_month').value;
+//		var day=document.getElementById('selected_day').value;
+//		console.log(year,month,day,year1,month1,day1);
+	if (window.XMLHttpRequest) {xmlhttp_situation=new XMLHttpRequest();}
+	
+	else{xmlhttp_situation=new ActiveXObject("Microsoft.XMLHTTP");}	
+	xmlhttp_situation.onreadystatechange=getResult_situation;
+	xmlhttp_situation.open("POST","DataProperties",true);
+	xmlhttp_situation.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xmlhttp_situation.send("year="+window.year+"&month="+window.month+"&day="+window.day+"&hour="+date.hrs+"&minute="+date.min+"&second="+date.sec);		
+}
+
+function getResult_situation(){
+	if (xmlhttp_situation.readyState==4) {		
+		if(xmlhttp_situation.status==200){
+			var rec=xmlhttp_situation.responseText;
+			var response_situation = JSON.parse(rec);
+			var ret=[];
+			ret = situation2_callback(response_situation);
+			paint_situation(response_situation);
+			paint_situation(ret[0],ret[1],ret[2]);
+		}
+		else{
+			alert("连接失败");
+		}
+	}
+}
+
+function situation2_callback(reponse){
+	var ret = [];
+	var dataType = [];
+	var colors = [];
+	for(var kinds in reponse){
+		if(kinds == '处置中' || kinds == '按期结办' ||kinds == '超期结办'){continue;}
+		else if(dataType.indexOf(kinds)>-1){continue;}
+		else{ataType.push(kinds);}
+	}
+	var color = 0x24f213;
+	var datas = [];
+	for(var i=0;i<dataType.length;i++){
+		color += 0x234567;
+		color = color & 0xffffff;
+		var temp = {};
+		temp.value = response[dataType[i]];
+		temp.name = dataType[i];
+		console.log(temp);
+		datas.push(temp);
+		colors.push(color);
+	}
+	ret[0]=dataType;
+	ret[1]=datas;
+	ret[2]=colors;
+	return ret;
+}
+function paint_situation(reponse){
+	var courserate = echarts.init(document.getElementById('situation1'));
+	option = {
+	    tooltip : {
+	        trigger: 'item',
+	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+	    },
+	    legend: {
+	        orient: 'vertical',
+	        right: '15%',
+	        y:'middle',
+	        textStyle:{
+	            color:"#000"
+	        },
+	
+	        formatter:function(name){
+	        	
+	        	console.log(option.series[0].data);
+	            var oa = option.series[0].data;
+	            var num = oa[0].value + oa[1].value + oa[2].value;
+	            for(var i = 0; i < option.series[0].data.length; i++){
+	                if(name==oa[i].name){
+	                    return name +  ' '+oa[i].value;
+	                }
+	            }
+	        },
+	        data: ['处置中','按期结办','超期结办']
+	    },
+	    series : [
+	        	{
+	            name: '具体数据',
+	            type: 'pie',
+	            radius : '55%',
+	            color:['red','#3CB371 ','#FFA500'],
+	            center: ['30%', '50%'],
+	            data:[
+	                {value:response.处置中, name:'处置中'},
+	                {value:response.按期结办, name:'按期结办'},
+	                {value:response.超期结办, name:'超期结办'},
+	            ],
+	            itemStyle: {
+	                emphasis: {
+	                    shadowBlur: 10,
+	                    shadowOffsetX: 0,
+	                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+	                }
+	            },
+	            itemStyle: {
+	                normal: {
+	                    label:{
+	                        show: true,
+	                        position:'outside',
+	                        formatter: '{b}'
+	                    }
+	                },
+	                labelLine :{show:true}
+	            }
+	        }
+	    ]
+	};
+	courserate.setOption(option);
+	//$('#content_pie').hide(0);
+}
+
+function paint_situation2(dataType,datas,colors){
+	var courserate = echarts.init(document.getElementById('situation2'));
+	option = {
+	    tooltip : {
+	        trigger: 'item',
+	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+	    },
+	    legend: {
+	        orient: 'vertical',
+	        right: '15%',
+	        y:'middle',
+	        textStyle:{
+	            color:"#000"
+	        },
+	
+	        formatter:function(name){
+	        	
+	        	console.log(option.series[0].data);
+	            var oa = option.series[0].data;
+	            var num = oa[0].value + oa[1].value + oa[2].value;
+	            for(var i = 0; i < option.series[0].data.length; i++){
+	                if(name==oa[i].name){
+	                    return name +  ' '+oa[i].value;
+	                }
+	            }
+	        },
+	        data: dataType
+	    },
+	    series : [
+	        	{
+	            name: '具体数据',
+	            type: 'pie',
+	            radius : '55%',
+	            color:colors,
+	            center: ['30%', '50%'],
+	            data:datas,
+	            itemStyle: {
+	                emphasis: {
+	                    shadowBlur: 10,
+	                    shadowOffsetX: 0,
+	                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+	                }
+	            },
+	            itemStyle: {
+	                normal: {
+	                    label:{
+	                        show: true,
+	                        position:'outside',
+	                        formatter: '{b}'
+	                    }
+	                },
+	                labelLine :{show:true}
+	            }
+	        }
+	    ]
+	};
+	courserate.setOption(option);
+}
+//事件结办区结束

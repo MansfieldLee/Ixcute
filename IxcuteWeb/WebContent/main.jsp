@@ -10,7 +10,9 @@
 <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
 <link rel="stylesheet" type="text/css" href="Pages/CSS/bootsnav.css">
 <link rel='stylesheet' type='text/css' href='Pages/CSS/main.css'>
-	<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<link rel="stylesheet" href="Pages/CSS/roll.css">
+    <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <script src="Pages/JS/roll.js"></script>
     <script src="https://cdn.bootcss.com/echarts/4.2.0-rc.2/echarts.min.js"></script>
 	<script src='Pages/JS/pingshan.js'></script>
 	<script src='Pages/JS/longtian.js'></script>
@@ -82,8 +84,42 @@
        		<h2 id="menu-head">Ixcute</h2>
             <div><button class="menu-button-keep" id="pie-button" onclick='javascript:myshow("pie","1")'><span class="glyphicon glyphicon-stats"></span> &nbsp; 问题性质汇总</button></div>
             <div><button class="menu-button" id="bar-button" onclick='javascript:myshow("bar","2")'><span class="glyphicon glyphicon-stats"></span> &nbsp; 各街道问题情况</button></div>
-         <div><button class="menu-button" id="map-button" onclick='javascript:myshow("map","3")'><span class="glyphicon glyphicon-stats"></span> &nbsp; 热点地区</button></div>
+         	<div><button class="menu-button" id="map-button" onclick='javascript:myshow("map","3")'><span class="glyphicon glyphicon-stats"></span> &nbsp; 热点地区</button></div>
+         	<div><button class="menu-button" id="situation-button" onclick='javascript:myshow("situation","4")'><span class="glyphicon glyphicon-stats"></span> &nbsp; 事件结办情况</button></div>
        </div>
+     
+     	<div class="news-scroll">
+
+		    <div  class="scroll-box">
+		        <!--滚动的新闻-->
+		        <div class="roll">
+		            <ul id='scroller'>
+		                <li class="roll_1">
+		                    <a href="#" class="ellipsis">2018年10月30日 坑梓街道 的秀新社区从12319接到商业经营红线内噪声投诉，请城管办（坑梓街道办事处）尽快前往处理。</a>
+		                </li>
+		                <li class="roll_2">
+		                    <a href="#" class="ellipsis">2018年10月30日马峦街道的江岭社区从@坪山接到工业废气投诉，请环境保护和水务局尽快前往处理。  </a>
+		                </li>
+		                <li class="roll_3">
+		                    <a href="#" class="ellipsis">2018年10月30日坑梓街道的金沙社区从美丽深圳接到绿化养护建议，请城市管理局尽快前往处理</a>
+		                </li>
+		                <li class="roll_hide">
+		                    <a href="#" class="ellipsis">2018年10月30日坪山街道的六联社区从 美丽深圳接到占道经营投诉，请坪山街道综合执法队（坪山街道办事处）尽快前往处理</a>
+		                </li>
+		                <li class="roll_hide">
+		                    <a href="#" class="ellipsis">2018年10月30日坪山街道的六联社区从@坪山接到道路破损求决，请坪山交通运输局尽快前往处理</a>
+		                </li>
+		                <li class="roll_hide">
+		                    <a href="#" class="ellipsis">2018年10月30日龙田街道的竹坑社区从美丽深圳接到无照经营游商投诉，请龙田街道综合执法队（龙田街道办事处）尽快前往处理</a>
+		                </li>
+		                <li class="roll_hide">
+		                    <a href="#" class="ellipsis">2018年10月30日石井街道的田头社区从12319接到无照经营游商投诉，请石井办事处综合执法队尽快前往处理</a>
+		                </li>
+		            </ul>
+		        </div>
+		    </div>
+		</div>
+
      
      
         <div id='show_desk'>
@@ -116,10 +152,6 @@
 						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
 						<div id='shijing' style='height:400px;'></div>
 					</div>
-                    <span class="top-left border-span"></span>
-                    <span class="top-right border-span"></span>
-                    <span class="bottom-left border-span"></span>
-                    <span class="bottom-right border-span"></span>
                 </div>
             </div>
             <div id='content_bar' class="main clearfix table">
@@ -284,6 +316,12 @@
                 </div>
             </div>
             
+            <div id='content_situation' class="main teacher-pie clearfix table">
+                <div class="border-container" style="height:95%">
+                    <div id="situation1" style="height:95%;width:48%" align='center'></div>
+                    <div id="situation2" style="height:95%;width:48%" align='center'></div>
+                </div>
+            </div>
             
             
         </div>

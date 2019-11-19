@@ -42,18 +42,10 @@ body,html{
 	margin: 0px;
 	padding: 0px;
 }
-#content_map{
+#content_map,#content_bar,#content_pie,#content_situation{
 	height:100%;
 	width:100%;
 } 
-#content_bar{
-	height:100%;
-	width:100%;
-}
-#content_pie{
-	height:100%;
-	width:100%;
-}
 #head{
 	width:100%;
 	background-color:#C0E6E7;
