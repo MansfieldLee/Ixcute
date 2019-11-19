@@ -1,10 +1,19 @@
 /* CSS Document */
-*{
-	margin:1px;
-}
-#container{
+
+body,html{
 	width:100%;
 	height:100%;
+}
+
+.wrapper{
+	width:100%;
+	height:100%;
+}
+
+#container{
+	width: 100%;
+	height: 100%;
+	background-color: #FFFFFF;
 }
 .box_showed{
 	width: 100%;
@@ -25,7 +34,6 @@
 	left:0px;
 	top:0px;
 	background:transparent;
-	box-shadow: 0 0 40px 20px #C0E6E7;/*澶栧湀鐨勬笎鍙樿壊灞�*/
 	display:none;
 }
 #clock_box2{
@@ -37,7 +45,6 @@
 #content_map{
 	height:100%;
 	width:100%;
-	border:1px solid blue;
 } 
 #content_bar{
 	height:100%;
@@ -52,17 +59,100 @@
 	background-color:#C0E6E7;
 	height:145px;
 	float:left;
-  	box-shadow: 0 0 40px 20px #C0E6E7;/*澶栧湀鐨勬笎鍙樿壊灞�*/
 }
 #menu{
-	width:18%;
-	float:left;
+	width: 12%;
+	position: fixed;
+	left: 0;
+	height: 100%;
+	text-align: left;
+	background-color: #F7FAFD;
+	border-top-width: 0px;
+	border-right-width: 1px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-right-color: #D6D6D6;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
 }
+
+.menu-button{
+	height: 60px;
+	font-size: 2rem;
+	width: 100%;
+	color: #6F6F6F;
+	background-color: #F7FAFD;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	text-align: left;
+}
+
+.menu-button:hover{
+	background-color: #C5E3fb;
+	color: #0b7efc;
+}
+
+.menu-button:focus, .menu-button:active{
+	outline:none;
+}
+
+.menu-button-keep{
+	background-color: #C5E3fb;
+	color: #0b7efc;
+	height: 60px;
+	font-size: 2rem;
+	width: 100%;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: solid;
+	text-align: left;
+	border-left-width: 3px;
+	border-left-color: #0B7EFC;
+	outline: none;
+}
+
+#menu-head{
+	font-size: 3.5em;
+	text-align: center;
+	height: 10%;
+	margin-top: 10%;
+	margin-bottom: 1px;
+	border-bottom-width: 1px;
+	border-bottom-color: #616161;
+	font-family: "Comic Sans MS", cursive;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-left-width: 0px;
+}
+
+.menu-divide{
+	margin: 0px;
+	border-top-color: #D4D4D4;
+	border-right-color: #D4D4D4;
+	border-bottom-color: #D4D4D4;
+	border-left-color: #D4D4D4;
+}
+	
+
 #show_desk{
-	width:81%;
-	height:500px;
-	float:left;
-  	box-shadow: 0 0 40px 20px #C0E6E7;/*澶栧湀鐨勬笎鍙樿壊灞�*/
+	width: 86%;
+	height: 500px;
+	position: relative;
+	left: 12.5%;
+	background-color: #F7FAFD;
+	margin-top: 7px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
 }
 a{
 	text-decoration:none;
@@ -119,68 +209,27 @@ a{
 	text-align: center;
 }
 
+#time_button{
+	background-color: #C5E3fb;
+	color: #0b7efc;
+	width: 90px;
+	font-size: 2em;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	height: 10%;
+}
 
+.border-container{
+	border-width:0;
+}
 
-nav.navbar.bootsnav{
-	border: none;
-	margin-bottom: 150px;
-}
-#navbar-menu{
-	padding-left:20%;
-}
-.navbar-nav{
-	float: left;
-}
-.navbar-nav li{
-	display锛歩nline-block;
-}
-nav.navbar.bootsnav ul.nav > li > a{
-	color: #474747;
-	text-transform: uppercase;
-	padding: 30px;
-}
-nav.navbar.bootsnav ul.nav > li:hover{
-	background: #f4f4f4;
-}
-.nav > li:after{
-	content: "";
-	width: 0;
-	height: 5px;
-	background: #34c9dd;
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	transition: all 0.5s ease 0s;
-}
-.nav > li:hover:after{
-	width: 100%;
-}
-nav.navbar.bootsnav ul.nav > li.dropdown > a.dropdown-toggle:after{
-	content: "+";
-	font-family: 'FontAwesome';
-	font-size: 16px;
-	font-weight: 500;
-	position: absolute;
-	top: 35%;
-	right: 10%;
-	transition: all 0.4s ease 0s;
-}
-nav.navbar.bootsnav ul.nav > li.dropdown.on > a.dropdown-toggle:after{
-	content: "\f105";
-	transform: rotate(90deg);
-}
-.dropdown-menu.multi-dropdown{
-	position: absolute;
-	left: -100% !important;
-}
-nav.navbar.bootsnav li.dropdown ul.dropdo/* -------------------------------- 
+/* -------------------------------- 
 
 Primary style
 
 -------------------------------- */
-*, *::after, *::before {
-  box-sizing: border-box;
-}
  
  
  
@@ -189,161 +238,7 @@ Primary style
 Main Components 
 
 -------------------------------- */
-.cd-accordion-menu {
-  width: 95%;
-  max-width: 600px;
-  background: #C0E6E7;
-  box-shadow: 0 0 40px 20px #C0E6E7;/*澶栧湀鐨勬笎鍙樿壊灞�*/
-  padding-left:2%;
-}
-.cd-accordion-menu ul {
-  /* by default hide all sub menus */
-  display: none;
-}
-.cd-accordion-menu li {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-.cd-accordion-menu input[type=checkbox] {
-  /* hide native checkbox */
-  position: absolute;
-  opacity: 0;
-}
-.cd-accordion-menu label, .cd-accordion-menu a {
-  position: relative;
-  display: block;
-  padding: 18px 18px 18px 64px;
-  background: #82AFFB;
-  box-shadow: inset 0 -1px #555960;
-  color: #C0E6E7;
-  font-size: 1.3rem;
-  border-radius:15px;
-}
-.no-touch .cd-accordion-menu label:hover, .no-touch .cd-accordion-menu a:hover {
-  background: #52565d;
-}
-.cd-accordion-menu label::before, .cd-accordion-menu label::after, .cd-accordion-menu a::after {
-  /* icons */
-  content: '';
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  position: absolute;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-.cd-accordion-menu label {
-  cursor: pointer;
-}
- .cd-accordion-menu label::after {
-  background-image: url(../images/cd-icons.svg);
-  background-repeat: no-repeat;
-}
 
-.cd-accordion-menu input[type=checkbox]:checked + label::before {
-  /* rotate arrow */
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-.cd-accordion-menu input[type=checkbox]:checked + label::after {
-  /* show open folder icon if item is checked */
-  background-position: -32px 0;
-}
-.cd-accordion-menu input[type=checkbox]:checked + label + ul,
-.cd-accordion-menu input[type=checkbox]:checked + label:nth-of-type(n) + ul {
-  /* use label:nth-of-type(n) to fix a bug on safari (<= 8.0.8) with multiple adjacent-sibling selectors*/
-  /* show children when item is checked */
-  display: block;
-}
-.cd-accordion-menu ul label,
-.cd-accordion-menu ul a {
-  background: #328AEB;
-  box-shadow: inset 0 -1px #41444a;
-  padding-left: 82px;
-  border-radius:15px;
-}
-.no-touch .cd-accordion-menu ul label:hover, .no-touch
-.cd-accordion-menu ul a:hover {
-  background: #C0E6E7;
-}
-.cd-accordion-menu > li:last-of-type > label,
-.cd-accordion-menu > li:last-of-type > a,
-.cd-accordion-menu > li > ul > li:last-of-type label,
-.cd-accordion-menu > li > ul > li:last-of-type a {
-  box-shadow: none;
-}
-
-@media only screen and (min-width: 600px) {
-  .cd-accordion-menu label, .cd-accordion-menu a {
-    padding: 24px 24px 24px 82px;
-    font-size: 1.9rem;
-  }
-  .cd-accordion-menu label::before {
-    left: 24px;
-  }
-  .cd-accordion-menu label::after {
-    left: 53px;
-  }
-  .cd-accordion-menu ul label,
-  .cd-accordion-menu ul a {
-    padding-left: 106px;
-  }
-  .cd-accordion-menu ul label::before {
-    left: 48px;
-  }
-  .cd-accordion-menu ul label::after,
-  .cd-accordion-menu ul a::after {
-    left: 77px;
-  }
-  .cd-accordion-menu ul ul label,
-  .cd-accordion-menu ul ul a {
-    padding-left: 130px;
-  }
-  .cd-accordion-menu ul ul label::before {
-    left: 72px;
-  }
-  .cd-accordion-menu ul ul label::after,
-  .cd-accordion-menu ul ul a::after {
-    left: 101px;
-  }
-  .cd-accordion-menu ul ul ul label,
-  .cd-accordion-menu ul ul ul a {
-    padding-left: 154px;
-  }
-  .cd-accordion-menu ul ul ul label::before {
-    left: 96px;
-  }
-  .cd-accordion-menu ul ul ul label::after,
-  .cd-accordion-menu ul ul ul a::after {
-    left: 125px;
-  }
-}
-.cd-accordion-menu.animated label::before {
-  /* this class is used if you're using jquery to animate the accordion */
-  -webkit-transition: -webkit-transform 0.3s;
-  -moz-transition: -moz-transform 0.3s;
-  transition: transform 0.3s;
-}
-wn-menu{
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-	border: none;
-}
 #select_street{
 	height:150px;
-}
-@media only screen and (max-width:990px){
-	nav.navbar.bootsnav ul.nav > li.dropdown > a.dropdown-toggle:after,
-	nav.navbar.bootsnav ul.nav > li.dropdown.on > a.dropdown-toggle:after{ content: " "; }
-	.dropdown-menu.multi-dropdown{ left: 0 !important; }
-	nav.navbar.bootsnav ul.nav > li:hover{ background: transparent; }
-	nav.navbar.bootsnav ul.nav > li > a{ margin: 0; }
 }

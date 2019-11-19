@@ -28,9 +28,34 @@ document.getElementById('time_box').onmousewheel = function(){
 }
 })
 
-function myshow(showed){
+function myshow(showed,bid){
 	$('.table').hide(100);
 	$('#content_'+showed).show(200);
+	
+	$("#pie-button").removeClass("menu-button-keep");
+	$("#bar-button").removeClass("menu-button-keep");
+	$("#map-button").removeClass("menu-button-keep");
+	$("#pie-button").removeClass("menu-button");
+	$("#bar-button").removeClass("menu-button");
+	$("#map-button").removeClass("menu-button");
+	
+	
+	if(bid==1){
+		$("#pie-button").addClass("menu-button-keep");
+		$("#bar-button").addClass("menu-button");
+		$("#map-button").addClass("menu-button");
+	}
+	else if(bid==2){
+		$("#pie-button").addClass("menu-button");
+		$("#bar-button").addClass("menu-button-keep");
+		$("#map-button").addClass("menu-button");
+	}
+	else{
+		$("#pie-button").addClass("menu-button");
+		$("#bar-button").addClass("menu-button");
+		$("#map-button").addClass("menu-button-keep");
+	}
+		
 }
 
 //控制街道选择块儿
