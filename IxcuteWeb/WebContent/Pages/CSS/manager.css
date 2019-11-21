@@ -16,7 +16,6 @@ body{
 	background-size: cover;
 	height: 18%;
 	position: relative;
-
 }
 
 #title{
@@ -26,18 +25,16 @@ body{
 	font-weight: bold;
 	padding-top: 4%;
 	position: relative;
-	left: 0;
+	left: 20%;
 	float:left;
 }
 
 #menu{
-	width: 12%;
+	background-color: #3094A4;
+	width: 15%;
 	height:100%;
 	position: relative;
 	margin-top:0;
-	float:left;
-	background-color: #3094A4;
-	padding-top:18%;
 	float:left;
 }
 
@@ -77,7 +74,7 @@ body{
 	border-bottom-width: 0;
 	border-right-width: 0;
 	border-left-width: 0;
-	font-size: 1rem;
+	font-size: 1em;
 	font-family: '微软雅黑';
 	font-weight: bold;
 	padding: 0px;
@@ -94,25 +91,33 @@ body{
 
 .titles{
 	text-align:center;
-	
+	font-size:3em;
+	margin-bottom:10px;
 }
 
-#page_add, #page_change{
+#page_add, #submit_change_info{
 	position:relative;
 	padding-top:5%;
 	padding-left:35%;
 	padding-right:35%;
 }
 
+#page_change{
+	position:relative;
+	padding-top:5%;
+	padding-left:10%;
+	padding-right:10%;
+}
+
 .input_frame {
 	height:35px;
 	width: 100%;
 	margin-top:5%;
-	font-size:1rem;
+	font-size:1em;
 }
 
 #wp{
-	width: 88%;
+	width: 83%;
 	height: 100%;
 	float:left;
 }
