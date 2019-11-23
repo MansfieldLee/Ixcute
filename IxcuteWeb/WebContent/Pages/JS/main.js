@@ -26,9 +26,9 @@ $(document).ready(function(){
 	window.day='';
 	for(var i=0;i<date.today.length;i++){
 		if(date.today[i]=='/'){flag++;continue;}
-		if(flag==0){year += date.today[i];}
-		if(flag==1){month += date.today[i];}
-		if(flag==2){day += date.today[i];}
+		if(flag==0){window.year += date.today[i];}
+		if(flag==1){window.month += date.today[i];}
+		if(flag==2){window.day += date.today[i];}
 	}
 //	console.log(window.year.window.month,window.day);
 	//地图初始化隐藏部分
@@ -41,7 +41,6 @@ $(document).ready(function(){
 	//结束
 	canvas_change();
 }
-
 document.getElementById('time_box').onmousewheel = function(){
 	document.getElementById('time_box').setAttribute('class','box_hided');
 	$('#clock_box2').slideUp(300);
@@ -73,6 +72,7 @@ function myshow(showed,bid){
 		$("#bar-button").addClass("menu-button");
 		$("#map-button").addClass("menu-button");
 		$("#situation-button").addClass("menu-button");
+		time_issue2();
 	}
 	else if(bid==2){
 		$("#pie-button").addClass("menu-button");
@@ -109,10 +109,24 @@ $('#street').mouseout(
 	function(){
 	$('#street_son').hide(200);
 })
+
+function show_map(showed){
+	$('#mapadd_nav').css('display','none');
+	$('#longtian_nav').css('display','none');
+	$('#kengzi_nav').css('display','none');
+	$('#biling_nav').css('display','none');
+	$('#maluan_nav').css('display','none');
+	$('#pingshanjiedao_nav').css('display','none');
+	$('#shijing_nav').css('display','none');
+	$('#'+showed+'_nav').css('display','block');
+}
+
 //加载统计图区域：
 //bar区：
 function canvas_change(){
 	map_issue();
+	window.time_issue2;
+	situation_issue(1);
 //$(function() {
 	var response_bar;
 	var xmlhttp_bar;
@@ -324,7 +338,16 @@ function canvas_change(){
 		xmlhttp_time.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 		xmlhttp_time.send("year="+window.year+"&month="+window.month+"&day="+window.day+"&year1="+year1+"&month1="+month1+"&day1="+day1);		
 	}
-	
+	 window.time_issue2=function(){
+		if (window.XMLHttpRequest) {xmlhttp_time=new XMLHttpRequest();}
+		
+		else{xmlhttp_time=new ActiveXObject("Microsoft.XMLHTTP");}	
+		xmlhttp_time.onreadystatechange=getResult;
+		xmlhttp_time.open("POST","DataPropertiesToday",true);
+		xmlhttp_time.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		console.log(date);
+		xmlhttp_time.send("year="+window.year+"&month="+window.month+"&day="+window.day+"&hour="+date.hrs+"&minute="+date.min+"&second="+date.sec);			
+	}
 	function getResult(){
 		if (xmlhttp_time.readyState==4) {		
 			if(xmlhttp_time.status==200){
@@ -448,6 +471,7 @@ function canvas_change(){
 	}
 //})
 //统计图区域结束
+	
 
 //地图块开始
 /* 地图 需要哪个省市的地图直接引用js 将下面的name以及mapType修改为对应省市名称*/
@@ -552,6 +576,20 @@ function paint_map(color){
             trigger: 'item',
             formatter: '{b}'
         },
+        dataRange: {
+	        min: 0,
+	        max: 1000,
+	        y:'top',
+	        color:['#0066cc','#bde7ff'],
+	        text:['高','低'],   
+	        calculable : true
+	    },
+	    legend:{
+	    	show : false,
+	        orient: 'vertical',
+	        x:'right',
+	        data:['坪山街道','坑梓街道','龙田街道','马峦街道','石井街道','碧岭街道',]
+	    },
         series : [{
             name: '坪山',
             type: 'map',
@@ -569,9 +607,6 @@ function paint_map(color){
                             color: "#231816"//地图上的字体颜色
                         }
                     },
-                    areaStyle:{color:'#fff'},
-                    color:'#fff',
-                    borderColor:'#fff'//区块的边框颜色
                 },
                 emphasis:{//鼠标hover样式
                     label:{
@@ -1150,11 +1185,19 @@ function paint_shijing(color){
     option['series'][0]['data'][3]['itemStyle']['normal']['areaColor'] = color[0];
     map_shijing.setOption(option);
 }
-}
 //地图块结束
 //事件结办区开始
+$('#on_month').click(function(){
+	situation_issue(1);
+})
+$('#on_season').click(function(){
+	situation_issue(2);
+})
+$('#on_today').click(function(){
+	situation_issue(3);
+})
 var xmlhttp_situation;
-function situation_issue(){
+function situation_issue(flag){
 //		var year1=document.getElementById('selected_year_pre').value;
 //		var month1=document.getElementById('selected_month_pre').value;
 //		var day1=document.getElementById('selected_day_pre').value;
@@ -1166,54 +1209,66 @@ function situation_issue(){
 	
 	else{xmlhttp_situation=new ActiveXObject("Microsoft.XMLHTTP");}	
 	xmlhttp_situation.onreadystatechange=getResult_situation;
-	xmlhttp_situation.open("POST","DataProperties",true);
+	xmlhttp_situation.open("POST","kind",true);
 	xmlhttp_situation.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	xmlhttp_situation.send("year="+window.year+"&month="+window.month+"&day="+window.day+"&hour="+date.hrs+"&minute="+date.min+"&second="+date.sec);		
+	var time = '';
+	if(flag == 1){
+		time = $('#selected_year_situation').val()+'-'+$('#selected_month_situation').val();
+	}
+	if(flag == 2){
+		time = $('#selected_season_situation').val();
+	}
+	if(flag == 3){
+		time = window.year+'-'+window.month+'-'+window.day+'-'+date.hrs+'-'+date.min+'-'+date.sec;
+	}
+	xmlhttp_situation.send("time="+time+"&flag="+flag);		
 }
 
 function getResult_situation(){
 	if (xmlhttp_situation.readyState==4) {		
 		if(xmlhttp_situation.status==200){
 			var rec=xmlhttp_situation.responseText;
-			var response_situation = JSON.parse(rec);
+			window.response_situation = JSON.parse(rec);
 			var ret=[];
-			ret = situation2_callback(response_situation);
-			paint_situation(response_situation);
-			paint_situation(ret[0],ret[1],ret[2]);
+			console.log(window.response_situation);
+			//ret = situation2_callback(response_situation);
+			paint_situation();
+			//paint_situation(ret[0],ret[1],ret[2]);
 		}
 		else{
 			alert("连接失败");
 		}
 	}
 }
-
-function situation2_callback(reponse){
-	var ret = [];
-	var dataType = [];
-	var colors = [];
-	for(var kinds in reponse){
-		if(kinds == '处置中' || kinds == '按期结办' ||kinds == '超期结办'){continue;}
-		else if(dataType.indexOf(kinds)>-1){continue;}
-		else{ataType.push(kinds);}
-	}
-	var color = 0x24f213;
-	var datas = [];
-	for(var i=0;i<dataType.length;i++){
-		color += 0x234567;
-		color = color & 0xffffff;
-		var temp = {};
-		temp.value = response[dataType[i]];
-		temp.name = dataType[i];
-		console.log(temp);
-		datas.push(temp);
-		colors.push(color);
-	}
-	ret[0]=dataType;
-	ret[1]=datas;
-	ret[2]=colors;
-	return ret;
-}
-function paint_situation(reponse){
+//
+//function situation2_callback(reponse){
+//	var ret = [];
+//	var dataType = [];
+//	var colors = [];
+//	for(var kinds in reponse){
+//		if(kinds == '处置中' || kinds == '按期结办' ||kinds == '超期结办'){continue;}
+//		else if(dataType.indexOf(kinds)>-1){continue;}
+//		else{ataType.push(kinds);}
+//	}
+//	var color = 0x24f213;
+//	var datas = [];
+//	for(var i=0;i<dataType.length;i++){
+//		color += 0x234567;
+//		color = color & 0xffffff;
+//		var temp = {};
+//		temp.value = response[dataType[i]];
+//		temp.name = dataType[i];
+//		console.log(temp);
+//		datas.push(temp);
+//		colors.push(color);
+//	}
+//	ret[0]=dataType;
+//	ret[1]=datas;
+//	ret[2]=colors;
+//	return ret;
+//}
+function paint_situation(){
+	console.log(window.response_situation.超期结办 );
 	var courserate = echarts.init(document.getElementById('situation1'));
 	option = {
 	    tooltip : {
@@ -1223,14 +1278,15 @@ function paint_situation(reponse){
 	    legend: {
 	        orient: 'vertical',
 	        right: '15%',
-	        y:'middle',
+	        x:'center',
+	        y:'top',
 	        textStyle:{
 	            color:"#000"
 	        },
 	
 	        formatter:function(name){
 	        	
-	        	console.log(option.series[0].data);
+	        	//console.log(option.series[0].data);
 	            var oa = option.series[0].data;
 	            var num = oa[0].value + oa[1].value + oa[2].value;
 	            for(var i = 0; i < option.series[0].data.length; i++){
@@ -1249,9 +1305,9 @@ function paint_situation(reponse){
 	            color:['red','#3CB371 ','#FFA500'],
 	            center: ['30%', '50%'],
 	            data:[
-	                {value:response.处置中, name:'处置中'},
-	                {value:response.按期结办, name:'按期结办'},
-	                {value:response.超期结办, name:'超期结办'},
+	                {value:window.response_situation.处置中.总量, name:'处置中'},
+	                {value:window.response_situation.按期结办.总量, name:'按期结办'},
+	                {value:window.response_situation.超期结办.总量, name:'超期结办'},
 	            ],
 	            itemStyle: {
 	                emphasis: {
@@ -1273,11 +1329,66 @@ function paint_situation(reponse){
 	        }
 	    ]
 	};
+	
 	courserate.setOption(option);
+	courserate.on('click',function(params){
+		paint_situation2(params.name);
+	});
 	//$('#content_pie').hide(0);
 }
-
-function paint_situation2(dataType,datas,colors){
+function createHexRandom(){ 
+    var num = '';
+ for (i = 0; i < 6; i++)
+ {
+    var tmp = Math.ceil(Math.random()*15);
+    if(tmp > 9){
+           switch(tmp){ 
+               case(10):
+                   num+='a';
+                   break;
+               case(11):
+                   num+='b';
+                   break;
+               case(12):
+                   num+='c';
+                   break;
+               case(13):
+                   num+='d';
+                   break;
+               case(14):
+                   num+='e';
+                   break;
+               case(15):
+                   num+='f';
+                   break;
+           }
+        }else{
+           num+=tmp;
+        }
+ }
+ return num;
+}
+function paint_situation2(name){
+	var data_now = window.response_situation[name];
+	//console.log(data_now);
+	var dataType = [];
+	var colors = [];
+	for(var kinds in data_now){
+		if(kinds == '总量'){continue;}
+		else if(dataType.indexOf(kinds)>-1){continue;}
+		else{dataType.push(kinds);}
+	}
+	//console.log(dataType);
+	var datas = [];
+	for(var i=0;i<dataType.length;i++){
+		var color = createHexRandom();
+		color = '#'+String(color);
+		var temp = {};
+		temp.value = data_now[dataType[i]];
+		temp.name = dataType[i];
+		colors.push(color);
+		datas.push(temp);
+	}
 	var courserate = echarts.init(document.getElementById('situation2'));
 	option = {
 	    tooltip : {
@@ -1286,15 +1397,16 @@ function paint_situation2(dataType,datas,colors){
 	    },
 	    legend: {
 	        orient: 'vertical',
-	        right: '15%',
-	        y:'middle',
+	        right: '5%',
+	        x:'right',
+	        y:'top',
 	        textStyle:{
 	            color:"#000"
 	        },
 	
 	        formatter:function(name){
 	        	
-	        	console.log(option.series[0].data);
+	        	//console.log(option.series[0].data);
 	            var oa = option.series[0].data;
 	            var num = oa[0].value + oa[1].value + oa[2].value;
 	            for(var i = 0; i < option.series[0].data.length; i++){
@@ -1309,7 +1421,7 @@ function paint_situation2(dataType,datas,colors){
 	        	{
 	            name: '具体数据',
 	            type: 'pie',
-	            radius : '55%',
+	            radius : ['35%','55%'],
 	            color:colors,
 	            center: ['30%', '50%'],
 	            data:datas,
@@ -1333,6 +1445,8 @@ function paint_situation2(dataType,datas,colors){
 	        }
 	    ]
 	};
+	console.log(option);
 	courserate.setOption(option);
+}
 }
 //事件结办区结束
