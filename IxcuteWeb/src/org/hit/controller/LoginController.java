@@ -62,6 +62,18 @@ public class LoginController {
 		}
 	}
 	
+	@RequestMapping("/loginOut")
+	public String quitLogin(HttpServletRequest req,HttpServletResponse res) {
+		Cookie cookie = new Cookie("username","");
+		cookie.setMaxAge(0);
+		cookie.setPath("/");
+		res.addCookie(cookie);
+		req.getSession().removeAttribute("username");
+		req.getSession().removeAttribute("password");
+		return "redirect:index.jsp";
+	}
+	
+	
 	@RequestMapping("/Next")
 	public String next() {
 		return "main";
@@ -154,10 +166,6 @@ public class LoginController {
 	}
 	
 	
-	@RequestMapping("/quitLogin")
-	public String quitLogin() {
-		return "";
-	}
 	
 	
 	public void setLoginService(LoginService loginService) {

@@ -82,6 +82,11 @@
          $("#add_code").val("");
 	}
 	
+	function loginOut(){
+		
+		
+	}
+	
 //complete chart	
 	var all_user_info;
 	var user_len;
