@@ -71,7 +71,7 @@
 <script type='text/javascript'>
 
 	function logout(){
-		.ajax({
+		$.ajax({
 			url : "loginout",
 			type : "POST"
 		});
@@ -82,10 +82,6 @@
          $("#add_code").val("");
 	}
 	
-	function loginOut(){
-		
-		
-	}
 	
 //complete chart	
 	var all_user_info;
