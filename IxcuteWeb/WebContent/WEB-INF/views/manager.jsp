@@ -20,7 +20,7 @@
 	 <div id='menu'>
 		<button class="menu_button" id="add" href="#page_add" data-toggle="tab" onclick="javascript:add_init()">添加新用户</button>
 		<button class="menu_button" id="change" href="#page_change" data-toggle="tab" onclick="javascript:change_init()">编辑用户信息</button>
-		<button class="menu_button" href="#" data-toggle="tab">退出</button>
+		<a class="menu_button" href="loginOut">退出</a>
 	 </div>
 	 
 	 <div id="title_back">
@@ -74,6 +74,11 @@
 	function add_init(){
 		 $("#add_name").val("");
          $("#add_code").val("");
+	}
+	
+	function loginOut(){
+		
+		
 	}
 	
 //complete chart	
