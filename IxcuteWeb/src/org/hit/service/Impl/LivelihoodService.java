@@ -62,11 +62,12 @@ public class LivelihoodService implements ILivelihoodService {
 
 	//problem properties
 	public Map<String,Integer> queryDataPropertiesByDate(Map map) {
-		List<Livelihood_data> list = livelihoodMapper.EveProBetween(map);
+		List<Livelihood_data> list = livelihoodMapper.TimeBetween(map);
 		result.clear();
 		String properties = "";
 		result = InitProperties();
 		for(Livelihood_data data:list) {
+			System.out.println(data);
 			System.out.println(data.getCreate_time());
 			properties = data.getEvent_property_name();
 			if(result.containsKey(properties)) {
@@ -211,36 +212,192 @@ public class LivelihoodService implements ILivelihoodService {
 	}
 	
 	//by kind of problem
-	public Map<String, Integer> queryKindByMonth(String month){
+	public Map<String, Map<String,Integer>> queryKindByMonth(String month){
 		List<Livelihood_data> list = livelihoodMapper.SelectBymon(month);
-		result.clear();
+		ans.clear();
 		InitProblem();
-		String kind;
+		String kind = "";
+		int overTime = 0;
+		int Intime = 0;
+		int to_Intime = 0;
+		String mainType = "";
+		for(Livelihood_data data:list) {
+			System.out.println(data);
+			if(data.getOvertime_archive_num() == 1) {
+				kind = "超期结办";
+				overTime++;
+				mainType = data.getEvent_type_name();
+				Map<String,Integer> map1 = ans.get(kind);
+				if(map1.containsKey(mainType))
+				{
+					map1.put(mainType, map1.get(mainType)+ 1);
+				}else
+				{
+					map1.put(mainType, 1);
+				}
+			
+			}else if(data.getIntime_archive_num() == 1) {
+				kind = "按期结办";
+				Intime++;
+				mainType = data.getEvent_type_name();
+				Map<String,Integer> map1 = ans.get(kind);
+				if(map1.containsKey(mainType))
+				{
+					map1.put(mainType, map1.get(mainType)+ 1);
+				}else
+				{
+					map1.put(mainType, 1);
+				}
+				
+			}else if(data.getIntime_to_archive_num() == 1) {
+				kind = "处置中";
+				to_Intime++;
+				mainType = data.getEvent_type_name();
+				Map<String,Integer> map1 = ans.get(kind);
+				if(map1.containsKey(mainType))
+				{
+					map1.put(mainType, map1.get(mainType)+ 1);
+				}else
+				{
+					map1.put(mainType, 1);
+				}
+				}
+		
+		}
+		Map map2 = ans.get("处置中");
+		map2.put("总量",to_Intime);
+		map2 = ans.get("按期结办");
+		map2.put("总量", Intime);
+		map2 = ans.get("超期结办");
+		map2.put("总量", overTime);
+		return ans;
+		
+	}
+	
+		
+	public Map<String, Map<String, Integer>> queryKindByQ(int q){
+		List<Livelihood_data> list = livelihoodMapper.SelectByQuarter(q);
+		ans.clear();
+		InitProblem();
+		String kind = "";
+		int overTime = 0;
+		int Intime = 0;
+		int to_Intime = 0;
+		String mainType = "";
+		for(Livelihood_data data:list) {
+			System.out.println(data);
+			if(data.getOvertime_archive_num() == 1) {
+				kind = "超期结办";
+				overTime++;
+				mainType = data.getEvent_type_name();
+				
+				Map<String,Integer> map1 = ans.get(kind);
+				if(map1.containsKey(mainType))
+				{
+					map1.put(mainType, map1.get(mainType)+ 1);
+				}else
+				{
+					map1.put(mainType, 1);
+				}
+				
+			}else if(data.getIntime_archive_num() == 1) {
+				kind = "按期结办";
+				Intime++;
+			
+				mainType = data.getEvent_type_name();
+				
+				Map<String,Integer> map1 = ans.get(kind);
+				if(map1.containsKey(mainType))
+				{
+					map1.put(mainType, map1.get(mainType)+ 1);
+				}else
+				{
+					map1.put(mainType, 1);
+				}
+				
+				
+			}else if(data.getIntime_to_archive_num() == 1) {
+				kind = "处置中";
+				to_Intime++;
+				mainType = data.getEvent_type_name();
+
+				Map<String,Integer> map1 = ans.get(kind);
+				if(map1.containsKey(mainType))
+				{
+					map1.put(mainType, map1.get(mainType)+ 1);
+				}else
+				{
+					map1.put(mainType, 1);
+				}
+				
+			}
+		}
+		Map map2 = ans.get("处置中");
+		map2.put("总量",to_Intime);
+		map2 = ans.get("按期结办");
+		map2.put("总量", Intime);
+		map2 = ans.get("超期结办");
+		map2.put("总量", overTime);
+		return ans;
+	}
+			
+	public Map<String, Map<String, Integer>> queryKindByToday(Map map){
+		List<Livelihood_data> list = livelihoodMapper.TimeBetween(map);
+		ans.clear();
+		InitProblem();
+		String kind = "";
+		int overTime = 0;
+		int Intime = 0;
+		int to_Intime = 0;
+		String mainType = "";
 		for(Livelihood_data data:list) {
 			if(data.getOvertime_archive_num() == 1) {
 				kind = "超期结办";
-				if(result.containsKey(kind)) {
-					result.put(kind, result.get(kind)+1);
-				}else {
-					result.put(kind, 1);
+				overTime++;
+				mainType = data.getEvent_type_name();
+				
+				Map<String,Integer> map1 = ans.get(kind);
+				if(map1.containsKey(mainType))
+				{
+					map1.put(mainType, map1.get(mainType)+ 1);
+				}else
+				{
+					map1.put(mainType, 1);
 				}
+				
 			}else if(data.getIntime_archive_num() == 1) {
 				kind = "按期结办";
-				if(result.containsKey(kind)) {
-					result.put(kind, result.get(kind)+1);
-				}else {
-					result.put(kind, 1);
+				Intime++;
+				mainType = data.getEvent_type_name();
+				Map<String,Integer> map1 = ans.get(kind);
+				if(map1.containsKey(mainType))
+				{
+					map1.put(mainType, map1.get(mainType)+ 1);
+				}else
+				{
+					map1.put(mainType, 1);
 				}
 			}else if(data.getIntime_to_archive_num() == 1) {
 				kind = "处置中";
-				if(result.containsKey(kind)) {
-					result.put(kind, result.get(kind)+1);
-				}else {
-					result.put(kind, 1);
+				to_Intime++;
+				mainType = data.getEvent_type_name();
+				Map<String,Integer> map1 = ans.get(kind);
+				if(map1.containsKey(mainType))
+				{
+					map1.put(mainType, map1.get(mainType)+ 1);
+				}else
+				{
+					map1.put(mainType, 1);
 				}
-			}
 		}
-		return result;
+		}
+		Map map2 = ans.get("处置中");
+		map2.put("总量",to_Intime);
+		map2 = ans.get("按期结办");
+		map2.put("总量", Intime);
+		map2 = ans.get("超期结办");
+		map2.put("总量", overTime);
+		return ans;
 	}
 	
 	public Map<String,Integer> StatisticByall(Map map){
@@ -319,9 +476,12 @@ public class LivelihoodService implements ILivelihoodService {
 	}
 
 	private void InitProblem() {
-		result.put("超期结办", 0);
-		result.put("按期结办", 0);
-		result.put("处置中", 0);
+		Map<String,Integer> map = new HashMap<String, Integer>();
+		ans.put("超期结办", map);
+		map = new HashMap<String, Integer>();
+		ans.put("按期结办", map);
+		map = new HashMap<String, Integer>();
+		ans.put("处置中", map);
 
 	}
 	

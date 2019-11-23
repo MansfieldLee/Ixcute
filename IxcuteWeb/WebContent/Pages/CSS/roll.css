@@ -12,7 +12,7 @@
   position: relative;
   letter-spacing: 1px;
   top: -8px;
-  left: 0;
+  left: -50px;
 }
 .roll ul {
   position: relative;
@@ -28,7 +28,8 @@
   -ms-transition: all .3s;
   -o-transition: all .3s;
   transition: all 2s;
-  padding: 12px 45px 12px 35px;
+  padding: 10px 45px 10px 35px;
+  margin-left:10px;
   font-size: 18px;
   list-style: none;
 }
@@ -84,9 +85,9 @@
 
 .news-scroll {
   	height: 130px;
-  	width: 86%;
+  	width: 83%;
 	position: relative;
-	left: 12.5%;
+	left: 16%;
 	background-color: #F7FAFD;
 	margin-top: 7px;
 	margin-right: 0px;
@@ -97,7 +98,7 @@
 .news-scroll .scroll-box {
   width: 100%;
   height: 125px;
-  padding: 20px 0;
+  padding: 15px 0;
   margin: 0 auto;
   background-color: #67a0fe;
   -webkit-border-radius: 6px;

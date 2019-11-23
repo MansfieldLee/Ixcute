@@ -53,8 +53,8 @@ body,html{
 	float:left;
 }
 #menu{
-	width: 12%;
-	position: fixed;
+	width: 15%;
+	position: relative;
 	left: 0;
 	height: 100%;
 	text-align: left;
@@ -68,6 +68,7 @@ body,html{
 	border-right-style: solid;
 	border-bottom-style: solid;
 	border-left-style: solid;
+	float:left;
 }
 
 .menu-button{
@@ -136,15 +137,16 @@ body,html{
 	
 
 #show_desk{
-	width: 86%;
+	width: 85%;
 	height: 500px;
 	position: relative;
-	left: 12.5%;
+	left: 0;
 	background-color: #F7FAFD;
 	margin-top: 7px;
 	margin-right: 0px;
 	margin-bottom: 0px;
 	margin-left: 0px;
+	float:left;
 }
 a{
 	text-decoration:none;

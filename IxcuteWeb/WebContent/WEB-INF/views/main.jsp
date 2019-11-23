@@ -82,13 +82,13 @@
         
        <div id="menu">
        		<h2 id="menu-head">Ixcute</h2>
-            <div><button class="menu-button-keep" id="pie-button" onclick='javascript:myshow("pie","1")'><span class="glyphicon glyphicon-stats"></span> &nbsp; 问题性质汇总</button></div>
+         	<div><button class="menu-button-keep" id="map-button" onclick='javascript:myshow("map","3")'><span class="glyphicon glyphicon-stats"></span> &nbsp; 热点地区</button></div>
+            <div><button class="menu-button" id="pie-button" onclick='javascript:myshow("pie","1")'><span class="glyphicon glyphicon-stats"></span> &nbsp; 问题性质汇总</button></div>
             <div><button class="menu-button" id="bar-button" onclick='javascript:myshow("bar","2")'><span class="glyphicon glyphicon-stats"></span> &nbsp; 各街道问题情况</button></div>
-         	<div><button class="menu-button" id="map-button" onclick='javascript:myshow("map","3")'><span class="glyphicon glyphicon-stats"></span> &nbsp; 热点地区</button></div>
          	<div><button class="menu-button" id="situation-button" onclick='javascript:myshow("situation","4")'><span class="glyphicon glyphicon-stats"></span> &nbsp; 事件结办情况</button></div>
        </div>
      
-     	<div class="news-scroll">
+     	<div class="news-scroll" id='sc'>
 
 		    <div  class="scroll-box">
 		        <!--滚动的新闻-->
@@ -157,6 +157,38 @@
             <div id='content_bar' class="main clearfix table">
                 <div class="border-container" style="height:95%">
                     <div class="name-title">
+                    	<div class='time_selector'>
+                        <table width="40%" border="0">
+                          <tr>
+                            <td width='21%'>
+								<select class='selected_year' class='time_select'>
+									<option value='2018'>2018</option>
+									<option value='2017'>2017</option>
+									<option value='2016'>2016</option>
+								</select>
+							</td>
+                            <td width='10%'>年</td>
+                            <td width='21%'>
+								<select class='selected_month' class='time_select'>
+									<option value='1'>1</option>
+									<option value='2'>2</option>
+									<option value='3'>3</option>
+									<option value='4'>4</option>
+									<option value='5'>5</option>
+									<option value='6'>6</option>
+									<option value='7'>7</option>
+									<option value='8'>8</option>
+									<option value='9'>9</option>
+									<option value='10'>10</option>
+									<option value='11'>11</option>
+									<option value='12'>12</option>
+								</select>
+							</td>
+                            <td width='10%'>月</td>
+                          </tr>
+                        </table>
+
+                    </div>
                         <input type='button' id='bar_button' value='check' width='50px' height='30px'>
                     </div>
                     <div id="edubalance" style="height:95%"></div>
@@ -316,11 +348,54 @@
                 </div>
             </div>
             
-            <div id='content_situation' class="main teacher-pie clearfix table">
-                <div class="border-container" style="height:95%">
-                    <div id="situation1" style="height:95%;width:48%" align='center'></div>
-                    <div id="situation2" style="height:95%;width:48%" align='center'></div>
-                </div>
+            <div id='content_situation' class="main table" style="height:95%">
+            	<table width="40%" border="0">
+                          <tr>
+                            <td width='30%'><input type='button' value='按月份查看' width='60%' id='on_month'></td>	
+                            <td width='34%'>
+								<select id='selected_year_situation' class='time_select' width='60%'>
+									<option value='2018'>2018</option>
+									<option value='2018'>2017</option>
+									<option value='2018'>2016</option>
+								</select>
+							</td>
+							<td width='34%'>
+								<select id='selected_month_situation' class='time_select' width='60%'>
+									<option value='1'>1</option>
+									<option value='2'>2</option>
+									<option value='3'>3</option>
+									<option value='4'>4</option>
+									<option value='5'>5</option>
+									<option value='6'>6</option>
+									<option value='7'>7</option>
+									<option value='8'>8</option>
+									<option value='9'>9</option>
+									<option value='10'>10</option>
+									<option value='11'>11</option>
+									<option value='12'>12</option>
+								</select>
+							</td>
+						  </tr>
+						  <tr>
+						  	<td width='30%'><input type='button' value='按季度查看' width='60%' id='on_season'></td>
+						  	<td width='34%' >
+						  		<select id='selected_season_situation' class='time_select' width='60%'>
+									<option value='1'>春季</option>
+									<option value='2'>夏季</option>
+									<option value='3'>秋季</option>
+									<option value='4'>冬季</option>
+								</select>
+							</td>
+							<td></td>
+						  </tr>
+						  <tr>
+						  	<td width='30%'><input type='button' value='查看今日' width='60%' id='on_today'></td>
+						  	<td></td>
+						  	<td></td>
+						  </tr>
+				</table>
+                  <div id="situation1" style="height:500px;width:500px;float:left;left:7%;" ></div>
+                  <div id="situation2" style="height:500px;width:500px;float:left;" ></div>
             </div>
             
             

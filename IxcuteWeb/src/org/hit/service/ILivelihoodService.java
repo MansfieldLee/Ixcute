@@ -10,6 +10,6 @@ public interface ILivelihoodService {
 	
 	public Map<String,Map<String,Integer>> queryStreetDataByMonth(String month);
 	
-	public Map<String, Integer> queryKindByMonth(String month);
+	public Map<String, Map<String,Integer>> queryKindByMonth(String month);
 	
 }
