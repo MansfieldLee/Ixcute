@@ -2,6 +2,7 @@ package org.hit.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -144,6 +145,21 @@ public class LoginController {
 			return 0;
 		}
 	}
+	
+	@RequestMapping("/findAllUser")
+	@ResponseBody
+	public List<User> findAllUser(){
+		List<User> allUser = loginService.findAllUser();
+		return allUser;
+	}
+	
+	
+	@RequestMapping("/quitLogin")
+	public String quitLogin() {
+		return "";
+	}
+	
+	
 	public void setLoginService(LoginService loginService) {
 		this.loginService = loginService;
 	}

@@ -81,21 +81,21 @@
 	var user_len;
 	var user_point = 0;
 	function change_init(){
-//		$.ajax({
-//        url : "findServlet",
-//        type : "GET",
-//        success : function(data) {
-          //调用创建表和填充动态填充数据的方法.
-//         	all_user_info = data;
-// 			user_len = all_user_info.length;
-// 			user_point = 0;
-//          createShowingTable(all_user_info)
-//        },
-//        error : function() {
-//      	  alert("连接错误");
-//        }
-//      });
-		all_user_info = [{username:"1", usertype:"普通用户"},{username:"2", usertype:"普通用户"},
+			$.ajax({
+	        url : "findAllUser",
+	        type : "GET",
+	        success : function(data) {
+	          //调用创建表和填充动态填充数据的方法.
+	         	all_user_info = data;
+	 			user_len = all_user_info.length;
+	 			user_point = 0;
+	      	    createShowingTable(all_user_info)
+	      	  },
+	      	  error : function() {
+	     	  alert("连接错误");
+	      	 }
+	      }); 
+/*		all_user_info = [{username:"1", usertype:"普通用户"},{username:"2", usertype:"普通用户"},
 		{username:"3", usertype:"普通用户"},{username:"4", usertype:"普通用户"},
 		{username:"5", usertype:"普通用户"},{username:"6", usertype:"普通用户"},
 		{username:"7", usertype:"普通用户"},{username:"8", usertype:"普通用户"},
@@ -103,10 +103,7 @@
 		{username:"11", usertype:"普通用户"},{username:"12", usertype:"普通用户"},
 		{username:"13", usertype:"普通用户"},{username:"14", usertype:"普通用户"},
 		{username:"15", usertype:"普通用户"},{username:"16", usertype:"普通用户"}
-		];
-		user_len = all_user_info.length;
-		user_point = 0;
-		createShowingTable(all_user_info);
+		];*/
 	}
 
 	function createShowingTable(data){
@@ -197,8 +194,8 @@
 	}
 	
 	
-	$('#change_button').click(function(){
-		var old_uname = all_user_info[target_user_id].uname;
+	$("#change_button").click(function(){
+		var old_uname = all_user_info[target_user_id].username;
 		var new_uname = document.getElementById('new_name').value;
 		var ucode = document.getElementById('new_code').value;
 		
@@ -233,13 +230,13 @@
 		});
 	})
 	
-	function delete_user(){		
+	function delete_user(id){		
 		$.ajax({
 		    url:"deleteServlet",     //请求后台的地址
 		    type:"post",    //请求方式
 		    data:{    //这里是你要传给后台的data值
-		        "uname":all_user_info[user_point].username,
-		        "upwd":all_user_info[user_point].userpwd
+		        "uname":all_user_info[id].username,
+		        "upwd":all_user_info[id].userpwd
 		    },
 
 		    dataType:"json",    //数据类型为json类型

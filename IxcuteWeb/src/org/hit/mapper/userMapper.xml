@@ -28,6 +28,8 @@
  		select *from login where username=#{username}
  	</select>
  	
-
+	<select id="findAllUser" resultType="org.hit.entity.User">
+		select *from login
+	</select>
  	
     </mapper>
