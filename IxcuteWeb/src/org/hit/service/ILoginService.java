@@ -1,5 +1,7 @@
 package org.hit.service;
 
+import java.util.List;
+
 import org.hit.entity.User;
 
 public interface ILoginService {
@@ -8,4 +10,6 @@ public interface ILoginService {
 	public User selectloginbyname(String username);
 	
 	public void deleteUserbyname(String username);
+	
+	public List<User> findAllUser();
 }
