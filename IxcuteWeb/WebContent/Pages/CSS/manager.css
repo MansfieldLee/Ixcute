@@ -16,6 +16,7 @@ body{
 	background-size: cover;
 	height: 18%;
 	position: relative;
+	
 }
 
 #title{
@@ -30,12 +31,13 @@ body{
 }
 
 #menu{
-	background-color: #3094A4;
 	width: 15%;
 	height:100%;
 	position: relative;
 	margin-top:0;
 	float:left;
+	background-color: #3094A4;
+	padding-top:15%;
 }
 
 .submit-button{
@@ -67,7 +69,7 @@ body{
 }
 
 .menu_button{
-	height: 7%;
+	height: 8%;
 	width:100%;
 	background-color: #3094A4;
 	border-top-width: 0;
@@ -105,8 +107,8 @@ body{
 #page_change{
 	position:relative;
 	padding-top:5%;
-	padding-left:10%;
-	padding-right:10%;
+	padding-left:7%;
+	padding-right:7%;
 }
 
 .input_frame {
@@ -117,7 +119,7 @@ body{
 }
 
 #wp{
-	width: 83%;
+	width: 85%;
 	height: 100%;
 	float:left;
 }

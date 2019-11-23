@@ -15,18 +15,20 @@
 </head>
 
 <body>
-	<div id="title_back">
-	   	<div id="title">Ixcute</div>
-	</div>
+
     
 	 <div id='menu'>
 		<button class="menu_button" id="add" href="#page_add" data-toggle="tab" onclick="javascript:add_init()">添加新用户</button>
 		<button class="menu_button" id="change" href="#page_change" data-toggle="tab" onclick="javascript:change_init()">编辑用户信息</button>
 		<button class="menu_button" href="#" data-toggle="tab">退出</button>
 	 </div>
+	 
+	 <div id="title_back">
+	   	<div id="title">Ixcute</div>
+	 </div>
 
 	  <div id="wp" class="tab-content">
-	    <div id="page_add" class='tab-pane in active'>s
+	    <div id="page_add" class='tab-pane in active'>
 	    	<div class='titles'>添加新用户</div>
         	<div><input type='text' id="add_name" class="input_frame" placeholder="用户名"/></div>
             <div><input type='text' id="add_code" class="input_frame" placeholder="密码"/></div>
@@ -111,9 +113,9 @@
 		var tableStr = "";
 
 	    for (var i = 0; i < 10 && user_point < user_len; i++, user_point++) {
-	      	tableStr += "<tr><td width='40%'>" + all_user_info[user_point].username + "</td>"
-	          + "<td width='40%'>" + all_user_info[user_point].usertype + "</td>"
-	          + "<td width='20%'>"
+	      	tableStr += "<tr><td width='42%'>" + all_user_info[user_point].username + "</td>"
+	          + "<td width='42%'>" + all_user_info[user_point].usertype + "</td>"
+	          + "<td width='16%'>"
 	          + "<button class='btn btn-success' href='#submit_change_info' data-toggle='tab' onclick='javascript:to_change_each_page(" + user_point + ")'>更改</button> "
 	          + "<button class='btn btn-danger' onclick='javascript:delete_user(" + user_point + ")'>删除</button>" 
 	          + "</td>" + "</tr>";
@@ -195,7 +197,7 @@
 	}
 	
 	
-	$("change_button").click(function(){
+	$('#change_button').click(function(){
 		var old_uname = all_user_info[target_user_id].uname;
 		var new_uname = document.getElementById('new_name').value;
 		var ucode = document.getElementById('new_code').value;
@@ -219,7 +221,6 @@
 		        if(result){    //如果后台返回的data.SuccessCode不等于0执行后面的语句
 		        	change_init();
 		        	alert("更改成功");
-		        	
 		        }
 		        else{
 					alert("用户名已存在");
