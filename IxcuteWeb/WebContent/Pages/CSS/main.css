@@ -172,6 +172,7 @@ a{
 #time_selector, #time_selector_pre{
 	left:5%;
 	top:5%;
+	float:left;
 }
 .time_select{
 	width:100%;
@@ -194,7 +195,7 @@ a{
 	text-align: center;
 	border-radius: 5px;
 }
-#time_selector table tr,#time_selector_pre table tr
+#time_selector table tr,#time_selector_pre table tr{
 	height: 30px;
 }
 #time_button{
@@ -224,7 +225,6 @@ a{
 	border-right-width: 0px;
 	border-bottom-width: 0px;
 	border-left-width: 0px;
-	height: 10%;
 }
 
 .border-container{

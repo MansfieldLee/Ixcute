@@ -235,6 +235,7 @@
 								</select></td>
 					        <td width='10%'>日</td>
 					      </tr>
+
 					    </table>
 					</div>
                     <div id='time_selector'>
@@ -305,7 +306,6 @@
 									<option value='31'>31</option>
 								</select></td>
                             <td width='10%'>日</td>
-							
                           </tr>
                         </table>
 
