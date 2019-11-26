@@ -128,8 +128,7 @@
         });
         //返回一个数值相同的新DateTime对象 
         that.reDate = function () {
-        	return 1
-            //return new DateTime();
+            return new DateTime();
         };
         //返回此实例的Date值 
         that.GetValue = function () {

@@ -33,7 +33,7 @@ $(function () {
 		var i;
 		var flag;
 		for(i in response){
-			message = response[i].时间 ;
+			message = response[i].时间.split('.')[0] ;
 			message += response[i].街道 + '的'; 
 			message += response[i].社区 + '从' ;
 			message += response[i].来源 + '接到' ;
