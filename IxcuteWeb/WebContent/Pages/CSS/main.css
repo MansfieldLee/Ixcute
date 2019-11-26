@@ -138,15 +138,14 @@ body,html{
 	
 
 #show_desk{
-	width: 85%;
+	width: 80%;
 	height: 500px;
 	position: relative;
 	left: 0;
-	background-color: #F7FAFD;
 	margin-top: 7px;
 	margin-right: 0px;
 	margin-bottom: 0px;
-	margin-left: 0px;
+	margin-left: 9px;
 	float:left;
 }
 a{
@@ -178,7 +177,7 @@ a{
 	float:left;
 }
 .time_select{
-	width:40%;
+	width:100%;
 	line-height:30px;
 	text-align-last: center;
 	height:30px;
@@ -186,8 +185,6 @@ a{
 	outline: none;
 	/*鍙栨秷榛樿绠ご寮�濮�*/
 	appearance:none;
-	-moz-appearance:none;
-	-webkit-appearance:none;
 	/*鍙栨秷榛樿绠ご缁撴潫*/
 	font-size: 1.5rem;
 }
