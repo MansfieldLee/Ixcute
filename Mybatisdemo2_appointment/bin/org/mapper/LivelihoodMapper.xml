@@ -28,6 +28,9 @@
 		select * from livelihood_data where to_char(create_time,'yyyy-mm-dd hh24-mi-ss') between #{begin_time} and #{end_time}
 	</select>
 	
+	
+	
+	
 	<select id="EveProBytime1" parameterType="String" resultType="HashMap">
 		 select count(*) "count",nvl(EVENT_PROPERTY_NAME,'notknown') "event_property" from livelihood_data where to_char(create_time,'yyyy-mm-dd') = #{create_time} group by EVENT_PROPERTY_NAME
 	</select>
@@ -36,6 +39,93 @@
 		select count(*) "count",nvl(EVENT_PROPERTY_NAME,'notknown') event_property from livelihood_data where to_char(create_time,'yyyy-mm-dd') between #{begin_time} and #{end_time} group by EVENT_PROPERTY_NAME
 	</select>
 
+	<select id="StreetBymon" parameterType="HashMap" resultType="HashMap">
+		 select count(*) "count",nvl(SUB_TYPE_NAME,'notknown') SUB_TYPE_NAME from livelihood_data where to_char(create_time,'mm') = #{month} and STREET_NAME = #{street} group by SUB_TYPE_NAME
+	</select>
+	
+	<select id="Streettoday" parameterType="HashMap" resultType="HashMap">
+		 select count(*) "count",nvl(SUB_TYPE_NAME,'notknown') SUB_TYPE_NAME from livelihood_data where to_char(create_time,'yyyy-mm-dd') = #{day} and STREET_NAME = #{street} group by SUB_TYPE_NAME
+	</select>
+	
+	<select id="hotCommuByDay" parameterType="String" resultType="HashMap">
+		 select count(*) "count",nvl(COMMUNITY_NAME,'notknown') COMMUNITY_NAME from livelihood_data where to_char(create_time,'yyyy-mm-dd') = #{day}  group by COMMUNITY_NAME
+	</select>
 
+	<select id="hotCommuByMon" parameterType="String" resultType="HashMap">
+		 select count(*) "count",nvl(COMMUNITY_NAME,'notknown') COMMUNITY_NAME from livelihood_data where to_char(create_time,'mm') = #{mon}  group by COMMUNITY_NAME
+	</select>
+	
+	<select id="OvertimeBymon" parameterType="String" resultType="int">
+		 select count(*) from livelihood_data where to_char(create_time,'mm') = #{month} and OVERTIME_ARCHIVE_NUM = '1'
+	</select>
+	
+	<select id="OvertimeByQuarter" parameterType="String" resultType="int">
+		 select count(*) from livelihood_data where to_char(create_time,'Q')=#{quarter} and OVERTIME_ARCHIVE_NUM = '1'
+	</select>	
+	
+	<select id="OvertimeBetween" parameterType="HashMap" resultType="int">
+		 select count(*) from livelihood_data where to_char(create_time,'yyyy-mm-dd hh24-mi-ss') between #{begin_time} and #{end_time} and OVERTIME_ARCHIVE_NUM = '1'
+	</select>
 
+	<select id="IntimetoBymon" parameterType="String" resultType="int">
+		 select count(*) from livelihood_data where to_char(create_time,'mm') = #{month} and INTIME_TO_ARCHIVE_NUM = '1'
+	</select>
+	
+	<select id="IntimetoByQuarter" parameterType="String" resultType="int">
+		 select count(*) from livelihood_data where to_char(create_time,'Q')=#{quarter} and INTIME_TO_ARCHIVE_NUM = '1'
+	</select>	
+	
+	<select id="IntimetoBetween" parameterType="HashMap" resultType="int">
+		 select count(*) from livelihood_data where to_char(create_time,'yyyy-mm-dd hh24-mi-ss') between #{begin_time} and #{end_time} and INTIME_TO_ARCHIVE_NUM = '1'
+	</select>
+	
+	<select id="IntimeBymon" parameterType="String" resultType="int">
+		 select count(*) from livelihood_data where to_char(create_time,'mm') = #{month} and INTIME_ARCHIVE_NUM = '1'
+	</select>
+	
+	<select id="IntimeByQuarter" parameterType="String" resultType="int">
+		 select count(*) from livelihood_data where to_char(create_time,'Q')=#{quarter} and INTIME_ARCHIVE_NUM = '1'
+	</select>	
+	
+	<select id="IntimeBetween" parameterType="HashMap" resultType="int">
+		 select count(*) from livelihood_data where to_char(create_time,'yyyy-mm-dd hh24-mi-ss') between #{begin_time} and #{end_time} and INTIME_ARCHIVE_NUM = '1'
+	</select>	
+	
+	
+	<select id="OverGroupBymon" parameterType="String" resultType="HashMap">
+		 select count(*) "count",nvl(EVENT_TYPE_NAME,'notknown') EVENT_TYPE_NAME from livelihood_data where to_char(create_time,'mm') = #{month} and OVERTIME_ARCHIVE_NUM = '1' group by EVENT_TYPE_NAME
+	</select>
+	
+	<select id="OverGroupByQuarter" parameterType="String" resultType="HashMap">
+		 select count(*) "count",nvl(EVENT_TYPE_NAME,'notknown') EVENT_TYPE_NAME from livelihood_data where to_char(create_time,'Q')=#{quarter} and OVERTIME_ARCHIVE_NUM = '1' group by EVENT_TYPE_NAME
+	</select>	
+	
+	<select id="OverGroupBetween" parameterType="HashMap" resultType="HashMap">
+		 select count(*) "count",nvl(EVENT_TYPE_NAME,'notknown') EVENT_TYPE_NAME from livelihood_data where to_char(create_time,'yyyy-mm-dd hh24-mi-ss') between #{begin_time} and #{end_time} and OVERTIME_ARCHIVE_NUM = '1' group by EVENT_TYPE_NAME
+	</select>
+
+	<select id="InGrouptoBymon" parameterType="String" resultType="HashMap">
+		 select count(*) "count",nvl(EVENT_TYPE_NAME,'notknown') EVENT_TYPE_NAME from livelihood_data where to_char(create_time,'mm') = #{month} and INTIME_TO_ARCHIVE_NUM = '1' group by EVENT_TYPE_NAME
+	</select>
+	
+	<select id="InGrouptoByQuarter" parameterType="String" resultType="HashMap">
+		 select count(*) "count",nvl(EVENT_TYPE_NAME,'notknown') EVENT_TYPE_NAME from livelihood_data where to_char(create_time,'Q')=#{quarter} and INTIME_TO_ARCHIVE_NUM = '1' group by EVENT_TYPE_NAME
+	</select>	
+	
+	<select id="InGrouptoBetween" parameterType="HashMap" resultType="HashMap">
+		 select count(*) "count",nvl(EVENT_TYPE_NAME,'notknown') EVENT_TYPE_NAME from livelihood_data where to_char(create_time,'yyyy-mm-dd hh24-mi-ss') between #{begin_time} and #{end_time} and INTIME_TO_ARCHIVE_NUM = '1' group by EVENT_TYPE_NAME
+	</select>
+	
+	<select id="InGroupBymon" parameterType="String" resultType="HashMap">
+		 select count(*) "count",nvl(EVENT_TYPE_NAME,'notknown') EVENT_TYPE_NAME from livelihood_data where to_char(create_time,'mm') = #{month} and INTIME_ARCHIVE_NUM = '1' group by EVENT_TYPE_NAME
+	</select>
+	
+	<select id="InGroupByQuarter" parameterType="String" resultType="HashMap">
+		 select count(*) "count",nvl(EVENT_TYPE_NAME,'notknown') EVENT_TYPE_NAME from livelihood_data where to_char(create_time,'Q')=#{quarter} and INTIME_ARCHIVE_NUM = '1' group by EVENT_TYPE_NAME
+	</select>	
+	
+	<select id="InGroupBetween" parameterType="HashMap" resultType="HashMap">
+		 select count(*) "count",nvl(EVENT_TYPE_NAME,'notknown') EVENT_TYPE_NAME from livelihood_data where to_char(create_time,'yyyy-mm-dd hh24-mi-ss') between #{begin_time} and #{end_time} and INTIME_ARCHIVE_NUM = '1' group by EVENT_TYPE_NAME
+	</select>		
+	
 </mapper>

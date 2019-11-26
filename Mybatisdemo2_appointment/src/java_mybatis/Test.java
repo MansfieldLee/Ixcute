@@ -264,6 +264,38 @@ public class Test {
 		}
 	}
 	
+	public static void test(){
+		Reader reader=null;
+		SqlSessionFactory session=null;
+		SqlSession se = null;
+		try{
+			reader = Resources.getResourceAsReader("conf.xml");
+			session = new SqlSessionFactoryBuilder().build(reader);
+			se = session.openSession();
+			
+			LivelihoodMapper livelihoodmapper = se.getMapper(LivelihoodMapper.class);
+			
+			int quarter = 3;
+			String day = "2018-10-30";
+			HashMap<String,Object> map = new HashMap<>();
+			map.put("begin_time","2018-10-20");
+			map.put("end_time","2018-10-31");
+			
+			List<HashMap<String,Object>> result = livelihoodmapper.InGroupBetween(map);
+
+			System.out.println(result);
+		}catch(IOException e){
+			e.printStackTrace();
+
+		}catch(Exception e){
+			e.printStackTrace();
+
+		}finally{
+			if(se!=null) se.close();
+		}
+	}
+	
+	
 	public static void main(String[] args){
 //		System.out.println("请输入需要查找的id");
 //		Scanner s = new Scanner(System.in);
@@ -273,19 +305,19 @@ public class Test {
 		
 //		loginOrderbycol();
 		
-		login log = new login(7,"kakao","etrd6546123","client");
+//		login log = new login(7,"kakao","etrd6546123","client");
 //		String saltpwd = MD5salt.Get_MD5salt(log.getUserpwd(),0);
 //		log.setUserpwd(saltpwd);
 //		Insertuser(log);
 		
-		int find = CheckNameAndPwd(log);
-		System.out.println(find);
+//		int find = CheckNameAndPwd(log);
+//		System.out.println(find);
 		
 //		Eventproperty();
 //		EventpropertyBetween();
 //		SelectQuarter();
 //		pageDivide();
 //		updatePWD(log);
-		
+		test();
 	}
 }
