@@ -1,28 +1,151 @@
 /* CSS Document */
-*{
-	margin:1px;
+
+body,html{
+	width:100%;
+	height:100%;
 }
+
+.wrapper{
+	width:100%;
+	height:100%;
+}
+
 #container{
-	width:1500px;
-	border:1px solid #000;
-	clear:both;
+	width: 100%;
+	height: 100%;
+	background-color: #FFFFFF;
 }
-#content_map{
-	height:400px;width:600px;border:1px solid blue;
+.box_showed{
+	width: 100%;
+	height: 60rem;
+	transition:all .28s ease-in .2s;
+}
+.box_hided{
+	width:100%;
+	height:10rem;
+	transition:all .28s ease-in .2s;
+}
+#clock_box{
+	width:100%;
+	height:10rem;
+	position:absolute;
+	margin:0px;
+	padding:0px;
+	left:0px;
+	top:0px;
+	background:transparent;
+	display:none;
+}
+#clock_box2{
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+#content_map,#content_bar,#content_pie,#content_situation{
+	height:100%;
+	width:100%;
 } 
 #head{
-	width:1500px;
-	height:40px;
-	border:1px solid red;
-}
-#menu{
-	width:200px;
-	border:1px solid green;
+	width:100%;
+	background-color:#C0E6E7;
+	height:145px;
 	float:left;
 }
+#menu{
+	width: 15%;
+	position: relative;
+	left: 0;
+	height: 100%;
+	text-align: left;
+	background-color: #F7FAFD;
+	border-top-width: 0px;
+	border-right-width: 1px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-right-color: #D6D6D6;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	float:left;
+}
+
+.menu-button{
+	height: 60px;
+	font-size: 2rem;
+	width: 100%;
+	color: #6F6F6F;
+	background-color: #F7FAFD;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	text-align: left;
+}
+
+.menu-button:hover{
+	background-color: #C5E3fb;
+	color: #0b7efc;
+}
+
+.menu-button:focus, .menu-button:active{
+	outline:none;
+}
+
+.menu-button-keep{
+	background-color: #C5E3fb;
+	color: #0b7efc;
+	height: 60px;
+	font-size: 2rem;
+	width: 100%;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: solid;
+	text-align: left;
+	border-left-width: 3px;
+	border-left-color: #0B7EFC;
+	outline: none;
+}
+
+#menu-head{
+	font-size: 3.5em;
+	text-align: center;
+	height: 10%;
+	margin-top: 10%;
+	margin-bottom: 1px;
+	border-bottom-width: 1px;
+	border-bottom-color: #616161;
+	font-family: "Comic Sans MS", cursive;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-left-width: 0px;
+}
+
+.menu-divide{
+	margin: 0px;
+	border-top-color: #D4D4D4;
+	border-right-color: #D4D4D4;
+	border-bottom-color: #D4D4D4;
+	border-left-color: #D4D4D4;
+}
+	
+
 #show_desk{
-	width:1290px;
-	border:1px solid blue;
+	width: 85%;
+	height: 500px;
+	position: relative;
+	left: 0;
+	background-color: #F7FAFD;
+	margin-top: 7px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
 	float:left;
 }
 a{
@@ -35,3 +158,95 @@ a{
 	display:none;
 }
 
+.selected_community{
+	display:none;
+}
+#street{
+	height:40px;
+	border:1px solid blue;
+}
+#headmenu>li{
+	font-size:24px;	!important
+}
+.container{
+	width:100%;
+}
+#time_selector, #time_selector_pre{
+	left:5%;
+	top:5%;
+	float:left;
+}
+.time_select{
+	width:100%;
+	line-height:30px;
+	text-align-last: center;
+	height:30px;
+	border-radius: 5px;
+	outline: none;
+	/*鍙栨秷榛樿绠ご寮�濮�*/
+	appearance:none;
+	-moz-appearance:none;
+	-webkit-appearance:none;
+	/*鍙栨秷榛樿绠ご缁撴潫*/
+	font-size: 1.5rem;
+}
+.time_select:hover{
+	background-color: #87CEFA;
+}
+#time_selector table,#time_selector_pre table{
+	text-align: center;
+	border-radius: 5px;
+}
+#time_selector table tr,#time_selector_pre table tr{
+	height: 30px;
+}
+#time_button{
+	width:180px;
+	margin-top:10px;
+	line-height:10px;
+	height:30px;
+	font-size:20px;
+	border-radius:10px;
+	background-color:#E2F7F8;
+	color:#6F2430;
+	float:left;
+}
+#time_button:focus{
+	outline:none;
+}
+.time_select option{
+	text-align: center;
+}
+
+#time_button{
+	background-color: #C5E3fb;
+	color: #0b7efc;
+	width: 90px;
+	font-size: 2em;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+}
+
+.border-container{
+	border-width:0;
+}
+
+/* -------------------------------- 
+
+Primary style
+
+-------------------------------- */
+ 
+ 
+ 
+/* -------------------------------- 
+
+Main Components 
+
+-------------------------------- */
+
+#select_street{
+	height:150px;
+}

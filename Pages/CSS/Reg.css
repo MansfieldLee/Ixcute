@@ -17,7 +17,6 @@ body #regform
           transform-origin: 161px 100%;
   -webkit-transform: rotateX(0deg);
           transform: rotateX(0deg);
-  position: relative;
   width: 350px;
   /*border-top: 2px solid #D8312A;*/
   height: 380px;

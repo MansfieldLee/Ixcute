@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<context:component-scan base-package="org.hit.authorizedInterceptor"></context:component-scan>
 	
 	<!-- 加载dp.properties文件 -->
 	<bean id="config" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
@@ -39,17 +43,22 @@
 		（对象名就是首字母小写的接口名）：loginMapper.query()
 		 -->
 	</bean>
+	
 	<bean class="org.hit.entity.User"></bean>
 	
+	<bean class="org.hit.entity.Livelihood_data"></bean>
+	
+	<bean id="livelihoodService" class="org.hit.service.Impl.LivelihoodService">
+		<property name="livelihoodMapper" ref="livelihoodMapper"></property>
+		<property name="result"><map></map></property>
+		<property name="ans"><map></map></property>
+		<property name="specialEvent"><map></map></property>
+	</bean>
 	
 	<!-- 给Service注入Dao -->
 	<bean id="loginService" class="org.hit.service.Impl.LoginService">
 	<property name="loginMapper" ref="loginMapper"></property>
 	</bean>
-	
-	<!-- 
-	<bean id="loginController" class="org.hit.controller.LoginController">
-	<property name="loginService" ref="loginService"></property>
-	</bean> -->
+
 	
 </beans>

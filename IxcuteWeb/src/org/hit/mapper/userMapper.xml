@@ -6,21 +6,30 @@
  <mapper namespace="org.hit.mapper.LoginMapper">
  <!-- 通过namespace + id 来定位namesql -->
  
+ 
+    <insert id="addUser" parameterType="org.hit.entity.User">
+   		insert into Login(username,userpwd,usertype) values(#{username},#{userpwd},#{usertype})
+    </insert>
+    
+  	<delete id="deleteUserbyname" parameterType="String">
+		delete from login where username = #{username}
+ 	</delete>
  <!-- 修改内容
    <select id="QueryStudentByStuno" parameterType="int" resultType="Student">
    		select * from student where stuno=#{stuno}
    </select> 
     
-    <insert id="addUser" parameterType="org.hit.entity.User">
-    	insert into Login(id,username,userpwd,usertype) values(#{id},#{uname},#{upwd},#{utype})
-    </insert>
  	
     <select id="selectloginbyid" resultType="org.hit.entity.User"  parameterType="int">
 	 select * from login where id = #{id}
  	</select>-->
  	
- 	<select id="selectloginbyname" resultType="org.hit.entity.User" parameterType="org.hit.entity.User">
- 		select *from login where username=#{uname} and userpwd=#{upwd}
+ 	<select id="selectloginbyname" resultType="org.hit.entity.User" parameterType="String">
+ 		select *from login where username=#{username}
  	</select>
+ 	
+	<select id="findAllUser" resultType="org.hit.entity.User">
+		select *from login
+	</select>
  	
     </mapper>

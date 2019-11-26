@@ -1,5 +1,7 @@
 package org.hit.service.Impl;
 
+import java.util.List;
+
 import org.hit.entity.User;
 import org.hit.mapper.LoginMapper;
 import org.hit.service.ILoginService;
@@ -17,8 +19,20 @@ public class LoginService implements ILoginService{
 	}
 	
 	
-	public User selectloginbyname(User user) {
-		return loginMapper.selectloginbyname(user);
+	public User selectloginbyname(String username) {
+		return loginMapper.selectloginbyname(username);
+	}
+	
+	public List<User> findAllUser(){
+		return loginMapper.findAllUser();
+	}
+	
+	public void addUser(User user) {
+		loginMapper.addUser(user);
+	}
+
+	public void deleteUserbyname(String username) {
+		loginMapper.deleteUserbyname(username);
 	}
 
 }

@@ -30,5 +30,5 @@
 		<bean class="org.hit.authorizedInterceptor.AuthorizedInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
-	
+	<mvc:default-servlet-handler/>
 </beans>

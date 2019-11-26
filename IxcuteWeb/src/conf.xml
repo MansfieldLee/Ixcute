@@ -9,5 +9,6 @@
   <mappers>
   <!-- 加载映射文件 -->
     <mapper resource="org/hit/mapper/userMapper.xml"/>
+ 	<mapper resource="org/hit/mapper/LivelihoodMapper.xml"/>
   </mappers>
 </configuration>
