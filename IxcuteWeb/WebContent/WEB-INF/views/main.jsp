@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="Pages/CSS/bootsnav.css">
 <link rel='stylesheet' type='text/css' href='Pages/CSS/main.css'>
 <link rel="stylesheet" href="Pages/CSS/roll.css">
+<link rel="stylesheet" type="text/css" href="Pages/CSS/jedate.css"/>
     <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
     <script src="https://cdn.bootcss.com/echarts/4.2.0-rc.2/echarts.min.js"></script>
 	<script src='Pages/JS/pingshan.js'></script>
@@ -124,9 +125,8 @@
                             <td width='10%'>月</td>
                           </tr>
                         </table>
-
-                    </div>
-                        <input type='button' id='bar_button' value='check' width='50px' height='30px'>
+                        <input type='button' id='bar_button' value='查看' width='50px' height='30px'>
+                    	</div>
                     </div>
                     <div id="edubalance" style="height:95%"></div>
                 </div>
@@ -134,161 +134,36 @@
             
             
             <div id='content_pie' class="main teacher-pie clearfix table">
-            	<div class='border-container' style="height:95%">
-            		<div id='time_selector_pre'>
-					    <table width="60%" border="0">
-					      <tr>
-							<td width='6%'>从：</td>	
-					        <td width='21%'>
-								<select id='selected_year_pre' class='time_select'>
-									<option value='2018'>2018</option>
-									<option value='2017'>2017</option>
-									<option value='2016'>2016</option>
-								</select>
-							</td>
-					        <td width='10%'>年</td>
-					        <td width='21%'>
-								<select id='selected_month_pre' class='time_select'>
-									<option value='1'>1</option>
-									<option value='2'>2</option>
-									<option value='3'>3</option>
-									<option value='4'>4</option>
-									<option value='5'>5</option>
-									<option value='6'>6</option>
-									<option value='7'>7</option>
-									<option value='8'>8</option>
-									<option value='9'>9</option>
-									<option value='10'>10</option>
-									<option value='11'>11</option>
-									<option value='12'>12</option>
-								</select>
-							</td>
-					        <td width='10%'>月</td>
-					        <td width='21%'>
-								<select id='selected_day_pre' class='time_select'>
-									<option value='1'>1</option>
-									<option value='2'>2</option>
-									<option value='3'>3</option>
-									<option value='4'>4</option>
-									<option value='5'>5</option>
-									<option value='6'>6</option>
-									<option value='7'>7</option>
-									<option value='8'>8</option>
-									<option value='9'>9</option>
-									<option value='10'>10</option>
-									<option value='11'>11</option>
-									<option value='12'>12</option>
-									<option value='13'>13</option>
-									<option value='14'>14</option>
-									<option value='15'>15</option>
-									<option value='16'>16</option>
-									<option value='17'>17</option>
-									<option value='18'>18</option>
-									<option value='19'>19</option>
-									<option value='20'>20</option>
-									<option value='21'>21</option>
-									<option value='22'>22</option>
-									<option value='23'>23</option>
-									<option value='24'>24</option>
-									<option value='25'>25</option>
-									<option value='26'>26</option>
-									<option value='27'>27</option>
-									<option value='28'>28</option>
-									<option value='29'>29</option>
-									<option value='30'>30</option>
-									<option value='31'>31</option>
-								</select></td>
-					        <td width='10%'>日</td>
-					      </tr>
-					    </table>
-					</div>
+            	<div class='border-container' style="height:13%">
+            		
                     <div id='time_selector'>
-                        <table width="60%" border="0">
-                          <tr>
-                            <td width='6%'>至：</td>	
-                            <td width='21%'>
-								<select id='selected_year' class='time_select'>
-									<option value='2018'>2018</option>
-									<option value='2017'>2017</option>
-									<option value='2016'>2016</option>
-								</select>
-							</td>
-                            <td width='10%'>年</td>
-                            <td width='21%'>
-								<select id='selected_month' class='time_select'>
-									<option value='1'>1</option>
-									<option value='2'>2</option>
-									<option value='3'>3</option>
-									<option value='4'>4</option>
-									<option value='5'>5</option>
-									<option value='6'>6</option>
-									<option value='7'>7</option>
-									<option value='8'>8</option>
-									<option value='9'>9</option>
-									<option value='10'>10</option>
-									<option value='11'>11</option>
-									<option value='12'>12</option>
-								</select>
-							</td>
-                            <td width='10%'>月</td>
-                            <td width='21%'>
-								<select id='selected_day' class='time_select'>
-									<option value='1'>1</option>
-									<option value='2'>2</option>
-									<option value='3'>3</option>
-									<option value='4'>4</option>
-									<option value='5'>5</option>
-									<option value='6'>6</option>
-									<option value='7'>7</option>
-									<option value='8'>8</option>
-									<option value='9'>9</option>
-									<option value='10'>10</option>
-									<option value='11'>11</option>
-									<option value='12'>12</option>
-									<option value='13'>13</option>
-									<option value='14'>14</option>
-									<option value='15'>15</option>
-									<option value='16'>16</option>
-									<option value='17'>17</option>
-									<option value='18'>18</option>
-									<option value='19'>19</option>
-									<option value='20'>20</option>
-									<option value='21'>21</option>
-									<option value='22'>22</option>
-									<option value='23'>23</option>
-									<option value='24'>24</option>
-									<option value='25'>25</option>
-									<option value='26'>26</option>
-									<option value='27'>27</option>
-									<option value='28'>28</option>
-									<option value='29'>29</option>
-									<option value='30'>30</option>
-									<option value='31'>31</option>
-								</select></td>
-                            <td width='10%'>日</td>
-							
-                          </tr>
-                        </table>
-
+                        <label>从：
+                        	<input id='startTime' type='text' value='2018-10-29' width='250px'/>
+                        </label>
+                        <label>至：
+                        	<input id='endTime' type='text' value='2018-10-29' width='250px'/>
+                        </label>
                     </div>
-                    <div><button id='time_button'>查看</button></div>
-                    <div id="courserate" style="height:95%" align="center">
-                    </div>
+                    <button id='time_button'>查看</button>
+                    
                 </div>
+                <div id="courserate" style=" align="center">
+                    </div>
             </div>
             
             <div id='content_situation' class="main table" style="height:95%">
-            	<table width="40%" border="0">
+            	<table width="40%" border="0" class='table-striped table-hover'>
                           <tr>
                             <td width='30%'><input type='button' value='按月份查看' width='60%' id='on_month'></td>	
-                            <td width='34%'>
+                            <td width='32%'>
 								<select id='selected_year_situation' class='time_select' width='60%'>
 									<option value='2018'>2018</option>
 									<option value='2018'>2017</option>
 									<option value='2018'>2016</option>
 								</select>
 							</td>
-							<td width='34%'>
+							<td width='3%'>年</td>
+							<td width='32%'>
 								<select id='selected_month_situation' class='time_select' width='60%'>
 									<option value='1'>1</option>
 									<option value='2'>2</option>
@@ -304,10 +179,11 @@
 									<option value='12'>12</option>
 								</select>
 							</td>
+							<td width='3%'>月</td>
 						  </tr>
 						  <tr>
 						  	<td width='30%'><input type='button' value='按季度查看' width='60%' id='on_season'></td>
-						  	<td width='34%' >
+						  	<td width='32%' >
 						  		<select id='selected_season_situation' class='time_select' width='60%'>
 									<option value='1'>第一季度</option>
 									<option value='2'>第二季度</option>
@@ -316,9 +192,13 @@
 								</select>
 							</td>
 							<td></td>
+							<td></td>
+							<td></td>
 						  </tr>
 						  <tr>
 						  	<td width='30%'><input type='button' value='查看今日' width='60%' id='on_today'></td>
+						  	<td></td>
+						  	<td></td>
 						  	<td></td>
 						  	<td></td>
 						  </tr>
@@ -331,7 +211,9 @@
         </div>
     </div>
     <script src='Pages/JS/main.js' type='text/javascript' ></script>
+    <script src='Pages/JS/jedate.min.js'></script>
     <script src="Pages/JS/roll.js"></script>
+    
 </body>
 	<script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
 	<script type="text/javascript" src="Pages/JS/bootsnav.js"></script>

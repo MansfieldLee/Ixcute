@@ -42,11 +42,95 @@ $(document).ready(function(){
 	//结束
 	canvas_change();
 }
-document.getElementById('time_box').onmousewheel = function(){
+	document.getElementById('time_box').onmousewheel = function(){
 	document.getElementById('time_box').setAttribute('class','box_hided');
 	$('#clock_box2').slideUp(300);
 	$('#clock_box').slideDown(0);
 }
+	
+	//日历部分
+	
+	jeDate('#startTime', {
+        minDate: '1990-01-01',
+        isinitVal: true,
+        format: 'YYYY-MM-DD',
+        onClose: false,
+        donefun:function(obj){
+            // console.log(obj)
+            var saliDate=obj.val.split("-");
+             console.log(saliDate);
+            var riNum=0;
+            var yueNum=0;
+            var nianNum=saliDate[0];
+            // console.log(saliDate[1]-1)
+            // //判断月 同时判断年
+            if(saliDate[1]-1<=0&&saliDate[2]=="01"){
+                yueNum=12;
+                riNum=31;
+                nianNum=nianNum;
+                // console.log(nianNum,yueNum,riNum)
+                $("#endTime").val(nianNum+"-"+yueNum+"-"+riNum)
+                return false;
+            }else {
+                yueNum=saliDate[1];
+                nianNum=nianNum-0+1;
+            }
+            //当 日 是01 的时候要判断当前下一个月是否为31 还是30天  在判断一个是否为闰年  2月份是29 还是28
+            if(saliDate[2]=="01"){
+                switch(saliDate[1]-1){
+                    case 1:
+                    case 3:
+                    case 5:
+                    case 7:
+                    case 8:
+                    case 10:
+                    case 0://0就是12月  因为是只有点击的是2019-01-01  才会是2018-12-31
+                        riNum=31;
+                        yueNum="0"+(saliDate[1]-1);
+                        break;
+                    case 4:
+                    case 6:
+                    case 9:
+                    case 11:
+                        riNum=30;
+                        yueNum="0"+(saliDate[1]-1);
+                        break;
+                }
+                if(saliDate[1]-1==2){
+                	yueNum="0"+(saliDate[1]-1);
+                    //判断是否为闰年
+                    if(isLeap(saliDate[0])==1){
+                        riNum=29;
+                    }else{
+                        riNum=28;
+                    }
+                }
+            }else{
+                if(saliDate[2]-1<=9){
+                    riNum="0"+(saliDate[2]-1);
+                }else{
+                    riNum=saliDate[2]-1;
+                }
+            }
+            $("#endTime").val(nianNum+"-"+yueNum+"-"+riNum)
+            // console.log(nianNum,yueNum,riNum)
+        }
+    });
+    jeDate('#endTime', {
+        minDate: '1990-01-01',
+        isinitVal: true,
+        format: 'YYYY-MM-DD',
+        onClose: false
+    });
+    
+   //判断是否为闰年  若为闰年，返回1，反之则返回0
+    function isLeap(year) {
+        if((year%4==0 && year%100!=0)||(year%400==0)){
+            return 1;
+        }
+        return 0;
+    }
+    //日历部分结束
 })
 
 function myshow(showed,bid){
@@ -214,6 +298,10 @@ function canvas_change(){
 		}
 	}
 	$('#bar_button').click(function(){
+		var edubalance = echarts.init(document.getElementById('edubalance'));
+		edubalance.clear();
+		bar_option.series = [];
+		bar_option.legend.data = [];
 		bar_issue();
 	})
 	var bar_option = {
@@ -310,9 +398,8 @@ function canvas_change(){
 	        series: []
 	    };
 	function paint_bar(dataType,sery){
-		console.log(sery);
+		//console.log(sery);
 	    var edubalance = echarts.init(document.getElementById('edubalance'));
-	    
 		bar_option.series.push(sery);
 		bar_option.legend.data.push(dataType);
 		edubalance.setOption(bar_option);
@@ -325,13 +412,17 @@ function canvas_change(){
     window.response='';
 	var xmlhttp_time;
 	function time_issue(){
-		var year1=document.getElementById('selected_year_pre').value;
-		var month1=document.getElementById('selected_month_pre').value;
-		var day1=document.getElementById('selected_day_pre').value;
-		var year=document.getElementById('selected_year').value;
-		var month=document.getElementById('selected_month').value;
-		var day=document.getElementById('selected_day').value;
-		console.log(year,month,day,year1,month1,day1);
+		var startTime = document.getElementById('startTime').value;
+		var endTime = document.getElementById('endTime').value;
+		console.log(startTime,endTime);
+		startTime = startTime.split('-');
+		endTime = endTime.split('-');
+		var year = startTime[0];
+		var month = startTime[1];
+		var day = startTime[2];
+		var year1 = endTime[0];
+		var month1 = endTime[1];
+		var day1 = endTime[2];
 		if (window.XMLHttpRequest) {xmlhttp_time=new XMLHttpRequest();}
 		
 		else{xmlhttp_time=new ActiveXObject("Microsoft.XMLHTTP");}	
@@ -359,7 +450,7 @@ function canvas_change(){
 //				console.log(response);
 //				console.log(response.投诉);
 				window.test_response.tousu = response.投诉;
-				console.log(window.test_response.tousu);
+				//console.log(window.test_response.tousu);
 				window.test_response.jianyi = response.建议;
 				window.test_response.zixun = response.咨询;
 				window.test_response.ganxie = response.感谢;
@@ -397,12 +488,12 @@ function canvas_change(){
 //	}
 	
 	function paint_pie(){
-		console.log(response);
-		console.log(test_response);
-		console.log(test_response.tousu);
-		for(var key in test_response){
-			console.log(key);
-		}
+//		console.log(response);
+//		console.log(test_response);
+//		console.log(test_response.tousu);
+//		for(var key in test_response){
+//			console.log(key);
+//		}
 //    	console.log('!!');
 //    	console.log(test_response);
 //    	console.log(test_response.tousu);
@@ -422,7 +513,7 @@ function canvas_change(){
 
             formatter:function(name){
             	
-            	console.log(option.series[0].data);
+            	//console.log(option.series[0].data);
                 var oa = option.series[0].data;
                 var num = oa[0].value + oa[1].value + oa[2].value + oa[3].value + oa[4].value + oa[5].value;
                 for(var i = 0; i < option.series[0].data.length; i++){
@@ -940,9 +1031,9 @@ function paint_situation(){
 	    },
 	    legend: {
 	        orient: 'vertical',
-	        right: '15%',
-	        x:'center',
-	        y:'top',
+	        right: '20%',
+	        x:'right',
+	        y:'center',
 	        textStyle:{
 	            color:"#000"
 	        },

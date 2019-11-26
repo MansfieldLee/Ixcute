@@ -200,17 +200,12 @@ a{
 #time_selector table tr,#time_selector_pre table tr{
 	height: 30px;
 }
-#time_button{
-	width:180px;
-	margin-top:10px;
-	line-height:10px;
-	height:30px;
-	font-size:20px;
-	border-radius:10px;
-	background-color:#E2F7F8;
-	color:#6F2430;
-	float:left;
+
+
+#time_button:hover{
+	color:#fff;
 }
+
 #time_button:focus{
 	outline:none;
 }
@@ -222,11 +217,14 @@ a{
 	background-color: #C5E3fb;
 	color: #0b7efc;
 	width: 90px;
-	font-size: 2em;
 	border-top-width: 0px;
 	border-right-width: 0px;
 	border-bottom-width: 0px;
 	border-left-width: 0px;
+	line-height:10px;
+	height:25px;
+	font-size:18px;
+	border-radius:10px;
 }
 
 .border-container{
