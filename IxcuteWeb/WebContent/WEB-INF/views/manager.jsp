@@ -82,8 +82,6 @@
          $("#add_code").val("");
 	}
 	
-	
-//complete chart	
 	var all_user_info;
 	var user_len;
 	var user_point = 0;
@@ -102,15 +100,6 @@
 	     	  alert("连接错误");
 	      	 }
 	      }); 
-/*		all_user_info = [{username:"1", usertype:"普通用户"},{username:"2", usertype:"普通用户"},
-		{username:"3", usertype:"普通用户"},{username:"4", usertype:"普通用户"},
-		{username:"5", usertype:"普通用户"},{username:"6", usertype:"普通用户"},
-		{username:"7", usertype:"普通用户"},{username:"8", usertype:"普通用户"},
-		{username:"9", usertype:"普通用户"},{username:"10", usertype:"普通用户"},
-		{username:"11", usertype:"普通用户"},{username:"12", usertype:"普通用户"},
-		{username:"13", usertype:"普通用户"},{username:"14", usertype:"普通用户"},
-		{username:"15", usertype:"普通用户"},{username:"16", usertype:"普通用户"}
-		];*/
 	}
 
 	function createShowingTable(data){

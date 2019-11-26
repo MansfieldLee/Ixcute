@@ -315,8 +315,7 @@ function canvas_change(){
 		bar_option.legend.data.push(dataType);
 		edubalance.setOption(bar_option);
 	}
-	//$('#content_bar').hide(0);
-/*  =====-=*/
+
 //pie区：
 	//时间事件ajax
 	//var response;

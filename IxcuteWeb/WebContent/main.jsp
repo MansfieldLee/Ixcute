@@ -342,60 +342,49 @@
                         </table>
 
                     </div>
-                    <div><button id='time_button'>查看</button></div>
+                    <div><button id='time_button' class='btn btn-primary'>查看</button></div>
                     <div id="courserate" style="height:95%" align="center">
                     </div>
                 </div>
             </div>
             
             <div id='content_situation' class="main table" style="height:95%">
-            	<table width="40%" border="0">
-                          <tr>
-                            <td width='30%'><input type='button' value='按月份查看' width='60%' id='on_month'></td>	
-                            <td width='34%'>
-								<select id='selected_year_situation' class='time_select' width='60%'>
-									<option value='2018'>2018</option>
-									<option value='2018'>2017</option>
-									<option value='2018'>2016</option>
-								</select>
-							</td>
-							<td width='34%'>
-								<select id='selected_month_situation' class='time_select' width='60%'>
-									<option value='1'>1</option>
-									<option value='2'>2</option>
-									<option value='3'>3</option>
-									<option value='4'>4</option>
-									<option value='5'>5</option>
-									<option value='6'>6</option>
-									<option value='7'>7</option>
-									<option value='8'>8</option>
-									<option value='9'>9</option>
-									<option value='10'>10</option>
-									<option value='11'>11</option>
-									<option value='12'>12</option>
-								</select>
-							</td>
-						  </tr>
-						  <tr>
-						  	<td width='30%'><input type='button' value='按季度查看' width='60%' id='on_season'></td>
-						  	<td width='34%' >
-						  		<select id='selected_season_situation' class='time_select' width='60%'>
-									<option value='1'>春季</option>
-									<option value='2'>夏季</option>
-									<option value='3'>秋季</option>
-									<option value='4'>冬季</option>
-								</select>
-							</td>
-							<td></td>
-						  </tr>
-						  <tr>
-						  	<td width='30%'><input type='button' value='查看今日' width='60%' id='on_today'></td>
-						  	<td></td>
-						  	<td></td>
-						  </tr>
-				</table>
-                  <div id="situation1" style="height:500px;width:500px;float:left;left:7%;" ></div>
-                  <div id="situation2" style="height:500px;width:500px;float:left;" ></div>
+            	<div class='content_select'>
+                	<input type='button' value='查月份' class="btn btn-primary" id='on_month'>
+					<select id='selected_year_situation' class='time_select' >
+						<option value='2018'>2018</option>
+						<option value='2018'>2017</option>
+						<option value='2018'>2016</option>
+					</select>
+					<select id='selected_month_situation' class='time_select'>
+						<option value='1'>1</option>
+						<option value='2'>2</option>
+						<option value='3'>3</option>
+						<option value='4'>4</option>
+						<option value='5'>5</option>
+						<option value='6'>6</option>
+						<option value='7'>7</option>
+						<option value='8'>8</option>
+						<option value='9'>9</option>
+						<option value='10'>10</option>
+						<option value='11'>11</option>
+						<option value='12'>12</option>
+					</select>	
+				</div>
+				<div class='content_select'>
+					<input type='button' value='查季度' class="btn btn-primary" id='on_season'></td>
+					<select id='selected_season_situation' class='time_select'> 
+						<option value='1'>春季</option>
+						<option value='2'>夏季</option>
+						<option value='3'>秋季</option>
+						<option value='4'>冬季</option>
+					</select>
+				</div>
+				<div class='content_select'>
+					<input type='button' value='查今日' class="btn btn-primary" id='on_today'>
+				</div>
+	            <div id="situation1" style="height:500px;width:500px;float:left;left:7%;" ></div>
+	            <div id="situation2" style="height:500px;width:500px;float:left;" ></div>
             </div>
             
             
