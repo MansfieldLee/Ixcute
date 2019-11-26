@@ -188,7 +188,7 @@ function degToRad(degree){
 function showTime(ms,s,m,h){
 
 	var now = new Date();
-	date.today = '2018/10/10';
+	date.today = '2018/10/30';
 	date.day = 3;
 	date.hrs = 15 + h;
 	date.min = 23 + m;
@@ -443,7 +443,7 @@ function degToRad2(degree){
 function showTime2(ms,s,m,h){
 
 	var now = new Date();
-	date.today = '2018/10/10';
+	date.today = '2018/10/30';
 	date.day = 3;
 	date.hrs = 20 + h;
 	date.min = 23 + m;

@@ -76,10 +76,6 @@
          $("#add_code").val("");
 	}
 	
-	function loginOut(){
-		
-		
-	}
 	
 //complete chart	
 	var all_user_info;
@@ -96,8 +92,12 @@
 	 			user_point = 0;
 	      	    createShowingTable(all_user_info)
 	      	  },
-	      	  error : function() {
-	     	  alert("连接错误");
+	      	  error : function(result) {
+	     	  if(result.responseText == "loseToken"){
+	     		  window.location.href="returnIndex";
+	     		  return;
+	     	  }
+	     	  	alert("出错！！");
 	      	 }
 	      }); 
 /*		all_user_info = [{username:"1", usertype:"普通用户"},{username:"2", usertype:"普通用户"},
@@ -191,8 +191,12 @@
 		        }
 		    },
 
-		    error:function(){   //请求失败执行的操作
-		        alert("出错！！");
+		    error:function(result){   //请求失败执行的操作
+		     	  if(result.responseText == "loseToken"){
+		     		  window.location.href="returnIndex";
+		     		  return;
+		     	  }
+		     	  	alert("出错！！");
 		    }
 
 		});
@@ -223,14 +227,20 @@
 		        if(result){    //如果后台返回的data.SuccessCode不等于0执行后面的语句
 		        	change_init();
 		        	alert("更改成功");
+		        	
 		        }
 		        else{
 					alert("用户名已存在");
 		        }
 		    },
 
-		    error:function(){   //请求失败执行的操作
-		        alert("出错！！");
+		    error:function(result){   //请求失败执行的操作
+	     	  	if(result.responseText == "loseToken"){
+	     			  window.location.href="returnIndex";
+		     		  return;
+
+	     	 	 }
+	     	  	alert("出错！！");
 		    }
 		});
 	})
@@ -255,8 +265,13 @@
 		        }
 		    },
 
-		    error:function(){   //请求失败执行的操作
-		        alert("出错！！");
+		    error:function(result){   //请求失败执行的操作
+		     	if(result.responseText == "loseToken"){
+		     	  window.location.href="returnIndex";
+	     		  return;
+
+		    	  }
+	     	  	alert("出错！！");
 		    }
 		});
 	}

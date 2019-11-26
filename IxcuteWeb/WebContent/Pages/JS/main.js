@@ -30,6 +30,7 @@ $(document).ready(function(){
 		if(flag==1){window.month += date.today[i];}
 		if(flag==2){window.day += date.today[i];}
 	}
+
 //	console.log(window.year.window.month,window.day);
 	//地图初始化隐藏部分
 	$('#longtian_nav').css('display','none');
@@ -72,7 +73,7 @@ function myshow(showed,bid){
 		$("#bar-button").addClass("menu-button");
 		$("#map-button").addClass("menu-button");
 		$("#situation-button").addClass("menu-button");
-		time_issue2();
+		//time_issue2();
 	}
 	else if(bid==2){
 		$("#pie-button").addClass("menu-button");
@@ -125,8 +126,9 @@ function show_map(showed){
 //bar区：
 function canvas_change(){
 	map_issue();
-	window.time_issue2;
+	//window.time_issue2;
 	situation_issue(1);
+
 //$(function() {
 	var response_bar;
 	var xmlhttp_bar;
@@ -135,7 +137,7 @@ function canvas_change(){
 		
 		else{xmlhttp_bar=new ActiveXObject("Microsoft.XMLHTTP");}	
 		xmlhttp_bar.onreadystatechange=getResult_bar;
-		xmlhttp_bar.open("POST","DataStreetToday",true);
+		xmlhttp_bar.open("POST","DataStreetToday",true);//DataStreetToday
 		xmlhttp_bar.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 		xmlhttp_bar.send("year="+window.year+"&month="+window.month+"&day="+window.day+"&hour="+date.hrs+"&minute="+date.min+"&second="+date.sec);		
 	}
@@ -491,195 +493,97 @@ function canvas_change(){
 			if(xmlhttp_map.status==200){
 				var rec=xmlhttp_map.responseText;
 				response_map = eval("("+rec+")");
-				console.log(response_map);
+				//console.log(response_map);
 				var longtian,biliing,maluan,pingshanjiedao,kengzi,shijing;
 				longtian = (response_map.龙田社区?response_map.龙田社区:0) + (response_map.老坑社区?response_map.老坑社区:0) + (response_map.南布社区?response_map.南布社区:0) + (response_map.竹坑社区?response_map.竹坑社区:0);
 				kengzi = (response_map.沙田社区?response_map.沙田社区:0) + (response_map.金沙社区?response_map.金沙社区:0) + (response_map.秀新社区?response_map.秀新社区:0) + (response_map.坑梓社区?response_map.坑梓社区:0);
-				biling = (response_map.碧玲社区?response_map.碧玲社区:0) + (response_map.汤坑社区?response_map.汤坑社区:0) + (response_map.沙湖社区?response_map.沙湖社区:0);
+				biling = (response_map.碧岭社区?response_map.碧岭社区:0) + (response_map.汤坑社区?response_map.汤坑社区:0) + (response_map.沙湖社区?response_map.沙湖社区:0);
 				maluan = (response_map.坪环社区?response_map.坪环社区:0) + (response_map.马峦社区?response_map.马峦社区:0) + (response_map.江岭社区?response_map.江岭社区:0) + (response_map.沙坣社区?response_map.沙坣社区:0);
 				shijing = (response_map.石井社区?response_map.石井社区:0) + (response_map.田头社区?response_map.田头社区:0) + (response_map.田心社区?response_map.田心社区:0) + (response_map.金龟社区?response_map.金龟社区:0);
 				pingshanjiedao = (response_map.六联社区?response_map.六联社区:0) + (response_map.和平社区?response_map.和平社区:0) + (response_map.六和社区?response_map.六和社区:0) + (response_map.坪山社区?response_map.坪山社区:0);
-				console.log(longtian,kengzi,biling,maluan,shijing,pingshanjiedao);
-				var color=['','','','','',''];
-				window.longtian_color=['','','',''];
-				window.kengzi_color=['','','',''];
-				window.biling_color=['','',''];
-				window.maluan_color=['','','',''];
-				window.shijing_color=['','','',''];
-				window.pingshanjiedao_color=['','','',''];
-				function get_color(obj){
-				if(obj<1000){
-				if(obj<900){
-				if(obj<800){
-				if(obj<700){
-				if(obj<600){
-				if(obj<500){
-				if(obj<400){
-				if(obj<300){
-				if(obj<200){
-				if(obj<100){
-					return '#acd6ff';}
-					return '#97cbff';}
-					return '#84c1ff';}
-					return '#66b3ff';}
-					return '#46a3ff';}
-					return '#2894ff';}
-					return '#0080ff';}
-					return '#0072e3';}
-					return '#0066cc';}
-					return '#005ab5';}
-				return '#004b97';
-				}
-				function get_shequ_color(obj){
-					if(obj<420){
-					if(obj<360){
-					if(obj<300){
-					if(obj<240){
-					if(obj<180){
-					if(obj<120){
-					if(obj<60){
-						return '#acd6ff';}
-						return '#84c1ff';}
-						return '#66b3ff';}
-						return '#46a3ff';}
-						return '#0080ff';}
-						return '#0072e3';}
-						return '#005ab5';}
-					return '#004b97';
-				}
-				color[0]=get_color(longtian);color[1]=get_color(kengzi);color[2]=get_color(biling);
-				color[3]=get_color(maluan);color[4]=get_color(shijing);color[5]=get_color(pingshanjiedao);
-				window.longtian_color[0]=get_shequ_color(response_map.龙田社区);window.longtian_color[1]=get_shequ_color(response_map.老坑社区);
-				window.longtian_color[2]=get_shequ_color(response_map.南布社区);window.longtian_color[3]=get_shequ_color(response_map.竹坑社区);
-				window.kengzi_color[0]=get_shequ_color(response_map.沙田社区);window.longtian_color[1]=get_shequ_color(response_map.秀新社区);
-				window.kengzi_color[2]=get_shequ_color(response_map.金沙社区);window.longtian_color[3]=get_shequ_color(response_map.坑梓社区);
-				window.biling_color[0]=get_shequ_color(response_map.碧玲社区);window.longtian_color[1]=get_shequ_color(response_map.沙湖社区);
-				window.biling_color[2]=get_shequ_color(response_map.汤坑社区);
-				window.maluan_color[0]=get_shequ_color(response_map.坪环社区);window.longtian_color[1]=get_shequ_color(response_map.马峦社区);
-				window.maluan_color[2]=get_shequ_color(response_map.江岭社区);window.longtian_color[3]=get_shequ_color(response_map.沙坣社区);
-				window.shijing_color[0]=get_shequ_color(response_map.石井社区);window.longtian_color[1]=get_shequ_color(response_map.田心社区);
-				window.shijing_color[2]=get_shequ_color(response_map.田头社区);window.longtian_color[3]=get_shequ_color(response_map.金龟社区);
-				window.pingshanjiedao_color[0]=get_shequ_color(response_map.六和社区);window.longtian_color[1]=get_shequ_color(response_map.和平社区);
-				window.pingshanjiedao_color[2]=get_shequ_color(response_map.六联社区);window.longtian_color[3]=get_shequ_color(response_map.坪山社区);
-				console.log(color);
-				paint_map(color);
+				//console.log(longtian,kengzi,biling,maluan,shijing,pingshanjiedao);
+				var sf_data = [
+				    {name: '坪山街道',value: pingshanjiedao},
+				    {name: '马峦街道',value: maluan},
+				    {name: '坑梓街道',value: kengzi},
+				    {name: '碧岭街道',value: biling},
+				    {name: '石井街道',value: shijing},
+				    {name: '龙田街道',value: longtian},
+					];
+				window.longtian_color=[
+					{name: '龙田社区',value: (response_map.龙田社区?response_map.龙田社区:0)},
+				    {name: '老坑社区',value: (response_map.老坑社区?response_map.老坑社区:0)},
+				    {name: '竹坑社区',value: (response_map.竹坑社区?response_map.竹坑社区:0)},
+				    {name: '南布社区',value: (response_map.南布社区?response_map.南布社区:0)}];
+				window.kengzi_color=[
+					{name: '沙田社区',value: (response_map.沙田社区?response_map.沙田社区:0)},
+				    {name: '金沙社区',value: (response_map.金沙社区?response_map.金沙社区:0)},
+				    {name: '秀新社区',value: (response_map.秀新社区?response_map.秀新社区:0)},
+				    {name: '坑梓社区',value: (response_map.坑梓社区?response_map.坑梓社区:0)}];
+				window.biling_color=[
+					{name: '碧岭社区',value: (response_map.碧岭社区?response_map.碧岭社区:0)},
+				    {name: '汤坑社区',value: (response_map.汤坑社区?response_map.汤坑社区:0)},
+				    {name: '沙湖社区',value: (response_map.沙湖社区?response_map.沙湖社区:0)}];
+				window.maluan_color=[
+					{name: '坪环社区',value: (response_map.坪环社区?response_map.坪环社区:0)},
+				    {name: '马峦社区',value: (response_map.马峦社区?response_map.马峦社区:0)},
+				    {name: '江岭社区',value: (response_map.江岭社区?response_map.江岭社区:0)},
+				    {name: '沙坣社区',value: (response_map.沙坣社区?response_map.沙坣社区:0)}];
+				window.shijing_color=[
+					{name: '石井社区',value: (response_map.石井社区?response_map.石井社区:0)},
+				    {name: '田头社区',value: (response_map.田头社区?response_map.田头社区:0)},
+				    {name: '田心社区',value: (response_map.田心社区?response_map.田心社区:0)},
+				    {name: '金龟社区',value: (response_map.金龟社区?response_map.金龟社区:0)}];
+				window.pingshanjiedao_color=[
+					{name: '六联社区',value: (response_map.六联社区?response_map.六联社区:0)},
+				    {name: '和平社区',value: (response_map.和平社区?response_map.和平社区:0)},
+				    {name: '六和社区',value: (response_map.六和社区?response_map.六和社区:0)},
+				    {name: '坪山社区',value: (response_map.坪山社区?response_map.坪山社区:0)}];
+				
+				paint_map(sf_data);
 			}
 			else{
 				alert("连接失败");
 			}
 		}
 	}
-function paint_map(color){
+function paint_map(sf_data){
     var maps = echarts.init(document.getElementById('mapadd_nav'));
     option = {
-        tooltip : {
-            trigger: 'item',
-            formatter: '{b}'
-        },
-        dataRange: {
-	        min: 0,
-	        max: 1000,
-	        y:'top',
-	        color:['#0066cc','#bde7ff'],
-	        text:['高','低'],   
-	        calculable : true
-	    },
-	    legend:{
-	    	show : false,
-	        orient: 'vertical',
-	        x:'right',
-	        data:['坪山街道','坑梓街道','龙田街道','马峦街道','石井街道','碧岭街道',]
-	    },
-        series : [{
-            name: '坪山',
-            type: 'map',
-            mapType: '坪山',
-            roam: false,
-            top:'8%',
-            zoom:1.2,
-            x:'25%',
-            selectedMode : 'single',//multiple多选
-            itemStyle:{
-                normal:{
-                    label:{
-                        show:true,
-                        textStyle: {
-                            color: "#231816"//地图上的字体颜色
-                        }
-                    },
-                },
-                emphasis:{//鼠标hover样式
-                    label:{
-                        show:true,
-                        textStyle:{
-                            color:'red'//hover后的字体颜色
-                        }
-                    },
-                    areaStyle:{color:'#fff'}
-                }
+            tooltip : {
+                trigger: 'item'
             },
-            data:[
-                {name:'坪山街道',
-                    itemStyle: {
-                        normal: {
-                            areaColor: 'green',
-                            borderColor: '#edce00'
-                        }
-                    }
+    		legend: {
+    			show : false,
+    		    orient: 'vertical',
+    		    x:'right',
+    		    data:['坪山']
+    		},
+    		dataRange: {
+    		    min: 0,
+    		    max: 1000,
+    		    y:'top',
+    		    color:['#004b97','#acd6ff'],
+    		    text:['高','低'],           // 文本，默认为数值文本
+    		    calculable : true
+    		},
+            series : [{
+                name: '坪山',
+                type: 'map',
+                mapType: '坪山',
+                roam: false,
+                top:'8%',
+                zoom:1.2,
+                x:'25%',
+                selectedMode : 'single',//multiple多选
+                itemStyle:{
+                    normal:{label:{show:true}},
+                    emphasis:{label:{show:true}}
                 },
-                {name:'马峦街道',
-                    itemStyle: {
-                        normal: {
-                            areaColor: 'yellow',
-                            borderColor: '#0abcee'
-                        }
-                    }
-                }, 
-                {name:'石井街道',
-                    itemStyle: {
-                        normal: {
-                            areaColor: '#92d050',
-                            borderColor: '#1ca9f2'
-                        }
-                    }
-                },
-                {name:'碧岭街道',
-                    itemStyle: {
-                        normal: {
-                            areaColor: '#88ddf5',
-                            borderColor: '#88ddf5',
-                        }
-                    }
-                },
-                {name:'坑梓街道',
-                    itemStyle: {
-                        normal: {
-                            areaColor: '#13d5ff',
-                            borderColor: '#45b5ef',
-                        }
-                    }
-                },
-                {name:'龙田街道',
-                    itemStyle: {
-                        normal: {
-                            areaColor: 'red',
-                            borderColor: '#45b5ef'
-                        }
-                    }
-                },
-               
-                
-               
-            ]
-        }]
-    };
-    //console.log(option['series'][0]['data'][0]['itemStyle']['normal']['areaColor']);
-    option['series'][0]['data'][0]['itemStyle']['normal']['areaColor'] = color[0];
-    option['series'][0]['data'][1]['itemStyle']['normal']['areaColor'] = color[1];
-    option['series'][0]['data'][2]['itemStyle']['normal']['areaColor'] = color[2];
-    option['series'][0]['data'][3]['itemStyle']['normal']['areaColor'] = color[3];
-    option['series'][0]['data'][4]['itemStyle']['normal']['areaColor'] = color[4];
-    option['series'][0]['data'][5]['itemStyle']['normal']['areaColor'] = color[5];
+    			
+                data:sf_data
+            }]
+        };
     maps.setOption(option);
 	maps.on('click',function(params){
 		switch (params.name){
@@ -712,477 +616,236 @@ function paint_map(color){
 }
 function paint_longtian(color){
 	var map_longtian = echarts.init(document.getElementById('longtian'));
-    option = {
-        tooltip : {
-            trigger: 'item',
-            formatter: '{b}'
-        },
-        series : [{
-            name: '龙田',
-            type: 'map',
-            mapType: '龙田',
-            roam: false,
-            top:'8%',
-            zoom:1.2,
-            x:'25%',
-            selectedMode : 'single',//multiple多选
-            itemStyle:{
-                normal:{
-                    label:{
-                        show:true,
-                        textStyle: {
-                            color: "#231816"
-                        }
-                    },
-                    areaStyle:{color:'#B1D0EC'},
-                    color:'#B1D0EC',
-                    borderColor:'#dadfde'//区块的边框颜色
-                },
-                emphasis:{//鼠标hover样式
-                    label:{
-                        show:true,
-                        textStyle:{
-                            color:'#fa4f04'
-                        }
-                    },
-                    areaStyle:{color:'red'}
-                }
-            },
-            data:[
-                {name:'龙田社区',
-                    itemStyle: {
-                        normal: {
-                            areaColor: 'green',
-                            borderColor: '#edce00'
-                        }
-                    }
-                },
-                {name:'竹坑社区',
-                    itemStyle: {
-                        normal: {
-                            areaColor: 'yellow',
-                            borderColor: '#0abcee'
-                        }
-                    }
-                }, 
-                {name:'南布社区',
-                    itemStyle: {
-                        normal: {
-                            areaColor: '#92d050',
-                            borderColor: '#1ca9f2'
-                        }
-                    }
-                },
-                {name:'老坑社区',
-                    itemStyle: {
-                        normal: {
-                            areaColor: '#88ddf5',
-                            borderColor: '#88ddf5',
-                        }
-                    }
-                },
-                
-            ]
-        }]
-    };
-    option['series'][0]['data'][0]['itemStyle']['normal']['areaColor'] = color[0];
-    option['series'][0]['data'][1]['itemStyle']['normal']['areaColor'] = color[3];
-    option['series'][0]['data'][2]['itemStyle']['normal']['areaColor'] = color[2];
-    option['series'][0]['data'][3]['itemStyle']['normal']['areaColor'] = color[1];
+	option = {
+	        tooltip : {
+	            trigger: 'item'
+	        },
+			legend: {
+				show : false,
+			    orient: 'vertical',
+			    x:'right',
+			    data:['龙田']
+			},
+			dataRange: {
+			    min: 0,
+			    max: 400,
+			    y:'top',
+			    color:['#004b97','#acd6ff'],
+			    text:['高','低'],           // 文本，默认为数值文本
+			    calculable : true
+			},
+	        series : [{
+	            name: '龙田',
+	            type: 'map',
+	            mapType: '龙田',
+	            roam: false,
+	            top:'8%',
+	            zoom:1.2,
+	            x:'25%',
+	            selectedMode : 'single',//multiple多选
+	            itemStyle:{
+	                normal:{label:{show:true}},
+	                emphasis:{label:{show:true}}
+	            },
+				
+	            data:color
+	        }]
+	    };
     map_longtian.setOption(option);
 }
 function paint_kengzi(color){	
 	var map_kengzi = echarts.init(document.getElementById('kengzi'));
-    option = {
-        tooltip : {
-            trigger: 'item',
-            formatter: '{b}'
-        },
-        series : [{
-            name: '坑梓',
-            type: 'map',
-            mapType: '坑梓',
-            roam: false,
-            top:'8%',
-            zoom:1.2,
-            x:'25%',
-            selectedMode : 'single',//multiple多选
-            itemStyle:{
-                normal:{
-                    label:{
-                        show:true,
-                        textStyle: {
-                            color: "#231816"
-                        }
-                    },
-                    areaStyle:{color:'#B1D0EC'},
-                    color:'#B1D0EC',
-                    borderColor:'#dadfde'//区块的边框颜色
-                },
-                emphasis:{//鼠标hover样式
-                    label:{
-                        show:true,
-                        textStyle:{
-                            color:'#fa4f04'
-                        }
-                    },
-                    areaStyle:{color:'red'}
-                }
-            },
-            data:[
-                {name:'坑梓社区',
-                    itemStyle: {
-                        normal: {
-                            areaColor: 'green',
-                            borderColor: '#edce00'
-                        }
-                    }
-                },
-                {name:'金沙社区',
-                    itemStyle: {
-                        normal: {
-                            areaColor: 'yellow',
-                            borderColor: '#0abcee'
-                        }
-                    }
-                }, 
-                {name:'沙田社区',
-                    itemStyle: {
-                        normal: {
-                            areaColor: '#92d050',
-                            borderColor: '#1ca9f2'
-                        }
-                    }
-                },
-                {name:'秀新社区',
-                    itemStyle: {
-                        normal: {
-                            areaColor: '#88ddf5',
-                            borderColor: '#88ddf5',
-                        }
-                    }
-                },
-                
-            ]
-        }]
-    };
-    option['series'][0]['data'][0]['itemStyle']['normal']['areaColor'] = color[3];
-    option['series'][0]['data'][1]['itemStyle']['normal']['areaColor'] = color[2];
-    option['series'][0]['data'][2]['itemStyle']['normal']['areaColor'] = color[0];
-    option['series'][0]['data'][3]['itemStyle']['normal']['areaColor'] = color[1];
+	option = {
+	        tooltip : {
+	            trigger: 'item'
+	        },
+			legend: {
+				show : false,
+			    orient: 'vertical',
+			    x:'right',
+			    data:['坑梓']
+			},
+			dataRange: {
+			    min: 0,
+			    max: 400,
+			    y:'top',
+			    color:['#004b97','#acd6ff'],
+			    text:['高','低'],           // 文本，默认为数值文本
+			    calculable : true
+			},
+	        series : [{
+	            name: '坑梓',
+	            type: 'map',
+	            mapType: '坑梓',
+	            roam: false,
+	            top:'8%',
+	            zoom:1.2,
+	            x:'25%',
+	            selectedMode : 'single',//multiple多选
+	            itemStyle:{
+	                normal:{label:{show:true}},
+	                emphasis:{label:{show:true}}
+	            },
+				
+	            data:color
+	        }]
+	    };
     map_kengzi.setOption(option);
 }
 function paint_pingshanjiedao(color){	
 	var map_pingshanjiedao = echarts.init(document.getElementById('pingshanjiedao'));
-    option = {
-        tooltip : {
-            trigger: 'item',
-            formatter: '{b}'
-        },
-        series : [{
-            name: '坪山街道',
-            type: 'map',
-            mapType: '坪山街道',
-            roam: false,
-            top:'8%',
-            zoom:1.2,
-            x:'25%',
-            selectedMode : 'single',//multiple多选
-            itemStyle:{
-                normal:{
-                    label:{
-                        show:true,
-                        textStyle: {
-                            color: "#231816"
-                        }
-                    },
-                    areaStyle:{color:'#B1D0EC'},
-                    color:'#B1D0EC',
-                    borderColor:'#dadfde'//区块的边框颜色
-                },
-                emphasis:{//鼠标hover样式
-                    label:{
-                        show:true,
-                        textStyle:{
-                            color:'#fa4f04'
-                        }
-                    },
-                    areaStyle:{color:'red'}
-                }
-            },
-            data:[
-                {name:'坪山社区',
-                    itemStyle: {
-                        normal: {
-                            areaColor: 'green',
-                            borderColor: '#edce00'
-                        }
-                    }
-                },
-                {name:'六和社区',
-                    itemStyle: {
-                        normal: {
-                            areaColor: 'yellow',
-                            borderColor: '#0abcee'
-                        }
-                    }
-                }, 
-                {name:'六联社区',
-                    itemStyle: {
-                        normal: {
-                            areaColor: '#92d050',
-                            borderColor: '#1ca9f2'
-                        }
-                    }
-                },
-                {name:'和平社区',
-                    itemStyle: {
-                        normal: {
-                            areaColor: '#88ddf5',
-                            borderColor: '#88ddf5',
-                        }
-                    }
-                },
-                
-            ]
-        }]
-    };
-    option['series'][0]['data'][0]['itemStyle']['normal']['areaColor'] = color[3];
-    option['series'][0]['data'][1]['itemStyle']['normal']['areaColor'] = color[0];
-    option['series'][0]['data'][2]['itemStyle']['normal']['areaColor'] = color[2];
-    option['series'][0]['data'][3]['itemStyle']['normal']['areaColor'] = color[1];
+	option = {
+	        tooltip : {
+	            trigger: 'item'
+	        },
+			legend: {
+				show : false,
+			    orient: 'vertical',
+			    x:'right',
+			    data:['坪山街道']
+			},
+			dataRange: {
+			    min: 0,
+			    max: 400,
+			    y:'top',
+			    color:['#004b97','#acd6ff'],
+			    text:['高','低'],           // 文本，默认为数值文本
+			    calculable : true
+			},
+	        series : [{
+	            name: '坪山街道',
+	            type: 'map',
+	            mapType: '坪山街道',
+	            roam: false,
+	            top:'8%',
+	            zoom:1.2,
+	            x:'25%',
+	            selectedMode : 'single',//multiple多选
+	            itemStyle:{
+	                normal:{label:{show:true}},
+	                emphasis:{label:{show:true}}
+	            },
+				
+	            data:color
+	        }]
+	    };
     map_pingshanjiedao.setOption(option);
 }
 function paint_biling(color){	
 	var map_biling = echarts.init(document.getElementById('biling'));
-    option = {
-        tooltip : {
-            trigger: 'item',
-            formatter: '{b}'
-        },
-        series : [{
-            name: '碧岭',
-            type: 'map',
-            mapType: '碧岭',
-            roam: false,
-            top:'8%',
-            zoom:1.2,
-            x:'25%',
-            selectedMode : 'single',//multiple多选
-            itemStyle:{
-                normal:{
-                    label:{
-                        show:true,
-                        textStyle: {
-                            color: "#231816"
-                        }
-                    },
-                    areaStyle:{color:'#B1D0EC'},
-                    color:'#B1D0EC',
-                    borderColor:'#dadfde'//区块的边框颜色
-                },
-                emphasis:{//鼠标hover样式
-                    label:{
-                        show:true,
-                        textStyle:{
-                            color:'#fa4f04'
-                        }
-                    },
-                    areaStyle:{color:'red'}
-                }
-            },
-            data:[
-                {name:'碧岭社区',
-                    itemStyle: {
-                        normal: {
-                            areaColor: 'green',
-                            borderColor: '#edce00'
-                        }
-                    }
-                },
-                {name:'沙湖社区',
-                    itemStyle: {
-                        normal: {
-                            areaColor: 'yellow',
-                            borderColor: '#0abcee'
-                        }
-                    }
-                }, 
-                {name:'汤坑社区',
-                    itemStyle: {
-                        normal: {
-                            areaColor: '#92d050',
-                            borderColor: '#1ca9f2'
-                        }
-                    }
-                },
-                
-            ]
-        }]
-    };
-    option['series'][0]['data'][0]['itemStyle']['normal']['areaColor'] = color[0];
-    option['series'][0]['data'][1]['itemStyle']['normal']['areaColor'] = color[1];
-    option['series'][0]['data'][2]['itemStyle']['normal']['areaColor'] = color[2];
+	option = {
+	        tooltip : {
+	            trigger: 'item'
+	        },
+			legend: {
+				show : false,
+			    orient: 'vertical',
+			    x:'right',
+			    data:['碧岭']
+			},
+			dataRange: {
+			    min: 0,
+			    max: 400,
+			    y:'top',
+			    color:['#004b97','#acd6ff'],
+			    text:['高','低'],           // 文本，默认为数值文本
+			    calculable : true
+			},
+	        series : [{
+	            name: '碧岭',
+	            type: 'map',
+	            mapType: '碧岭',
+	            roam: false,
+	            top:'8%',
+	            zoom:1.2,
+	            x:'25%',
+	            selectedMode : 'single',//multiple多选
+	            itemStyle:{
+	                normal:{label:{show:true}},
+	                emphasis:{label:{show:true}}
+	            },
+				
+	            data:color
+	        }]
+	    };
     map_biling.setOption(option);
 }
 function paint_maluan(color){	
 	var map_maluan = echarts.init(document.getElementById('maluan'));
-    option = {
-        tooltip : {
-            trigger: 'item',
-            formatter: '{b}'
-        },
-        series : [{
-            name: '马峦',
-            type: 'map',
-            mapType: '马峦',
-            roam: false,
-            top:'8%',
-            zoom:1.2,
-            x:'25%',
-            selectedMode : 'single',//multiple多选
-            itemStyle:{
-                normal:{
-                    label:{
-                        show:true,
-                        textStyle: {
-                            color: "#231816"
-                        }
-                    },
-                    areaStyle:{color:'#B1D0EC'},
-                    color:'#B1D0EC',
-                    borderColor:'#dadfde'//区块的边框颜色
-                },
-                emphasis:{//鼠标hover样式
-                    label:{
-                        show:true,
-                        textStyle:{
-                            color:'#fa4f04'
-                        }
-                    },
-                    areaStyle:{color:'red'}
-                }
-            },
-            data:[
-                {name:'江岭社区',
-                    itemStyle: {
-                        normal: {
-                            areaColor: 'green',
-                            borderColor: '#edce00'
-                        }
-                    }
-                },
-                {name:'坪环社区',
-                    itemStyle: {
-                        normal: {
-                            areaColor: 'yellow',
-                            borderColor: '#0abcee'
-                        }
-                    }
-                }, 
-                {name:'沙坣社区',
-                    itemStyle: {
-                        normal: {
-                            areaColor: '#92d050',
-                            borderColor: '#1ca9f2'
-                        }
-                    }
-                },
-                {name:'马峦社区',
-                    itemStyle: {
-                        normal: {
-                            areaColor: '#92d050',
-                            borderColor: '#1ca9f2'
-                        }
-                    }
-                },
-            ]
-        }]
-    };
-    option['series'][0]['data'][0]['itemStyle']['normal']['areaColor'] = color[2];
-    option['series'][0]['data'][1]['itemStyle']['normal']['areaColor'] = color[0];
-    option['series'][0]['data'][2]['itemStyle']['normal']['areaColor'] = color[3];
-    option['series'][0]['data'][3]['itemStyle']['normal']['areaColor'] = color[1];
+	option = {
+	        tooltip : {
+	            trigger: 'item'
+	        },
+			legend: {
+				show : false,
+			    orient: 'vertical',
+			    x:'right',
+			    data:['马峦']
+			},
+			dataRange: {
+			    min: 0,
+			    max: 400,
+			    y:'top',
+			    color:['#004b97','#acd6ff'],
+			    text:['高','低'],           // 文本，默认为数值文本
+			    calculable : true
+			},
+	        series : [{
+	            name: '马峦',
+	            type: 'map',
+	            mapType: '马峦',
+	            roam: false,
+	            top:'8%',
+	            zoom:1.2,
+	            x:'25%',
+	            selectedMode : 'single',//multiple多选
+	            itemStyle:{
+	                normal:{label:{show:true}},
+	                emphasis:{label:{show:true}}
+	            },
+				
+	            data:color
+	        }]
+	    };
     map_maluan.setOption(option);
 }
 function paint_shijing(color){	
 	var map_shijing = echarts.init(document.getElementById('shijing'));
-    option = {
-        tooltip : {
-            trigger: 'item',
-            formatter: '{b}'
-        },
-        series : [{
-            name: '石井',
-            type: 'map',
-            mapType: '石井',
-            roam: false,
-            top:'8%',
-            zoom:1.2,
-            x:'25%',
-            selectedMode : 'single',//multiple多选
-            itemStyle:{
-                normal:{
-                    label:{
-                        show:true,
-                        textStyle: {
-                            color: "#231816"
-                        }
-                    },
-                    areaStyle:{color:'#B1D0EC'},
-                    color:'#B1D0EC',
-                    borderColor:'#dadfde'//区块的边框颜色
-                },
-                emphasis:{//鼠标hover样式
-                    label:{
-                        show:true,
-                        textStyle:{
-                            color:'#fa4f04'
-                        }
-                    },
-                    areaStyle:{color:'red'}
-                }
-            },
-            data:[
-                {name:'金龟社区',
-                    itemStyle: {
-                        normal: {
-                            areaColor: 'green',
-                            borderColor: '#edce00'
-                        }
-                    }
-                },
-                {name:'田心社区',
-                    itemStyle: {
-                        normal: {
-                            areaColor: 'yellow',
-                            borderColor: '#0abcee'
-                        }
-                    }
-                }, 
-                {name:'田头社区',
-                    itemStyle: {
-                        normal: {
-                            areaColor: '#92d050',
-                            borderColor: '#1ca9f2'
-                        }
-                    }
-                },
-                {name:'石井社区',
-                    itemStyle: {
-                        normal: {
-                            areaColor: '#92d050',
-                            borderColor: '#1ca9f2'
-                        }
-                    }
-                },
-            ]
-        }]
-    };
-    option['series'][0]['data'][0]['itemStyle']['normal']['areaColor'] = color[3];
-    option['series'][0]['data'][1]['itemStyle']['normal']['areaColor'] = color[1];
-    option['series'][0]['data'][2]['itemStyle']['normal']['areaColor'] = color[2];
-    option['series'][0]['data'][3]['itemStyle']['normal']['areaColor'] = color[0];
+	option = {
+	        tooltip : {
+	            trigger: 'item'
+	        },
+			legend: {
+				show : false,
+			    orient: 'vertical',
+			    x:'right',
+			    data:['石井']
+			},
+			dataRange: {
+			    min: 0,
+			    max: 400,
+			    y:'top',
+			    color:['#004b97','#acd6ff'],
+			    text:['高','低'],           // 文本，默认为数值文本
+			    calculable : true
+			},
+	        series : [{
+	            name: '石井',
+	            type: 'map',
+	            mapType: '石井',
+	            roam: false,
+	            top:'8%',
+	            zoom:1.2,
+	            x:'25%',
+	            selectedMode : 'single',//multiple多选
+	            itemStyle:{
+	                normal:{label:{show:true}},
+	                emphasis:{label:{show:true}}
+	            },
+				
+	            data:color
+	        }]
+	    };
     map_shijing.setOption(option);
 }
 //地图块结束
@@ -1230,7 +893,7 @@ function getResult_situation(){
 			var rec=xmlhttp_situation.responseText;
 			window.response_situation = JSON.parse(rec);
 			var ret=[];
-			console.log(window.response_situation);
+			//console.log(window.response_situation);
 			//ret = situation2_callback(response_situation);
 			paint_situation();
 			//paint_situation(ret[0],ret[1],ret[2]);
@@ -1268,7 +931,7 @@ function getResult_situation(){
 //	return ret;
 //}
 function paint_situation(){
-	console.log(window.response_situation.超期结办 );
+	//console.log(window.response_situation.超期结办 );
 	var courserate = echarts.init(document.getElementById('situation1'));
 	option = {
 	    tooltip : {

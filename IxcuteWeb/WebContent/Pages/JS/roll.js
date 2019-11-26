@@ -5,14 +5,14 @@
 $(function () {
     /*消息滚动*/
 	var xmlhttp_scroll;
-	function map_issue(){
+	function roll_issue(){
 		if (window.XMLHttpRequest) {xmlhttp_scroll=new XMLHttpRequest();}
 		
 		else{xmlhttp_scroll=new ActiveXObject("Microsoft.XMLHTTP");}	
 		xmlhttp_scroll.onreadystatechange=getResult_scroll;
-		xmlhttp_scroll.open("POST","LoginServlet",true);
+		xmlhttp_scroll.open("POST","NoDeal",true);
 		xmlhttp_scroll.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-		xmlhttp_scroll.send(null);		
+		xmlhttp_scroll.send("year="+window.year+"&month="+window.month+"&day="+window.day+"&hour="+date.hrs+"&minute="+date.min+"&second="+date.sec);		
 	}
 	
 	function getResult_scroll(){
@@ -20,37 +20,50 @@ $(function () {
 			if(xmlhttp_scroll.status==200){
 				var rec=xmlhttp_scroll.responseText;
 				response_scroll = eval("("+rec+")");
-				scroll_callback(responese_scroll);
+				//console.log(response_scroll);
+				scroll_callback(response_scroll);
 			}
 			else{
 				alert("连接失败");
 			}
 		}
 	}
-	function scroll_callback(responese){
+	function scroll_callback(response){
 		var message='';
-		for(var i=0;i<5;i++){
-			message = '<span class="scroll_date">' + response[i].date + '</span>';
-			message += '<span class="scroll_street">' + response[i].street + '</span>的'; 
-			message += '<span class="scroll_shequ">' + response[i].shequ + '</span>从' ;
-			message += '<span class="scroll_id">' + response[i].id + '</span>接到' ;
-			message += '<span class="scroll_kind">' + response[i].kind + '</span>';
-			message += '<span class="scroll_dataType">' + response[i].dataType + '</span>,请' ;
-			message += '<span class="scroll_exc">' + response[i].exc + '</span>尽快前往处理';
-			$('#scroller').append('<li class="roll_"'+String(i+1)+'><a href="#" class="ellipsis">'+ message +'</a></li>');
+		var i;
+		var flag;
+		for(i in response){
+			message = response[i].时间 ;
+			message += response[i].街道 + '的'; 
+			message += response[i].社区 + '从' ;
+			message += response[i].来源 + '接到' ;
+			message += response[i].小类名称;
+			message += response[i].性质 + ',请' ;
+			message += response[i].处置部门 + '尽快前往处理';
+			//console.log(message);
+			flag = (response[i].事件类型 == 'abnormal')?1:0;
+			if(i<4){
+				if(flag){
+					$('#scroller').append('<li class="abnormal roll_'+(i)+'"><a href="#" class="ellipsis">'+ message +'</a></li>');
+				}
+				else{
+					$('#scroller').append('<li class="warning roll_'+(i)+'"><a href="#" class="ellipsis">'+ message +'</a></li>');
+				}
+			}
+			else{
+				if(flag){
+					$('#scroller').append('<li class="abnormal roll_hide"><a href="#" class="ellipsis">'+ message +'</a></li>');
+				}
+				else{
+					$('#scroller').append('<li class="warning roll_hide"><a href="#" class="ellipsis">'+ message +'</a></li>');
+				}
+			}
+			
 		}
-		for(var j=5;j<response.length;j++){
-			message = '<span class="scroll_date">' + response[j].date + '</span>';
-			message += '<span class="scroll_street">' + response[j].street + '</span>的'; 
-			message += '<span class="scroll_shequ">' + response[j].shequ + '</span>从' ;
-			message += '<span class="scroll_id">' + response[j].id + '</span>接到' ;
-			message += '<span class="scroll_kind">' + response[j].kind + '</span>';
-			message += '<span class="scroll_dataType">' + response[i].dataType + '</span>,请' ;
-			message += '<span class="scroll_exc">' + response[j].exc + '</span>尽快前往处理';
-			$('#scroller').append('<li class="roll_hide"><a href="#" class="ellipsis">'+ message +'</a></li>');
-		}
+		
 		roll();
 	}
+	roll_issue();
     var $ul = $('.roll ul');
     var timeID;
     function roll() {
@@ -59,11 +72,6 @@ $(function () {
             clearInterval(timeID);
             $ul.animate({ top: "0px" }, 3000, function () {
                 $ul.find("li:first").removeClass().addClass('roll_hide').appendTo($ul);
-                /*$ul.find("li").eq(0).removeClass().addClass('roll_1')
-                 $ul.find("li").eq(1).removeClass().addClass('roll_2')
-                 $ul.find("li").eq(2).removeClass().addClass('roll_3')
-                 $ul.find("li").eq(3).removeClass().addClass('roll_4')
-                 $ul.find("li").eq(4).removeClass().addClass('roll_5')*/
                 for(var i=0;i<3;i++){
                     $ul.find("li").eq(i).removeClass().addClass('roll_'+ (i+1) +'')
                 }
