@@ -64,39 +64,39 @@
     		<div id='content_map' class='table'>
                 <div class="border-container" style="height:95%">
                 	<div style="height:100%" id='ps'>
-                		<div style="margin-left:25%;font-size:2em"">坪山区地图</div>
+                		<div style="margin-left:25%;font-size:2em"">坪山区热点地区</div>
                     	<div id="mapadd_nav" style="height:95%" class='map'></div>	
                 	</div>
 					<div id='longtian_nav'>
 						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
-						<div style="margin-left:25%;font-size:2em"">龙田街道地图</div>
+						<div style="margin-left:25%;font-size:2em"">龙田街道</div>
 						<div id='longtian' style='height:400px;'></div>
 					</div>
                     
 					<div id='kengzi_nav'>
 						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
-						<div style='margin-left:25%;font-size:2em'>坑梓街道地图</div>
+						<div style='margin-left:25%;font-size:2em'>坑梓街道</div>
 						<div id='kengzi' style='height:400px;'></div>
 					</div>
                     
 					<div id='pingshanjiedao_nav'>
 						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
-						<div style='margin-left:25%;font-size:2em'>坪山街道地图</div>
+						<div style='margin-left:25%;font-size:2em'>坪山街道</div>
 						<div id='pingshanjiedao' style='height:400px;'></div>
 					</div>
 					<div id='biling_nav'>
 						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
-						<div style='margin-left:25%;font-size:2em'>碧岭街道地图</div>
+						<div style='margin-left:25%;font-size:2em'>碧岭街道</div>
 						<div id='biling' style='height:400px;'></div>
 					</div>
 					<div id='maluan_nav'>
 						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
-						<div style='margin-left:25%;font-size:2em'>马峦街道地图</div>
+						<div style='margin-left:25%;font-size:2em'>马峦街道</div>
 						<div id='maluan' style='height:400px;'></div>
 					</div>
 					<div id='shijing_nav'>
 						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
-						<div style='margin-left:25%;font-size:2em'>石井街道地图</div>
+						<div style='margin-left:25%;font-size:2em'>石井街道</div>
 						<div id='shijing' style='height:400px;'></div>
 					</div>
                 </div>
@@ -108,7 +108,7 @@
                         <table width="40%" border="0">
                           <tr>
                             <td width='21%'>
-								<select class='selected_year' class='time_select'>
+								<select id='selected_year' class='time_select'>
 									<option value='2018'>2018</option>
 									<option value='2017'>2017</option>
 									<option value='2016'>2016</option>
@@ -116,7 +116,7 @@
 							</td>
                             <td width='10%'>年</td>
                             <td width='21%'>
-								<select class='selected_month' class='time_select'>
+								<select id='selected_month' class='time_select'>
 									<option value='1'>1</option>
 									<option value='2'>2</option>
 									<option value='3'>3</option>
@@ -132,9 +132,11 @@
 								</select>
 							</td>
                             <td width='10%'>月</td>
+                            <td ><input type='button' id='bar_button' value='查看' width='50px' height='30px'></td>
+                            <td style='padding-left:150px'><input type='button' id='bar_button_today' value='查看今日' width='50px' height='30px'></td>
                           </tr>
                         </table>
-                        <input type='button' id='bar_button' value='查看' width='50px' height='30px' style='float:left'>
+                        
                     	</div>
                     </div>
                     <div id="edubalance" style="height:95%"></div>
@@ -150,7 +152,7 @@
                         	<input id='startTime' type='text' value='2018-10-29' width='250px'/>
                         </label>
                         <label>至：
-                        	<input id='endTime' type='text' value='2018-10-29' width='250px'/>
+                        	<input id='endTime' type='text' value='2018-10-30' width='250px'/>
                         </label>
                     </div>
                     <button id='time_button'>查看</button>

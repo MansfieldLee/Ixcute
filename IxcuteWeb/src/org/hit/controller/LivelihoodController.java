@@ -75,9 +75,10 @@ public class LivelihoodController {
 		return result;
 	}
 	
-	@RequestMapping(value="/DataStreetBymonth")
+	@RequestMapping(value="/DataStreetByMonth")
 	@ResponseBody
-	public Map<String,Map<String,Integer>> dataStreetToday(@RequestParam("month") String month){
+	public Map<String,Map<String,Integer>> dataStreetToday(@RequestParam("year") String year,@RequestParam("month") String month){
+		System.out.println(month);
 		Map<String,String> map = new HashMap<String, String>();
 		Map<String,Map<String,Integer>> result = livelihoodService.queryStreetDataByMonth(month);
 		System.out.println("\n");
