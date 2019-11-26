@@ -45,6 +45,7 @@ body,html{
 #content_map,#content_bar,#content_pie,#content_situation{
 	height:100%;
 	width:100%;
+	border:0px;
 } 
 #head{
 	width:100%;
@@ -137,15 +138,14 @@ body,html{
 	
 
 #show_desk{
-	width: 85%;
+	width: 80%;
 	height: 500px;
 	position: relative;
 	left: 0;
-	background-color: #F7FAFD;
 	margin-top: 7px;
 	margin-right: 0px;
 	margin-bottom: 0px;
-	margin-left: 0px;
+	margin-left: 9px;
 	float:left;
 }
 a{
@@ -185,8 +185,6 @@ a{
 	outline: none;
 	/*鍙栨秷榛樿绠ご寮�濮�*/
 	appearance:none;
-	-moz-appearance:none;
-	-webkit-appearance:none;
 	/*鍙栨秷榛樿绠ご缁撴潫*/
 	font-size: 1.5rem;
 }
@@ -200,17 +198,12 @@ a{
 #time_selector table tr,#time_selector_pre table tr{
 	height: 30px;
 }
-#time_button{
-	width:180px;
-	margin-top:10px;
-	line-height:10px;
-	height:30px;
-	font-size:20px;
-	border-radius:10px;
-	background-color:#E2F7F8;
-	color:#6F2430;
-	float:left;
+
+
+#time_button:hover{
+	color:#fff;
 }
+
 #time_button:focus{
 	outline:none;
 }
@@ -218,34 +211,13 @@ a{
 	text-align: center;
 }
 
-#time_button{
-	background-color: #C5E3fb;
-	color: #0b7efc;
-	width: 90px;
-	font-size: 2em;
-	border-top-width: 0px;
-	border-right-width: 0px;
-	border-bottom-width: 0px;
-	border-left-width: 0px;
+.content_select{
+	margin:10px;
 }
 
 .border-container{
 	border-width:0;
 }
-
-/* -------------------------------- 
-
-Primary style
-
--------------------------------- */
- 
- 
- 
-/* -------------------------------- 
-
-Main Components 
-
--------------------------------- */
 
 #select_street{
 	height:150px;

@@ -32,12 +32,12 @@ function pageInit(){
 		ms = -700;
 		s++;	
 	}
-	if(s == 30){
-		s = -30;
+	if(s == 10){
+		s = -50;
 		m++;
 	}
-	if(m == 37){
-		m = -23;
+	if(m == 34){
+		m = -26;
 		h++;
 	}
 	if(h == 9){
@@ -188,11 +188,11 @@ function degToRad(degree){
 function showTime(ms,s,m,h){
 
 	var now = new Date();
-	date.today = '2018/10/10';
+	date.today = '2018/10/30';
 	date.day = 3;
 	date.hrs = 15 + h;
-	date.min = 23 + m;
-	date.sec = 30 + s;
+	date.min = 26 + m;
+	date.sec = 50 + s;
 	date.mil = 700 + ms;
 	set_background_image(date.hrs);
 	var time = String(date.hrs)+':'+String(date.min)+':'+String(date.sec);
@@ -278,16 +278,16 @@ function pageInit2(){
 		ms = -700;
 		s++;	
 	}
-	if(s == 30){
-		s = -30;
+	if(s == 10){
+		s = -50;
 		m++;
 	}
-	if(m == 37){
-		m = -23;
+	if(m == 34){
+		m = -26;
 		h++;
 	}
-	if(h == 4){
-		h = -20;
+	if(h == 9){
+		h = -15;
 	}
 	canvas2.setAttribute('height', 440);//重新设置canvas的高度能够清除之前显示画布信息
 	showTime2(ms,s,m,h);
@@ -443,11 +443,11 @@ function degToRad2(degree){
 function showTime2(ms,s,m,h){
 
 	var now = new Date();
-	date.today = '2018/10/10';
+	date.today = '2018/10/30';
 	date.day = 3;
-	date.hrs = 20 + h;
-	date.min = 23 + m;
-	date.sec = 30 + s;
+	date.hrs = 15 + h;
+	date.min = 26 + m;
+	date.sec = 50 + s;
 	date.mil = 700 + ms;
 	set_background_image(date.hrs);
 	var time = String(date.hrs)+':'+String(date.min)+':'+String(date.sec);
@@ -541,18 +541,18 @@ function set_background_image(hrs){
 		bg2.style.backgroundAttachment = 'fixed';
 	}
 	else if(hrs>=12 && hrs<19){
-		bg.style.background = 'url(Pages/images/afternoon.jpg) no-repeat center center';
-		bg.style.backgroundSize = 'cover';
-		bg.style.backgroundAttachment = 'fixed';
-		bg2.style.background = 'url(Pages/images/afternoon.jpg) no-repeat center center';
-		bg2.style.backgroundSize = 'cover';
-		bg2.style.backgroundAttachment = 'fixed';
-	}
-	else{
 		bg.style.background = 'url(Pages/images/evening.jpg) no-repeat center center';
 		bg.style.backgroundSize = 'cover';
 		bg.style.backgroundAttachment = 'fixed';
 		bg2.style.background = 'url(Pages/images/evening.jpg) no-repeat center center';
+		bg2.style.backgroundSize = 'cover';
+		bg2.style.backgroundAttachment = 'fixed';
+	}
+	else{
+		bg.style.background = 'url(Pages/images/afternoon.jpg) no-repeat center center';
+		bg.style.backgroundSize = 'cover';
+		bg.style.backgroundAttachment = 'fixed';
+		bg2.style.background = 'url(Pages/images/afternoon.jpg) no-repeat center center';
 		bg2.style.backgroundSize = 'cover';
 		bg2.style.backgroundAttachment = 'fixed';
 	}

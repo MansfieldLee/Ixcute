@@ -1,6 +1,7 @@
 package org.hit.authorizedInterceptor;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -25,6 +26,7 @@ public class AuthorizedInterceptor implements HandlerInterceptor{
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
     	Cookie[] cookies = request.getCookies();
 		String uri = request.getRequestURI();
+		PrintWriter out = null;
 		System.out.println("uri:"+uri);
 		System.out.println(request.getParameter("user") + "-" +request.getParameter("psd") + "-"+request.getParameter("checkcode"));
 		if(uri.equals("/IxcuteWeb/LoginServlet"))
@@ -33,14 +35,26 @@ public class AuthorizedInterceptor implements HandlerInterceptor{
 		}
 		HttpSession session = request.getSession(false);
 		if(session==null) {
-			response.sendRedirect("/IxcuteWeb/index.jsp");
+			if(request.getHeader("x-requested-with") != null && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
+				out = response.getWriter();
+				out.print("loseToken");
+				out.flush();
+			}else
+			{
+				response.sendRedirect("/IxcuteWeb/index.jsp");
+			}
 			return false;
 		}
 		String sessionId = session.getId();
 		for(Cookie cookie:cookies) {
 			if(cookie.getName().equals("JSESSIONID")) {
 				if(!cookie.getValue().equals(sessionId)) {
-					response.sendRedirect("/IxcuteWeb/index.jsp");
+					if(request.getHeader("x-requested-with") != null && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
+						out = response.getWriter();
+						out.print("loseToken");
+					}else {		
+						response.sendRedirect("/IxcuteWeb/index.jsp");
+					}
 					return false;
 				}
 			}
@@ -49,16 +63,32 @@ public class AuthorizedInterceptor implements HandlerInterceptor{
 		if((String)session.getAttribute("username")!=null) {
 			user = loginService.selectloginbyname((String)session.getAttribute("username"));
 		}else {
-			response.sendRedirect("/IxcuteWeb/index.jsp");
+			if(request.getHeader("x-requested-with") != null && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
+				out = response.getWriter();
+				out.print("loseToken");
+			}else {
+				response.sendRedirect("/IxcuteWeb/index.jsp");
+			}
 			return false;
 		}
 		
 		if(user == null) {
-			response.sendRedirect("/IxcuteWeb/index.jsp");
+			if(request.getHeader("x-requested-with") != null && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
+				out = response.getWriter();
+				out.print("loseToken");
+			}else {
+				response.sendRedirect("/IxcuteWeb/index.jsp");
+
+			}
 			return false;
 		}else {
 			if(!user.getUserpwd().equals((String)session.getAttribute("password"))) {
-			response.sendRedirect("/IxcuteWeb/index.jsp");
+			if(request.getHeader("x-requested-with") != null && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
+				out = response.getWriter();
+				out.print("loseToken");
+			}else {
+				response.sendRedirect("/IxcuteWeb/index.jsp");
+			}
 			return false;
 			}
 		}
