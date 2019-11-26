@@ -91,6 +91,7 @@ public class LivelihoodService implements ILivelihoodService {
 		String streetName = "";
 		String main_type_name = "";
 		for(Livelihood_data data:list) {
+			System.out.println(data);
 			streetName = data.getStreet_name();
 			if(streetName==null)continue;
 			if(!ans.containsKey(streetName)) {

@@ -42,58 +42,98 @@ $(document).ready(function(){
 	//结束
 	canvas_change();
 }
-document.getElementById('time_box').onmousewheel = function(){
+	document.getElementById('time_box').onmousewheel = function(){
 	document.getElementById('time_box').setAttribute('class','box_hided');
 	$('#clock_box2').slideUp(300);
 	$('#clock_box').slideDown(0);
 }
+	
+	//日历部分
+	
+	jeDate('#startTime', {
+        minDate: '1990-01-01',
+        isinitVal: true,
+        format: 'YYYY-MM-DD',
+        onClose: false,
+        donefun:function(obj){
+            // console.log(obj)
+            var saliDate=obj.val.split("-");
+             console.log(saliDate);
+            var riNum=0;
+            var yueNum=0;
+            var nianNum=saliDate[0];
+            // console.log(saliDate[1]-1)
+            // //判断月 同时判断年
+            if(saliDate[1]-1<=0&&saliDate[2]=="01"){
+                yueNum=12;
+                riNum=31;
+                nianNum=nianNum;
+                // console.log(nianNum,yueNum,riNum)
+                $("#endTime").val(nianNum+"-"+yueNum+"-"+riNum)
+                return false;
+            }else {
+                yueNum=saliDate[1];
+                nianNum=nianNum-0+1;
+            }
+            //当 日 是01 的时候要判断当前下一个月是否为31 还是30天  在判断一个是否为闰年  2月份是29 还是28
+            if(saliDate[2]=="01"){
+                switch(saliDate[1]-1){
+                    case 1:
+                    case 3:
+                    case 5:
+                    case 7:
+                    case 8:
+                    case 10:
+                    case 0://0就是12月  因为是只有点击的是2019-01-01  才会是2018-12-31
+                        riNum=31;
+                        yueNum="0"+(saliDate[1]-1);
+                        break;
+                    case 4:
+                    case 6:
+                    case 9:
+                    case 11:
+                        riNum=30;
+                        yueNum="0"+(saliDate[1]-1);
+                        break;
+                }
+                if(saliDate[1]-1==2){
+                	yueNum="0"+(saliDate[1]-1);
+                    //判断是否为闰年
+                    if(isLeap(saliDate[0])==1){
+                        riNum=29;
+                    }else{
+                        riNum=28;
+                    }
+                }
+            }else{
+                if(saliDate[2]-1<=9){
+                    riNum="0"+(saliDate[2]-1);
+                }else{
+                    riNum=saliDate[2]-1;
+                }
+            }
+            $("#endTime").val(nianNum+"-"+yueNum+"-"+riNum)
+            // console.log(nianNum,yueNum,riNum)
+        }
+    });
+    jeDate('#endTime', {
+        minDate: '1990-01-01',
+        isinitVal: true,
+        format: 'YYYY-MM-DD',
+        onClose: false
+    });
+    
+   //判断是否为闰年  若为闰年，返回1，反之则返回0
+    function isLeap(year) {
+        if((year%4==0 && year%100!=0)||(year%400==0)){
+            return 1;
+        }
+        return 0;
+    }
+    //日历部分结束
 })
 
-function myshow(showed,bid){
-    $('#edubalance').css('height','95%');
-	$('#courserate').css('height','95%');
-	//document.getElementById('edubalance').height='95%';
-	//document.getElementById('courserate').height='95%';
-	$('.table').hide();
-	$('#content_'+showed).show();
-	//canvas_change();
-	
-	$("#pie-button").removeClass("menu-button-keep");
-	$("#bar-button").removeClass("menu-button-keep");
-	$("#map-button").removeClass("menu-button-keep");
-	$("#situation-button").removeClass("menu-button-keep");
-	$("#pie-button").removeClass("menu-button");
-	$("#bar-button").removeClass("menu-button");
-	$("#map-button").removeClass("menu-button");
-	$("#situation-button").removeClass("menu-button");
-	
-	
-	if(bid==1){
-		$("#pie-button").addClass("menu-button-keep");
-		$("#bar-button").addClass("menu-button");
-		$("#map-button").addClass("menu-button");
-		$("#situation-button").addClass("menu-button");
-		//time_issue2();
-	}
-	else if(bid==2){
-		$("#pie-button").addClass("menu-button");
-		$("#bar-button").addClass("menu-button-keep");
-		$("#map-button").addClass("menu-button");
-		$("#situation-button").addClass("menu-button");
-	}
-	else if(bid==3){
-		$("#pie-button").addClass("menu-button");
-		$("#bar-button").addClass("menu-button");
-		$("#map-button").addClass("menu-button-keep");
-		$("#situation-button").addClass("menu-button");
-	}
-	else{
-		$("#pie-button").addClass("menu-button");
-		$("#bar-button").addClass("menu-button");
-		$("#map-button").addClass("menu-button");
-		$("#situation-button").addClass("menu-button-keep");
-	}
-}
+
 
 //控制街道选择块儿
 $('#selected_street').change(
@@ -112,6 +152,10 @@ $('#street').mouseout(
 })
 
 function show_map(showed){
+	var ps = document.getElementById('ps');
+	console.log(ps.style.display);
+	if(ps.style.display == 'none'){$('#ps').css('display','block');}
+	else{$('#ps').css('display','none');}
 	$('#mapadd_nav').css('display','none');
 	$('#longtian_nav').css('display','none');
 	$('#kengzi_nav').css('display','none');
@@ -127,8 +171,59 @@ function show_map(showed){
 function canvas_change(){
 	map_issue();
 	//window.time_issue2;
-	situation_issue(1);
-
+	situation_issue(3);
+	window.myshow=function(showed,bid){
+	    $('#edubalance').css('height','95%');
+		$('#courserate').css('height','95%');
+		//document.getElementById('edubalance').height='95%';
+		//document.getElementById('courserate').height='95%';
+		$('.table').hide();
+		$('#content_'+showed).show();
+		//canvas_change();
+		
+		$("#pie-button").removeClass("menu-button-keep");
+		$("#bar-button").removeClass("menu-button-keep");
+		$("#map-button").removeClass("menu-button-keep");
+		$("#situation-button").removeClass("menu-button-keep");
+		$("#pie-button").removeClass("menu-button");
+		$("#bar-button").removeClass("menu-button");
+		$("#map-button").removeClass("menu-button");
+		$("#situation-button").removeClass("menu-button");
+		
+		
+		if(bid==1){
+			$("#pie-button").addClass("menu-button-keep");
+			$("#bar-button").addClass("menu-button");
+			$("#map-button").addClass("menu-button");
+			$("#situation-button").addClass("menu-button");
+			time_issue2();
+		}
+		else if(bid==2){
+			$("#pie-button").addClass("menu-button");
+			$("#bar-button").addClass("menu-button-keep");
+			$("#map-button").addClass("menu-button");
+			$("#situation-button").addClass("menu-button");
+			var edubalance = echarts.init(document.getElementById('edubalance'));
+			edubalance.clear();
+			bar_option.series = [];
+			bar_option_month.series = [];
+			bar_option.legend.data = [];
+			bar_option_month.legend.data = [];
+			bar_issue();
+		}
+		else if(bid==3){
+			$("#pie-button").addClass("menu-button");
+			$("#bar-button").addClass("menu-button");
+			$("#map-button").addClass("menu-button-keep");
+			$("#situation-button").addClass("menu-button");
+		}
+		else{
+			$("#pie-button").addClass("menu-button");
+			$("#bar-button").addClass("menu-button");
+			$("#map-button").addClass("menu-button");
+			$("#situation-button").addClass("menu-button-keep");
+		}
+	}
 //$(function() {
 	var response_bar;
 	var xmlhttp_bar;
@@ -140,6 +235,17 @@ function canvas_change(){
 		xmlhttp_bar.open("POST","DataStreetToday",true);//DataStreetToday
 		xmlhttp_bar.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 		xmlhttp_bar.send("year="+window.year+"&month="+window.month+"&day="+window.day+"&hour="+date.hrs+"&minute="+date.min+"&second="+date.sec);		
+	}
+	function bar_issue_month(){
+		var year = document.getElementById('selected_year').value;
+		var month = document.getElementById('selected_month').value;
+		if (window.XMLHttpRequest) {xmlhttp_bar=new XMLHttpRequest();}
+		
+		else{xmlhttp_bar=new ActiveXObject("Microsoft.XMLHTTP");}	
+		xmlhttp_bar.onreadystatechange=getResult_bar_month;
+		xmlhttp_bar.open("POST","DataStreetByMonth",true);//DataStreetToday
+		xmlhttp_bar.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		xmlhttp_bar.send("year="+year+"&month="+month);		
 	}
 	
 	function getResult_bar(){
@@ -205,7 +311,78 @@ function canvas_change(){
 					};
 					//console.log(dataType[i],sery);
 					paint_bar(dataType[i],sery);
-					console.log(i);
+					//console.log(i);
+				}
+			}
+			else{
+				alert("连接失败");
+			}
+		}
+	}
+	function getResult_bar_month(){
+		if (xmlhttp_bar.readyState==4) {		
+			if(xmlhttp_bar.status==200){
+				var rec=xmlhttp_bar.responseText;
+				response_bar = eval("("+rec+")");
+				var dataType=[];
+				for(var kinds in response_bar.坪山街道){
+					if(dataType.indexOf(kinds)>-1){continue;}
+					else{dataType.push(kinds);}
+				}
+				for(var kinds in response_bar.坑梓街道){
+					if(dataType.indexOf(kinds)>-1){continue;}
+					else{dataType.push(kinds);}
+				}
+				for(var kinds in response_bar.马峦街道){
+					if(dataType.indexOf(kinds)>-1){continue;}
+					else{dataType.push(kinds);}
+				}
+				for(var kinds in response_bar.碧玲街道){
+					if(dataType.indexOf(kinds)>-1){continue;}
+					else{dataType.push(kinds);}
+				}
+				for(var kinds in response_bar.龙田街道){
+					if(dataType.indexOf(kinds)>-1){continue;}
+					else{dataType.push(kinds);}
+				}
+				for(var kinds in response_bar.石井街道){
+					if(dataType.indexOf(kinds)>-1){continue;}
+					else{dataType.push(kinds);}
+				}
+				console.log(dataType);
+				var colors = 0x24f213;
+				for(var i=0;i<dataType.length;i++){
+					colors += 0x234567;
+					colors = colors & 0xffffff;
+					var temp = dataType[i]
+					if(!response_bar.龙田街道[temp]){response_bar.龙田街道[temp] = 0;}
+					if(!response_bar.坑梓街道[temp]){response_bar.坑梓街道[temp] = 0;}
+					if(!response_bar.碧岭街道[temp]){response_bar.碧岭街道[temp] = 0;}
+					if(!response_bar.马峦街道[temp]){response_bar.马峦街道[temp] = 0;}
+					if(!response_bar.石井街道[temp]){response_bar.石井街道[temp] = 0;}
+					if(!response_bar.坪山街道[temp]){response_bar.坪山街道[temp] = 0;}
+					var sery = {
+						name:dataType[i],
+						type:'bar',
+						stack: '总量',
+						data:[response_bar.龙田街道[temp],response_bar.坑梓街道[temp],response_bar.碧岭街道[temp],
+							  response_bar.马峦街道[temp],response_bar.石井街道[temp],response_bar.坪山街道[temp]],
+						barMaxWidth : 50,
+						itemStyle: {
+							normal: {
+								color: '#'+colors.toString(16)
+								},
+								label: {
+									show: true,
+									position: 'top',
+									formatter: '{a}'
+								}
+							},
+							
+					};
+					//console.log(dataType[i],sery);
+					paint_bar_month(dataType[i],sery);
+					//console.log(i);
 				}
 			}
 			else{
@@ -214,6 +391,17 @@ function canvas_change(){
 		}
 	}
 	$('#bar_button').click(function(){
+		var edubalance = echarts.init(document.getElementById('edubalance'));
+		edubalance.clear();
+		bar_option_month.series = [];
+		bar_option_month.legend.data = [];
+		bar_issue_month();
+	})
+	$('#bar_button_today').click(function(){
+		var edubalance = echarts.init(document.getElementById('edubalance'));
+		edubalance.clear();
+		bar_option.series = [];
+		bar_option.legend.data = [];
 		bar_issue();
 	})
 	var bar_option = {
@@ -248,71 +436,82 @@ function canvas_change(){
 	        xAxis: [
 	            {
 	                type: 'category',
-	                data: ['龙田街道','坑梓街道','碧岭街道','马峦街道','石井街道','坪山街道'],
-	                splitLine:{
-	                    show:false,
-	                    lineStyle:{
-	                        color: '#000'
-	                    }
-	                },
-	                axisTick: {
-	                    show: false
-	                },
-	                axisLabel:{
-	                    textStyle:{
-	                        color:"#000"
-	                    },
-	                    lineStyle:{
-	                        color: '#000'
-	                    },
-	                    alignWithLabel: true,
-	                    interval:0,
-	                }
+	                data: ['龙田街道','坑梓街道','碧岭街道','马峦街道','石井街道','坪山街道']
 	            }
 	        ],
 	        yAxis: [
 	            {
 	                type: 'value',
-
-	                nameTextStyle:{
-	                    color:'#000'
-	                },
 	                interval: 5,
-	                max:60,
+	                max:40,
 	                min: 0,
-	                splitLine:{
-	                    show:true,
-	                    lineStyle:{
-	                        color: '#000'
-	                    }
-	                },
-	                axisLine: {
-	                    show:false,
-	                    lineStyle: {
-	                        color: '#000'
-	                    }
-	                },
-	                axisTick: {
-	                    show: false
-	                },
-	                axisLabel:{
-	                    textStyle:{
-	                        color:"#000"
-	                    },
-	                    alignWithLabel: true,
-	                    interval:0
-
-	                }
+	                
 	            }
 	        ],
 			
 	        color:"yellow",
 	        series: []
 	    };
-	function paint_bar(dataType,sery){
-		console.log(sery);
+	var bar_option_month = {
+	        tooltip: {
+	            trigger: 'axis',
+	            formatter: '{b}</br>{a}: {c}</br>{a1}: {c1}</br>{a2}: {c2}</br>{a3}: {c3}</br>...'
+	        },
+	        toolbox: {
+	            show:false,
+	            feature: {
+	                dataView: {show: true, readOnly: false},
+	                magicType: {show: true, type: ['bar','stack']},
+	                restore: {show: true},
+	                saveAsImage: {show: true}
+	            }
+	        },
+			calculable : true,
+			legend: {
+	            data:[],
+	            right:"5%",
+	            textStyle:{
+	                color:'#000'
+	            }
+	        },
+	        grid:{
+	            top:'18%',
+	            right:'5%',
+	            bottom:'8%',
+	            left:'5%',
+	            containLabel: true
+	        },
+	        xAxis: [
+	            {
+	                type: 'category',
+	                data: ['龙田街道','坑梓街道','碧岭街道','马峦街道','石井街道','坪山街道']
+	            }
+	        ],
+	        yAxis: [
+	            {
+	                type: 'value',
+	                interval: 100,
+	                max:1000,
+	                min: 0,
+	                
+	            }
+	        ],
+			
+	        color:"yellow",
+	        series: []
+	    };
+	function paint_bar_month(dataType,sery){
+		//console.log(sery);
 	    var edubalance = echarts.init(document.getElementById('edubalance'));
-	    
+		bar_option_month.series.push(sery);
+		if(bar_option_month.legend.data.length<25){
+			bar_option_month.legend.data.push(dataType);
+		}
+		edubalance.setOption(bar_option_month);
+	}
+	function paint_bar(dataType,sery){
+		//console.log(sery);
+	    var edubalance = echarts.init(document.getElementById('edubalance'));
 		bar_option.series.push(sery);
 		bar_option.legend.data.push(dataType);
 		edubalance.setOption(bar_option);
@@ -324,12 +523,17 @@ function canvas_change(){
     window.response='';
 	var xmlhttp_time;
 	function time_issue(){
-		var year1=document.getElementById('selected_year_pre').value;
-		var month1=document.getElementById('selected_month_pre').value;
-		var day1=document.getElementById('selected_day_pre').value;
-		var year=document.getElementById('selected_year').value;
-		var month=document.getElementById('selected_month').value;
-		var day=document.getElementById('selected_day').value;
+		var startTime = document.getElementById('startTime').value;
+		var endTime = document.getElementById('endTime').value;
+		console.log(startTime,endTime);
+		startTime = startTime.split('-');
+		endTime = endTime.split('-');
+		var year1 = startTime[0];
+		var month1 = startTime[1];
+		var day1 = startTime[2];
+		var year = endTime[0];
+		var month = endTime[1];
+		var day = endTime[2];
 		console.log(year,month,day,year1,month1,day1);
 		if (window.XMLHttpRequest) {xmlhttp_time=new XMLHttpRequest();}
 		
@@ -337,7 +541,7 @@ function canvas_change(){
 		xmlhttp_time.onreadystatechange=getResult;
 		xmlhttp_time.open("POST","DataProperties",true);
 		xmlhttp_time.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-		xmlhttp_time.send("year="+window.year+"&month="+window.month+"&day="+window.day+"&year1="+year1+"&month1="+month1+"&day1="+day1);		
+		xmlhttp_time.send("year="+year+"&month="+month+"&day="+day+"&year1="+year1+"&month1="+month1+"&day1="+day1);		
 	}
 	 window.time_issue2=function(){
 		if (window.XMLHttpRequest) {xmlhttp_time=new XMLHttpRequest();}
@@ -358,12 +562,11 @@ function canvas_change(){
 //				console.log(response);
 //				console.log(response.投诉);
 				window.test_response.tousu = response.投诉;
-				console.log(window.test_response.tousu);
+				//console.log(window.test_response.tousu);
 				window.test_response.jianyi = response.建议;
 				window.test_response.zixun = response.咨询;
 				window.test_response.ganxie = response.感谢;
 				window.test_response.qiujue = response.求决;
-				window.test_response.qita = response.其他;
 				paint_pie();
 			}
 			else{
@@ -396,12 +599,12 @@ function canvas_change(){
 //	}
 	
 	function paint_pie(){
-		console.log(response);
-		console.log(test_response);
-		console.log(test_response.tousu);
-		for(var key in test_response){
-			console.log(key);
-		}
+//		console.log(response);
+//		console.log(test_response);
+//		console.log(test_response.tousu);
+//		for(var key in test_response){
+//			console.log(key);
+//		}
 //    	console.log('!!');
 //    	console.log(test_response);
 //    	console.log(test_response.tousu);
@@ -421,16 +624,16 @@ function canvas_change(){
 
             formatter:function(name){
             	
-            	console.log(option.series[0].data);
+            	//console.log(option.series[0].data);
                 var oa = option.series[0].data;
-                var num = oa[0].value + oa[1].value + oa[2].value + oa[3].value + oa[4].value + oa[5].value;
+                var num = oa[0].value + oa[1].value + oa[2].value + oa[3].value + oa[4].value;
                 for(var i = 0; i < option.series[0].data.length; i++){
                     if(name==oa[i].name){
                         return name +  ' '+oa[i].value;
                     }
                 }
             },
-            data: ['投诉','建议','咨询','感谢','求决','其他']
+            data: ['投诉','建议','咨询','感谢','求决']
         },
         series : [
             	{
@@ -444,8 +647,7 @@ function canvas_change(){
                     {value:test_response.jianyi, name:'建议'},
                     {value:test_response.zixun, name:'咨询'},
                     {value:test_response.ganxie, name:'感谢'},
-					{value:test_response.qiujue, name:'求决'},
-					{value:test_response.qita, name:'其他'},
+					{value:test_response.qiujue, name:'求决'}
                 ],
                 itemStyle: {
                     emphasis: {
@@ -939,7 +1141,7 @@ function paint_situation(){
 	    },
 	    legend: {
 	        orient: 'vertical',
-	        right: '15%',
+	        right: '10%',
 	        x:'center',
 	        y:'top',
 	        textStyle:{
@@ -1112,3 +1314,4 @@ function paint_situation2(name){
 }
 }
 //事件结办区结束
+//setInterval(function(){canvas_change();},30000);
