@@ -165,7 +165,10 @@ public class LoginController {
 		return allUser;
 	}
 	
-	
+	@RequestMapping("/returnIndex")
+	public String returnIndex() {
+		return "redirect:index.jsp";
+	}
 	
 	
 	public void setLoginService(LoginService loginService) {

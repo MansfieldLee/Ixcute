@@ -159,6 +159,22 @@ public class LivelihoodController {
 		return null;
 	}
 	
+	@RequestMapping("/NoDeal")
+	@ResponseBody
+	public Map<Integer,Map<String,String>> queryNoDealByToday(@RequestParam("year") String year,@RequestParam("month") String month,
+			@RequestParam("day") String day,@RequestParam("hour") String hour,@RequestParam("minute") String minute,@RequestParam("second")String second){
+		System.out.println(year+"-"+month+"-"+day+"-"+hour+"-"+minute+"-"+second);		
+		Map<String,String> map = new HashMap<String, String>();
+		String begin_time = getTime("2018", "1", "1", "0", "0", "0");
+		String end_time = getTime(year,month,day,hour,minute,day);
+		map.put("begin_time",begin_time);
+		map.put("end_time", end_time);
+		Map<Integer,Map<String,String>> re = livelihoodService.queryNoDeal(map);
+		System.out.println(re);
+		return re;
+	}
+	
+	
 	public String getTime(String year,String month,String day) {
 		if(Integer.parseInt(month)<10) {
 			month = "0" + month;

@@ -12,7 +12,6 @@
 <link rel='stylesheet' type='text/css' href='Pages/CSS/main.css'>
 <link rel="stylesheet" href="Pages/CSS/roll.css">
     <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
-    <script src="Pages/JS/roll.js"></script>
     <script src="https://cdn.bootcss.com/echarts/4.2.0-rc.2/echarts.min.js"></script>
 	<script src='Pages/JS/pingshan.js'></script>
 	<script src='Pages/JS/longtian.js'></script>
@@ -35,48 +34,6 @@
                 <canvas id="canvas2" width="380px" height="440px" style="margin:0px;left:65%;top:15%;position:relative;"/>
             </div>
             <script src="Pages/JS/clock.js"></script>
-            
-            <!--<script type='text/javascript'>
-            
-                var box1 = document.getElementById('clock_box');
-                box1.onmousedown = function(){
-                    document.onmousemove = function(e){
-                        e = event ||window.event;
-                        var left = e.pageX;
-                        var top = e.pageY;
-                        box1.style.left = left + 'px';
-                        box1.style.top = top + 'px';
-                    };
-                    document.onmouseup = function(){
-                        document.onmousemove = null;
-                        document.onmouseup = null;
-                    };
-                };
-                box1.onmousedown = function(e){
-                    e = event ||window.event;
-                    var reX = e.pageX;
-                    var reY = e.pageY;
-                    var box_left = Number(box1.style.left.replace('px',''));
-                    var box_top = Number(box1.style.top.replace('px',''));
-                    //注意，一定要在鼠标按下事件中保存原坐标，如果是在移动过程中保留，会是一个时刻变化的值
-                    document.onmousemove = function(e){
-                        e = event ||window.event;
-                        var X_change = e.pageX - reX;
-                        var Y_change = e.pageY - reY;
-                        
-                        var left = X_change + box_left;
-                        var top = Y_change + box_top;
-                        
-                        box1.style.left = left + 'px';
-                        box1.style.top = top + 'px';
-                    
-                    }
-                    document.onmouseup = function(){
-                        document.onmousemove = null;//取消move，让div停下来
-                        document.onmouseup = null;//取消up事件是必须的，如果不取消，后面继续点击鼠标，up时还会执行这里
-                    }
-                }
-            </script>-->
         </div>
       
         
@@ -94,27 +51,7 @@
 		        <!--滚动的新闻-->
 		        <div class="roll">
 		            <ul id='scroller'>
-		                <li class="roll_1">
-		                    <a href="#" class="ellipsis">2018年10月30日 坑梓街道 的秀新社区从12319接到商业经营红线内噪声投诉，请城管办（坑梓街道办事处）尽快前往处理。</a>
-		                </li>
-		                <li class="roll_2">
-		                    <a href="#" class="ellipsis">2018年10月30日马峦街道的江岭社区从@坪山接到工业废气投诉，请环境保护和水务局尽快前往处理。  </a>
-		                </li>
-		                <li class="roll_3">
-		                    <a href="#" class="ellipsis">2018年10月30日坑梓街道的金沙社区从美丽深圳接到绿化养护建议，请城市管理局尽快前往处理</a>
-		                </li>
-		                <li class="roll_hide">
-		                    <a href="#" class="ellipsis">2018年10月30日坪山街道的六联社区从 美丽深圳接到占道经营投诉，请坪山街道综合执法队（坪山街道办事处）尽快前往处理</a>
-		                </li>
-		                <li class="roll_hide">
-		                    <a href="#" class="ellipsis">2018年10月30日坪山街道的六联社区从@坪山接到道路破损求决，请坪山交通运输局尽快前往处理</a>
-		                </li>
-		                <li class="roll_hide">
-		                    <a href="#" class="ellipsis">2018年10月30日龙田街道的竹坑社区从美丽深圳接到无照经营游商投诉，请龙田街道综合执法队（龙田街道办事处）尽快前往处理</a>
-		                </li>
-		                <li class="roll_hide">
-		                    <a href="#" class="ellipsis">2018年10月30日石井街道的田头社区从12319接到无照经营游商投诉，请石井办事处综合执法队尽快前往处理</a>
-		                </li>
+		                
 		            </ul>
 		        </div>
 		    </div>
@@ -207,10 +144,6 @@
 									<option value='2018'>2018</option>
 									<option value='2017'>2017</option>
 									<option value='2016'>2016</option>
-									<option value='2015'>2015</option>
-									<option value='2014'>2014</option>
-									<option value='2013'>2013</option>
-									<option value='2012'>2012</option>
 								</select>
 							</td>
 					        <td width='10%'>年</td>
@@ -278,10 +211,6 @@
 									<option value='2018'>2018</option>
 									<option value='2017'>2017</option>
 									<option value='2016'>2016</option>
-									<option value='2015'>2015</option>
-									<option value='2014'>2014</option>
-									<option value='2013'>2013</option>
-									<option value='2012'>2012</option>
 								</select>
 							</td>
                             <td width='10%'>年</td>
@@ -391,6 +320,7 @@
         </div>
     </div>
     <script src='Pages/JS/main.js' type='text/javascript' ></script>
+    <script src="Pages/JS/roll.js"></script>
 </body>
 	<script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
 	<script type="text/javascript" src="Pages/JS/bootsnav.js"></script>

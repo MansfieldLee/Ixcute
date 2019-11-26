@@ -21,7 +21,7 @@ public class LivelihoodService implements ILivelihoodService {
 	
 	private Map<String,Map<String,Integer>> ans;
 	
-	private Map<String,Map<String,String>> specialEvent;
+	private Map<Integer,Map<String,String>> specialEvent;
 	
 	public Map<String, Map<String, Integer>> getAns() {
 		return ans;
@@ -31,7 +31,7 @@ public class LivelihoodService implements ILivelihoodService {
 		this.ans = ans;
 	}
 
-	public Map<String, Map<String, String>> getSpecialEvent() {
+	public Map<Integer, Map<String, String>> getSpecialEvent() {
 		return specialEvent;
 	}
 
@@ -40,7 +40,7 @@ public class LivelihoodService implements ILivelihoodService {
 	}
 	
 
-	public void setSpecialEvent(Map<String,Map<String,String>> specialEvent) {
+	public void setSpecialEvent(Map<Integer,Map<String,String>> specialEvent) {
 		this.specialEvent = specialEvent;
 	}
 	
@@ -419,19 +419,21 @@ public class LivelihoodService implements ILivelihoodService {
 	}
 	
 	//no deal 
-	public Map<String,Map<String,String>> queryNoDeal(Map map){
+	public Map<Integer,Map<String,String>> queryNoDeal(Map map){
 		List<Livelihood_data> list = livelihoodMapper.TimeBetween(map);
-		ans.clear();
-		InitEvent();
+		
+		specialEvent.clear();
 		int condition = 0;
 		String createTime = "";
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		int count = 1;
+		int option = 0;
 		for(Livelihood_data data:list) {
+			option = 0;
 			condition = data.getIntime_to_archive_num();
 			if(condition == 1) {
+				System.out.println(condition);
 				createTime = data.getCreate_time();
-				
-				
 				long diff = 0L;
 				try {
 					Date date1 = format.parse(createTime);
@@ -439,12 +441,23 @@ public class LivelihoodService implements ILivelihoodService {
 					diff = date2.getTime() - date1.getTime();
 					//one day ago
 					if(diff / (1000 * 24 * 60 * 60) > 1) {
-						
+						option = 1;
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
+			if(data.getEvent_type_name().equals("党纪政纪")) {
+				option = 1;
+			}
+			//regex match
+			if(data.getEvent_type_name().matches("(.*)违法(.*)")) {
+				option = 1;
+			}
+			if(data.getSub_type_name().matches("(.*)色情(.*)")) {
+				option = 1;
+			}
+			specialEvent.put(count, putData(data,option));
+			count++;
 			}
 		}
 		
@@ -485,15 +498,10 @@ public class LivelihoodService implements ILivelihoodService {
 
 	}
 	
-	private void InitEvent() {
-		Map<String,String> map = new HashMap<String, String>();
-		specialEvent.put("未结办事件", map);
-		map = new HashMap<String, String>();
-		specialEvent.put("报警事件", map);
-	}
 
 	//optional to choose abnormal(0) or alarm(1)
-	private void putData(Livelihood_data data,int optional) {
+	private Map<String,String> putData(Livelihood_data data,int optional) {
+		Map<String,String> map = new HashMap<String, String>();
 		String createTime = data.getCreate_time();
 		String street = data.getStreet_name();
 		String community = data.getCommunity_name();
@@ -501,9 +509,23 @@ public class LivelihoodService implements ILivelihoodService {
 		String subType = data.getSub_type_name();
 		String property = data.getEvent_property_name();
 		String disposal = data.getDispose_unit_name();
+		String option;
 		if(optional == 0) {
-			
+			option = "abnormal";
+		}else {
+			option = "warning";
 		}
+		map.put("时间", createTime);
+		map.put("街道", street);
+		map.put("社区", community);
+		map.put("来源", source);
+		map.put("小类名称", subType);
+		map.put("性质", property);
+		map.put("处置部门", disposal);
+		map.put("事件类型",option);
+		System.out.println(map);
+		return map;
 	}
+	
 	
 }

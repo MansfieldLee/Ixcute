@@ -33,6 +33,12 @@
   font-size: 18px;
   list-style: none;
 }
+.abnormal{
+	color:white;
+}
+.warning{
+	color:red;
+}
 .roll li a {
   position: relative;
   color: #fff;
