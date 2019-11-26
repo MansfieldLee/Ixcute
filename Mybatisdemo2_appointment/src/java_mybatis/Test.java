@@ -45,10 +45,17 @@ public class Test {
 			reader = Resources.getResourceAsReader("conf.xml");
 			session = new SqlSessionFactoryBuilder().build(reader);
 			se = session.openSession();
-			
 			loginMapper loginmapper = se.getMapper(loginMapper.class);
-			int find = loginmapper.selectloginbynameAndpwd(log);
-			return find;
+			
+			login log_find = loginmapper.selectloginbyname(log.getUsername());
+			String find_pwd = log_find.getUserpwd();
+			System.out.println("数据库中密码:"+find_pwd);
+			MD5salt.queriedHash = find_pwd;
+			String saltpwd = MD5salt.Get_MD5salt(log.getUserpwd(),0);
+			System.out.println("新密码:"+saltpwd);
+			if(saltpwd.equals(find_pwd)){
+				return 1;
+			}else return 0;
 //			System.out.println(log);
 		}catch(IOException e){
 			e.printStackTrace();
@@ -91,6 +98,7 @@ public class Test {
 			session = new SqlSessionFactoryBuilder().build(reader);
 			se = session.openSession();
 			loginMapper loginmapper = se.getMapper(loginMapper.class);
+			
 			loginmapper.addUser(log);
 			System.out.println("成功增加数据");
 			se.commit();
@@ -265,14 +273,18 @@ public class Test {
 		
 //		loginOrderbycol();
 		
-//		login log = new login(3,"ww","451254","client");
-//		int find = CheckNameAndPwd(log);
-//		System.out.println(find);
+		login log = new login(7,"kakao","etrd6546123","client");
+//		String saltpwd = MD5salt.Get_MD5salt(log.getUserpwd(),0);
+//		log.setUserpwd(saltpwd);
+//		Insertuser(log);
+		
+		int find = CheckNameAndPwd(log);
+		System.out.println(find);
 		
 //		Eventproperty();
 //		EventpropertyBetween();
 //		SelectQuarter();
-		pageDivide();
+//		pageDivide();
 //		updatePWD(log);
 		
 	}
