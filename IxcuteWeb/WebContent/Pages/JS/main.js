@@ -196,6 +196,10 @@ $('#street').mouseout(
 })
 
 function show_map(showed){
+	var ps = document.getElementById('ps');
+	console.log(ps.style.display);
+	if(ps.style.display == 'none'){$('#ps').css('display','block');}
+	else{$('#ps').css('display','none');}
 	$('#mapadd_nav').css('display','none');
 	$('#longtian_nav').css('display','none');
 	$('#kengzi_nav').css('display','none');

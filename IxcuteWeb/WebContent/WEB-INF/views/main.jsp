@@ -63,31 +63,40 @@
         <div id='show_desk'>
     		<div id='content_map' class='table'>
                 <div class="border-container" style="height:95%">
-                    <div id="mapadd_nav" style="height:95%" class='map'></div>
+                	<div style="height:100%" id='ps'>
+                		<div style="margin-left:25%;font-size:2em"">坪山区地图</div>
+                    	<div id="mapadd_nav" style="height:95%" class='map'></div>	
+                	</div>
 					<div id='longtian_nav'>
 						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
+						<div style="margin-left:25%;font-size:2em"">龙田街道地图</div>
 						<div id='longtian' style='height:400px;'></div>
 					</div>
                     
 					<div id='kengzi_nav'>
 						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
+						<div style='margin-left:25%;font-size:2em'>坑梓街道地图</div>
 						<div id='kengzi' style='height:400px;'></div>
 					</div>
                     
 					<div id='pingshanjiedao_nav'>
 						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
+						<div style='margin-left:25%;font-size:2em'>坪山街道地图</div>
 						<div id='pingshanjiedao' style='height:400px;'></div>
 					</div>
 					<div id='biling_nav'>
 						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
+						<div style='margin-left:25%;font-size:2em'>碧岭街道地图</div>
 						<div id='biling' style='height:400px;'></div>
 					</div>
 					<div id='maluan_nav'>
 						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
+						<div style='margin-left:25%;font-size:2em'>马峦街道地图</div>
 						<div id='maluan' style='height:400px;'></div>
 					</div>
 					<div id='shijing_nav'>
 						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
+						<div style='margin-left:25%;font-size:2em'>石井街道地图</div>
 						<div id='shijing' style='height:400px;'></div>
 					</div>
                 </div>
@@ -125,7 +134,7 @@
                             <td width='10%'>月</td>
                           </tr>
                         </table>
-                        <input type='button' id='bar_button' value='查看' width='50px' height='30px'>
+                        <input type='button' id='bar_button' value='查看' width='50px' height='30px' style='float:left'>
                     	</div>
                     </div>
                     <div id="edubalance" style="height:95%"></div>
