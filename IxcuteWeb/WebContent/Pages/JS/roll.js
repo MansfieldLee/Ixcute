@@ -44,10 +44,10 @@ $(function () {
 			flag = (response[i].事件类型 == 'abnormal')?1:0;
 			if(i<4){
 				if(flag){
-					$('#scroller').append('<li class="abnormal roll_'+(i)+'"><a href="#" class="ellipsis">'+ message +'</a></li>');
+					$('#scroller').append('<li class="abnormal roll_'+(i)+'"><a href="#" class="ellipsis abnormal">'+ message +'</a></li>');
 				}
 				else{
-					$('#scroller').append('<li class="warning roll_'+(i)+'"><a href="#" class="ellipsis">'+ message +'</a></li>');
+					$('#each_warning_event').append('<li class="warning roll_'+(i)+'"><a href="#" class="ellipsis warning">'+ message +'</a></li>');
 				}
 			}
 			else{
@@ -55,7 +55,7 @@ $(function () {
 					$('#scroller').append('<li class="abnormal roll_hide"><a href="#" class="ellipsis">'+ message +'</a></li>');
 				}
 				else{
-					$('#scroller').append('<li class="warning roll_hide"><a href="#" class="ellipsis">'+ message +'</a></li>');
+					$('#each_warning_event').append('<li class="warning roll_hide"><a href="#" class="ellipsis">'+ message +'</a></li>');
 				}
 			}
 			
@@ -64,16 +64,24 @@ $(function () {
 		roll();
 	}
 	roll_issue();
-    var $ul = $('.roll ul');
+    var normal = $('#scroller');
+    var warning = $('#each_warning_event');
     var timeID;
     function roll() {
         clearInterval(timeID);
         timeID = setInterval(function () {
             clearInterval(timeID);
-            $ul.animate({ top: "0px" }, 3000, function () {
-                $ul.find("li:first").removeClass().addClass('roll_hide').appendTo($ul);
+            normal.animate({ top: "0px" }, 3000, function () {
+                normal.find("li:first").removeClass().addClass('roll_hide').appendTo($ul);
                 for(var i=0;i<3;i++){
-                    $ul.find("li").eq(i).removeClass().addClass('roll_'+ (i+1) +'')
+                    normal.find("li").eq(i).removeClass().addClass('roll_'+ (i+1) +'')
+                }
+                roll()
+            })
+            warning.animate({ top: "0px" }, 3000, function () {
+            	warning.find("li:first").removeClass().addClass('roll_hide').appendTo($ul);
+                for(var i=0;i<3;i++){
+                	warning.find("li").eq(i).removeClass().addClass('roll_'+ (i+1) +'')
                 }
                 roll()
             })
