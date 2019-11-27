@@ -19,9 +19,9 @@ $(function () {
 		if (xmlhttp_scroll.readyState==4) {		
 			if(xmlhttp_scroll.status==200){
 				var rec=xmlhttp_scroll.responseText;
-				response_scroll = eval("("+rec+")");
-				//console.log(response_scroll);
-				scroll_callback(response_scroll);
+				all_event = eval("("+rec+")");
+
+				scroll_callback(all_event);
 			}
 			else{
 				alert("连接失败");
@@ -44,18 +44,18 @@ $(function () {
 			flag = (response[i].事件类型 == 'abnormal')?1:0;
 			if(i<4){
 				if(flag){
-					$('#scroller').append('<li class="abnormal roll_'+(i)+'"><a href="#" class="ellipsis abnormal">'+ message +'</a></li>');
+					$('#scroller').append('<li class="abnormal roll_'+(i)+'"><a href="javascripts:finish_event(' + response[i] + ')" class="ellipsis abnormal">'+ message +'</a></li>');
 				}
 				else{
-					$('#each_warning_event').append('<li class="warning roll_'+(i)+'"><a href="#" class="ellipsis warning">'+ message +'</a></li>');
+					$('#each_warning_event').append('<li class="warning roll_'+(i)+'"><a href="javascripts:finish_event(' + response[i] + ')" class="ellipsis warning">'+ message +'</a></li>');
 				}
 			}
 			else{
 				if(flag){
-					$('#scroller').append('<li class="abnormal roll_hide"><a href="#" class="ellipsis">'+ message +'</a></li>');
+					$('#scroller').append('<li class="abnormal roll_hide"><a href="javascripts:finish_event(' + response[i] + ')" class="ellipsis">'+ message +'</a></li>');
 				}
 				else{
-					$('#each_warning_event').append('<li class="warning roll_hide"><a href="#" class="ellipsis">'+ message +'</a></li>');
+					$('#each_warning_event').append('<li class="warning roll_hide"><a href="javascripts:finish_event(' + response[i] + ')" class="ellipsis">'+ message +'</a></li>');
 				}
 			}
 			
@@ -72,14 +72,14 @@ $(function () {
         timeID = setInterval(function () {
             clearInterval(timeID);
             normal.animate({ top: "0px" }, 3000, function () {
-                normal.find("li:first").removeClass().addClass('roll_hide').appendTo($ul);
+                normal.find("li:first").removeClass().addClass('roll_hide').appendTo(normal);
                 for(var i=0;i<3;i++){
                     normal.find("li").eq(i).removeClass().addClass('roll_'+ (i+1) +'')
                 }
                 roll()
             })
             warning.animate({ top: "0px" }, 3000, function () {
-            	warning.find("li:first").removeClass().addClass('roll_hide').appendTo($ul);
+            	warning.find("li:first").removeClass().addClass('roll_hide').appendTo(warning);
                 for(var i=0;i<3;i++){
                 	warning.find("li").eq(i).removeClass().addClass('roll_'+ (i+1) +'')
                 }

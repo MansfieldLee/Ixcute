@@ -16,8 +16,7 @@ $(document).ready(function(){
 	$('#content_bar').hide(0);
 	$('#content_pie').hide(0);
 	$('#content_situation').hide(0);
-//	var date = new Object();
-//	date = get_date();
+	$('#content_eventlist').hide(0);
 	console.log(date);
 	console.log(date.today);
 	var flag = 0;//0 is year,1 is month,2 is day
@@ -42,7 +41,8 @@ $(document).ready(function(){
 	//结束
 	canvas_change();
 }
-	document.getElementById('time_box').onmousewheel = function(){
+
+document.getElementById('time_box').onmousewheel = function(){
 	document.getElementById('time_box').setAttribute('class','box_hided');
 	$('#clock_box2').slideUp(300);
 	$('#clock_box').slideDown(0);
@@ -134,6 +134,110 @@ $(document).ready(function(){
 })
 
 
+//异常事件列表
+	
+	function finish_event(event){
+		var tableStr = "";
+	 	if(event.事件类型)
+	 		event.事件类型 = '';
+    	else
+    		event.事件类型 = '异常'
+      	tableStr += "<tr><td width='10%'>" + event.时间 + "</td>"
+          + "<td width='10%'>" + event.街道 + "</td>"
+          + "<td width='15%'>" + event.社区 + "</td>"
+          + "<td width='10%'>" + event.来源 + "</td>"
+          + "<td width='10%'>" + event.小类名称 + "</td>"
+          + "<td width='10%'>" + event.性质 + "</td>"
+          + "<td width='10%'>" + event.处置部门 + "</td>"
+          + "<td width='10%'>" + event.事件类型 + "</td>"
+          + "<td width='15%'>"
+          + "<button class='btn btn-success' onclick='javascript:finish_one(" + event.id + ")'>标记为已结办</button> "
+          + "</td>" + "</tr>";
+	 	$("#dataTable").html(tableStr);
+	 	
+		$("#pie-button").addClass("menu-button");
+		$("#bar-button").addClass("menu-button");
+		$("#map-button").addClass("menu-button");
+		$("#situation-button").addClass("menu-button");
+		$("#eventlist-button").addClass("menu-button-keep");
+		$("#event_table").show();
+	}
+
+	function event_list_page(){
+//		$.ajax({
+//	        url : "NoDeal",
+//	        type : "POST",
+//	        success : function(data) {
+//	          //调用创建表和填充动态填充数据的方法.
+//	         	all_event = data;
+//	         	event_len = all_event.length;
+//	         	event_point = 0;
+//	      	    createShowingTable(all_event);
+//	      	  },
+//	      	  error : function(){
+//	     	  	alert("出错！！");
+//	      	  }
+//	    });
+		
+		event_len = all_event.length;
+     	event_point = 0;
+     	createShowingTable();
+	}
+
+	var all_event;
+	var event_len;
+	var event_point = 0;
+	function createShowingTable(){
+		var tableStr = "";
+
+	    for (var i = 0; i < 10 && event_point < event_len; i++, event_point++) {
+	    	if(all_event[event_point].事件类型 != 'abnormal')
+	    		all_event[event_point].事件类型 = '';
+	    	else
+	    		all_event[event_point].事件类型 = '异常'
+	      	tableStr += "<tr><td width='10%'>" + all_event[event_point].时间 + "</td>"
+	          + "<td width='10%'>" + all_event[event_point].街道 + "</td>"
+	          + "<td width='15%'>" + all_event[event_point].社区 + "</td>"
+	          + "<td width='15%'>" + all_event[event_point].来源 + "</td>"
+	          + "<td width='15%'>" + all_event[event_point].小类名称 + "</td>"
+	          + "<td width='5%'>" + all_event[event_point].性质 + "</td>"
+	          + "<td width='10%'>" + all_event[event_point].处置部门 + "</td>"
+	          + "<td width='10%'>" + all_event[event_point].事件类型 + "</td>"
+	          + "<td width='10%'>"
+	          + "<button class='btn btn-success' onclick='javascript:finish_one(" + all_event[event_point].id + ")'>标记为已结办</button> "
+	          + "</td>" + "</tr>";
+	    }
+	    event_point--;
+	    $("#dataTable").html(tableStr);
+	}
+	
+	function previous_page(){
+		if(parseInt(event_point / 10) === 0){
+			alert("已经是最前面了哦");
+		}
+		else{
+			user_point -= ( 10 + parseInt(event_point % 10) );
+			createShowingTable(all_event);
+		}
+	}
+	
+	function next_page(){
+		if(parseInt(event_point / 10) == parseInt(event_len / 10)){
+			alert("已经是最后面了哦");
+		}
+		else{
+			event_point += ( 10 - (event_point % 10) ); 
+			createShowingTable(all_event);
+		}
+	}
+
+	
+	function finish_one(event_id){
+		
+	}
+
+
+
 
 //控制街道选择块儿
 $('#selected_street').change(
@@ -153,7 +257,6 @@ $('#street').mouseout(
 
 function show_map(showed){
 	var ps = document.getElementById('ps');
-	console.log(ps.style.display);
 	if(ps.style.display == 'none'){$('#ps').css('display','block');}
 	else{$('#ps').css('display','none');}
 	$('#mapadd_nav').css('display','none');
@@ -185,10 +288,13 @@ function canvas_change(){
 		$("#bar-button").removeClass("menu-button-keep");
 		$("#map-button").removeClass("menu-button-keep");
 		$("#situation-button").removeClass("menu-button-keep");
+		$("#eventlist-button").removeClass("menu-button-keep");
 		$("#pie-button").removeClass("menu-button");
 		$("#bar-button").removeClass("menu-button");
 		$("#map-button").removeClass("menu-button");
 		$("#situation-button").removeClass("menu-button");
+		$("#eventlist-button").removeClass("menu-button");
+		
 		
 		
 		if(bid==1){
@@ -196,6 +302,7 @@ function canvas_change(){
 			$("#bar-button").addClass("menu-button");
 			$("#map-button").addClass("menu-button");
 			$("#situation-button").addClass("menu-button");
+			$("#eventlist-button").addClass("menu-button");
 			time_issue2();
 		}
 		else if(bid==2){
@@ -203,6 +310,7 @@ function canvas_change(){
 			$("#bar-button").addClass("menu-button-keep");
 			$("#map-button").addClass("menu-button");
 			$("#situation-button").addClass("menu-button");
+			$("#eventlist-button").addClass("menu-button");
 			var edubalance = echarts.init(document.getElementById('edubalance'));
 			edubalance.clear();
 			bar_option.series = [];
@@ -216,12 +324,23 @@ function canvas_change(){
 			$("#bar-button").addClass("menu-button");
 			$("#map-button").addClass("menu-button-keep");
 			$("#situation-button").addClass("menu-button");
+			$("#eventlist-button").addClass("menu-button");
+		}
+		else if(bid == 5){
+			$("#pie-button").addClass("menu-button");
+			$("#bar-button").addClass("menu-button");
+			$("#map-button").addClass("menu-button");
+			$("#situation-button").addClass("menu-button");
+			$("#eventlist-button").addClass("menu-button-keep");
+			$("#event_table").show();
+			event_list_page();
 		}
 		else{
 			$("#pie-button").addClass("menu-button");
 			$("#bar-button").addClass("menu-button");
 			$("#map-button").addClass("menu-button");
 			$("#situation-button").addClass("menu-button-keep");
+			$("#eventlist-button").addClass("menu-button");
 		}
 	}
 //$(function() {

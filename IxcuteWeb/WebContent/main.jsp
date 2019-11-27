@@ -10,6 +10,9 @@
 <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
 <link rel="stylesheet" type="text/css" href="Pages/CSS/bootsnav.css">
 <link rel='stylesheet' type='text/css' href='Pages/CSS/main.css'>
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="Pages/CSS/roll.css">
 <link rel="stylesheet" type="text/css" href="Pages/CSS/jedate.css"/>
     <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
@@ -44,11 +47,12 @@
             <div><button class="menu-button" id="pie-button" onclick='javascript:myshow("pie","1")'><span class="glyphicon glyphicon-stats"></span> &nbsp; 问题性质汇总</button></div>
             <div><button class="menu-button" id="bar-button" onclick='javascript:myshow("bar","2")'><span class="glyphicon glyphicon-stats"></span> &nbsp; 各街道问题情况</button></div>
          	<div><button class="menu-button" id="situation-button" onclick='javascript:myshow("situation","4")'><span class="glyphicon glyphicon-stats"></span> &nbsp; 事件结办情况</button></div>
+       		<div><button class="menu-button" id="eventlist-button" onclick='javascript:myshow("eventlist","5")'><span class="glyphicon glyphicon-stats"></span> &nbsp; 事件列表</button></div>
        </div>
      
-     	<div class="warning-news-scroll" id='warning_event'>
+     	<div class="news-scroll" id='warning_event'>
 
-		    <div  class="warning-scroll-box">
+		    <div  class="scroll-box">
 		        <!--异常-->
 		        <div class="roll">
 		            <ul id='each_warning_event'>
@@ -111,6 +115,7 @@
 					</div>
                 </div>
             </div>
+            
             <div id='content_bar' class="main clearfix table">
                 <div class="border-container" style="height:95%">
                     <div>
@@ -152,8 +157,7 @@
                     <div id="edubalance" style="height:95%"></div>
                 </div>
             </div>
-            
-            
+           
             <div id='content_pie' class="main teacher-pie clearfix table">
             	<div class='border-container' style="height:13%">
             		
@@ -173,7 +177,7 @@
                     </div>
             </div>
             
-            <div id='content_situation' class="main table" style="height:95%">
+            <div id='content_situation' class="main teacher-pie clearfix table table" style="height:95%">
             	<table border="0">
                           <tr>	
                             <td width='20%'>
@@ -221,6 +225,28 @@
                   <div id="situation2" style="height:500px;width:500px;float:left;" ></div>
             </div>
             
+            <div id='content_eventlist' class='table'>
+            	<div style="text-align:center;font-size:2em">未结办和异常事件列表</div>
+		        	<table id="event_table" class="table table-striped table-condensed">
+		        		<thead>
+		        			<tr>
+		        				<th width="10%" text-align='center'>时间</th>
+		        				<th width="10%" text-align='center'>街道</th>
+		        				<th width="15%" text-align='center'>社区</th>
+		        				<th width="10%" text-align='center'>来源</th>
+		        				<th width="10%" text-align='center'>小类名称</th>
+		        				<th width="10%" text-align='center'>性质</th>
+		        				<th width="10%" text-align='center'>处置部门</th>
+		        				<th width="10%" text-align='center'>优先级</th>
+		        			</tr>
+		        		</thead>
+		        		<tbody id="dataTable"></tbody>
+		        	</table>
+		        	<ul class="pager">
+						<li class="previous"><a href="javascript:previous_page()">&larr; 上一页</a></li>
+						<li class="next"><a href="javascript:next_page()">下一页 &rarr;</a></li>
+					</ul>
+            </div>
             
         </div>
     </div>
