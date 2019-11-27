@@ -36,7 +36,9 @@ $(function () {
 	    var warning = $('#each_warning_event');
 	    var normal_count=0;
 	    var warning_count=0;
+	    event_len = 0;
 		for(i in response){
+			
 			message = response[i].时间.split('.')[0] ;
 			message += response[i].街道 + '的'; 
 			message += response[i].社区 + '从' ;
@@ -51,38 +53,23 @@ $(function () {
 				normal_count++;
 				//console.log(normal_count);
 				if(normal_count<4){
-					normal.append('<li class="roll_'+(normal_count)+'"><a href="javascripts:finish_event(' + response[i] + ')" class="ellipsis abnormal">'+ message +'</a></li>');
+					normal.append('<li class="roll_'+(normal_count)+'"><a href="javascript:finish_event(' + event_len + ');" class="ellipsis abnormal">'+ message +'</a></li>');
 				}
 				else{
-					normal.append('<li class="roll_hide"><a href="javascripts:finish_event(' + response[i] + ')" class="ellipsis abnormal">'+ message +'</a></li>');
+					normal.append('<li class="roll_hide"><a href="javascript:finish_event(' + event_len + ');" class="ellipsis abnormal">'+ message +'</a></li>');
 				}
 			}
 			else{
 				warning_count++;
 				//console.log(warning_count);
 				if(warning_count<4){
-					warning.append('<li class="roll_'+(warning_count)+'"><a href=href="javascripts:finish_event(' + response[i] + ')" class="ellipsis abnormal">'+ message +'</a></li>');
+					warning.append('<li class="roll_'+(warning_count)+'"><a href="javascript:finish_event(' + event_len + ');" class="ellipsis abnormal">'+ message +'</a></li>');
 				}
 				else{
-					warning.append('<li class="roll_hide"><a href=href="javascripts:finish_event(' + response[i] + ')" class="ellipsis abnormal">'+ message +'</a></li>');
+					warning.append('<li class="roll_hide"><a href="javascript:finish_event(' + event_len + ');" class="ellipsis abnormal">'+ message +'</a></li>');
 				}
 			}
-//			if(i<4){
-//				if(flag){
-//					normal.append('<li class="roll_'+(i)+'"><a href="#" class="ellipsis abnormal">'+ message +'</a></li>');
-//				}
-//				else{
-//					warning.append('<li class="roll_'+(i)+'"><a href="#" class="ellipsis abnormal">'+ message +'</a></li>');
-//				}
-//			}
-//			else{
-//				if(flag){
-//					normal.append('<li class="roll_hide"><a href="#" class="ellipsis abnormal">'+ message +'</a></li>');
-//				}
-//				else{
-//					warning.append('<li class="roll_hide"><a href="#" class="ellipsis abnormal">'+ message +'</a></li>');
-//				}
-//			}
+			event_len++;
 			
 		}
 		roll2();

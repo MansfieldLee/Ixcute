@@ -24,6 +24,9 @@
 	<script src='Pages/JS/biling.js'></script>
 	<script src='Pages/JS/maluan.js'></script>
 	<script src='Pages/JS/shijing.js'></script>
+	<script src='Pages/JS/main.js' type='text/javascript' ></script>
+    <script src='Pages/JS/jedate.min.js'></script>
+    <script src="Pages/JS/roll.js" type='text/javascript'></script>
 	
 </head>
 
@@ -251,11 +254,10 @@
             
         </div>
     </div>
-    <script src='Pages/JS/main.js' type='text/javascript' ></script>
-    <script src='Pages/JS/jedate.min.js'></script>
-    <script src="Pages/JS/roll.js"></script>
+    
     
 </body>
+	
 	<script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
 	<script type="text/javascript" src="Pages/JS/bootsnav.js"></script>
 </html>
