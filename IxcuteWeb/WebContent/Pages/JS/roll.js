@@ -32,6 +32,10 @@ $(function () {
 		var message='';
 		var i;
 		var flag;
+		var normal = $('#scroller');
+	    var warning = $('#each_warning_event');
+	    var normal_count=0;
+	    var warning_count=0;
 		for(i in response){
 			message = response[i].时间.split('.')[0] ;
 			message += response[i].街道 + '的'; 
@@ -42,50 +46,81 @@ $(function () {
 			message += response[i].处置部门 + '尽快前往处理';
 			//console.log(message);
 			flag = (response[i].事件类型 == 'abnormal')?1:0;
-			if(i<4){
-				if(flag){
-					$('#scroller').append('<li class="abnormal roll_'+(i)+'"><a href="javascripts:finish_event(' + response[i] + ')" class="ellipsis abnormal">'+ message +'</a></li>');
+
+			if(flag){
+				normal_count++;
+				//console.log(normal_count);
+				if(normal_count<4){
+					normal.append('<li class="roll_'+(normal_count)+'"><a href="javascripts:finish_event(' + response[i] + ')" class="ellipsis abnormal">'+ message +'</a></li>');
 				}
 				else{
-					$('#each_warning_event').append('<li class="warning roll_'+(i)+'"><a href="javascripts:finish_event(' + response[i] + ')" class="ellipsis warning">'+ message +'</a></li>');
+					normal.append('<li class="roll_hide"><a href="javascripts:finish_event(' + response[i] + ')" class="ellipsis abnormal">'+ message +'</a></li>');
 				}
 			}
 			else{
-				if(flag){
-					$('#scroller').append('<li class="abnormal roll_hide"><a href="javascripts:finish_event(' + response[i] + ')" class="ellipsis">'+ message +'</a></li>');
+				warning_count++;
+				//console.log(warning_count);
+				if(warning_count<4){
+					warning.append('<li class="roll_'+(warning_count)+'"><a href=href="javascripts:finish_event(' + response[i] + ')" class="ellipsis abnormal">'+ message +'</a></li>');
 				}
 				else{
-					$('#each_warning_event').append('<li class="warning roll_hide"><a href="javascripts:finish_event(' + response[i] + ')" class="ellipsis">'+ message +'</a></li>');
+					warning.append('<li class="roll_hide"><a href=href="javascripts:finish_event(' + response[i] + ')" class="ellipsis abnormal">'+ message +'</a></li>');
 				}
 			}
+//			if(i<4){
+//				if(flag){
+//					normal.append('<li class="roll_'+(i)+'"><a href="#" class="ellipsis abnormal">'+ message +'</a></li>');
+//				}
+//				else{
+//					warning.append('<li class="roll_'+(i)+'"><a href="#" class="ellipsis abnormal">'+ message +'</a></li>');
+//				}
+//			}
+//			else{
+//				if(flag){
+//					normal.append('<li class="roll_hide"><a href="#" class="ellipsis abnormal">'+ message +'</a></li>');
+//				}
+//				else{
+//					warning.append('<li class="roll_hide"><a href="#" class="ellipsis abnormal">'+ message +'</a></li>');
+//				}
+//			}
 			
 		}
+		roll2();
+		roll1();
 		
-		roll();
 	}
-	roll_issue();
-    var normal = $('#scroller');
+	var normal = $('#scroller');
+    
     var warning = $('#each_warning_event');
+   
+	roll_issue();
+    
     var timeID;
-    function roll() {
+    var timeID2;
+    function roll1() {
         clearInterval(timeID);
         timeID = setInterval(function () {
             clearInterval(timeID);
             normal.animate({ top: "0px" }, 3000, function () {
                 normal.find("li:first").removeClass().addClass('roll_hide').appendTo(normal);
                 for(var i=0;i<3;i++){
-                    normal.find("li").eq(i).removeClass().addClass('roll_'+ (i+1) +'')
+                    normal.find("li").eq(i).removeClass().addClass('roll_'+ (i+1))
                 }
-                roll()
+                roll1();
             })
+        }, 2000);
+    }
+    function roll2() {
+    	clearInterval(timeID2);
+        timeID2 = setInterval(function () {
+        	clearInterval(timeID2);
             warning.animate({ top: "0px" }, 3000, function () {
             	warning.find("li:first").removeClass().addClass('roll_hide').appendTo(warning);
                 for(var i=0;i<3;i++){
-                	warning.find("li").eq(i).removeClass().addClass('roll_'+ (i+1) +'')
+                	warning.find("li").eq(i).removeClass().addClass('roll_'+ (i+1))
                 }
-                roll()
+                roll2();
             })
-        }, 3000);
+        }, 2000);
     }
-	roll()
 })

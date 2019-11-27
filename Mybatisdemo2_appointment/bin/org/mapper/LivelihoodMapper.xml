@@ -36,7 +36,7 @@
 	</select>
 	
 	<select id="EveProBetween1" parameterType="HashMap" resultType="HashMap">
-		select count(*) "count",nvl(EVENT_PROPERTY_NAME,'notknown') event_property from livelihood_data where to_char(create_time,'yyyy-mm-dd') between #{begin_time} and #{end_time} group by EVENT_PROPERTY_NAME
+		select count(*) "count",nvl(EVENT_PROPERTY_NAME,'notknown') event_property from livelihood_data where to_char(create_time,'yyyy-mm-dd ') between #{begin_time} and #{end_time} group by EVENT_PROPERTY_NAME
 	</select>
 
 	<select id="StreetBymon" parameterType="HashMap" resultType="HashMap">

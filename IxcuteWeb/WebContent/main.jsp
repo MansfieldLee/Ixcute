@@ -48,11 +48,12 @@
             <div><button class="menu-button" id="bar-button" onclick='javascript:myshow("bar","2")'><span class="glyphicon glyphicon-stats"></span> &nbsp; 各街道问题情况</button></div>
          	<div><button class="menu-button" id="situation-button" onclick='javascript:myshow("situation","4")'><span class="glyphicon glyphicon-stats"></span> &nbsp; 事件结办情况</button></div>
        		<div><button class="menu-button" id="eventlist-button" onclick='javascript:myshow("eventlist","5")'><span class="glyphicon glyphicon-stats"></span> &nbsp; 事件列表</button></div>
+       		<a href="loginOut"><button class="menu-button"><span class="glyphicon glyphicon-stats"></span> &nbsp; 退出</button></a>
        </div>
      
      	<div class="news-scroll" id='warning_event'>
 
-		    <div  class="scroll-box">
+		    <div  class="scroll-box" style="background-color:red">
 		        <!--异常-->
 		        <div class="roll">
 		            <ul id='each_warning_event'>

@@ -70,6 +70,7 @@ public class LoginController {
 		res.addCookie(cookie);
 		req.getSession().removeAttribute("username");
 		req.getSession().removeAttribute("password");
+		System.out.println("OK");
 		return "redirect:index.jsp";
 	}
 	
@@ -132,7 +133,7 @@ public class LoginController {
 	public int changeUser(@RequestParam("old_name") String old_name,@RequestParam("new_name") String new_name,
 			@RequestParam("upwd") String pwd,
 			HttpServletRequest request,HttpServletResponse response) throws IOException {
-		
+		System.out.println(old_name + "-" + new_name + "-"+ pwd);
 		User user_res = loginService.selectloginbyname(old_name);
 		System.out.println(user_res);
 		user.setUsername(new_name);

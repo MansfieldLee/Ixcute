@@ -3,8 +3,10 @@ package org.hit.service.Impl;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.hit.entity.Livelihood_data;
 import org.hit.mapper.LivelihoodMapper;
@@ -62,112 +64,82 @@ public class LivelihoodService implements ILivelihoodService {
 
 	//problem properties
 	public Map<String,Integer> queryDataPropertiesByDate(Map map) {
-		List<Livelihood_data> list = livelihoodMapper.TimeBetween(map);
+		
 		result.clear();
-		String properties = "";
 		result = InitProperties();
-		for(Livelihood_data data:list) {
-			System.out.println(data);
-			System.out.println(data.getCreate_time());
-			properties = data.getEvent_property_name();
-			if(result.containsKey(properties)) {
-				result.put(properties,result.get(properties) + 1);
-			}else if(properties==null) {
-				System.out.println("找到空字符串"+data);
-			}
-			else {
-				result.put(properties, 1);
-			}
+		for(HashMap<String, Object> properties:livelihoodMapper.EveProBetween1(map)) {
+			String name = (String) properties.get("EVENT_PROPERTY");
+			if(name.equals("notknown"))continue;
+			String count = properties.get("count").toString();
+			int num = Integer.parseInt(count);
+			result.put(name,num);
+		}
+		return result;
+	}
+	//problem properties today
+	public Map<String,Integer> queryDataPropertieToday(Map map) {
+		result.clear();
+		result = InitProperties();
+		for(HashMap<String, Object> properties:livelihoodMapper.EveProBetween2(map)) {
+			System.out.println(properties);
+			String name = (String) properties.get("EVENT_PROPERTY");
+			if(name.equals("notknown"))continue;
+			String count = properties.get("count").toString();
+			int num = Integer.parseInt(count);
+			result.put(name,num);
 		}
 		return result;
 	}
 
 	//streetByMonth
 	public Map<String, Map<String, Integer>> queryStreetDataByMonth(String month) {
-		List<Livelihood_data> list = livelihoodMapper.SelectBymon(month);
-		ans.clear();
+		Map<String,String> input = new HashMap<String, String>();
+		if(Integer.parseInt(month)<10) {
+			month = "0"+month;
+		}
 		InitStreet();
-		Map<String,Integer> map;
-		String streetName = "";
-		String main_type_name = "";
-		for(Livelihood_data data:list) {
-			System.out.println(data);
-			streetName = data.getStreet_name();
-			if(streetName==null)continue;
-			if(!ans.containsKey(streetName)) {
-				map = new HashMap<String, Integer>();
-				main_type_name = data.getMain_type_name();
-				if(main_type_name!=null) {
-				map.put(main_type_name, 1);
-				}
-				ans.put(streetName, map);
-				
-			}else
-			{
-				main_type_name = data.getMain_type_name();
-				if(streetName!=null) {
-					if(ans.containsKey(streetName)) {
-						map = ans.get(streetName);
-						
-					    //exist type name;
-						if(map.containsKey(main_type_name)) {
-							map.put(main_type_name, map.get(main_type_name)+1);
-						}else if(main_type_name!=null){//not exist
-							map.put(main_type_name, 1);
-						}
-					}else {
-						map = new HashMap<String, Integer>();
-						ans.put(streetName, map);
-						
-					}
-				}
+		input.put("month", month);
+		List<HashMap<String, Object>> list = null;
+		Set<String> keySet = ans.keySet();
+		for(Iterator<String> it = keySet.iterator();it.hasNext();) {
+			String streetName = it.next();
+			input.put("street", streetName);
+			list = livelihoodMapper.StreetBymon(input);
+			System.out.println(list);
+			Map<String,Integer> second = ans.get(streetName);
+		for(HashMap<String, Object> out:list) {
+			String main_type_name = (String) out.get("SUB_TYPE_NAME");
+			if(main_type_name.equals("notknown"))continue;
+			String count = out.get("count").toString();
+			int num = Integer.parseInt(count);
+			second.put(main_type_name, num);
 			}
-			
 		}
 		return ans;
 	}
 	
 	//streetToday
 	public Map<String, Map<String, Integer>> queryStreetDataToday(Map today) {
-		List<Livelihood_data> list = livelihoodMapper.TimeBetween(today);
-		ans.clear();
+		Map<String,String> input = new HashMap<String, String>();
+		
 		InitStreet();
-		Map<String,Integer> map;
-		String streetName = "";
-		String main_type_name = "";
-		for(Livelihood_data data:list) {
-			System.out.println(data);
-			streetName = data.getStreet_name();
-			if(streetName==null)continue;
-			if(!ans.containsKey(streetName)) {
-				map = new HashMap<String, Integer>();
-				main_type_name = data.getMain_type_name();
-				if(main_type_name!=null) {
-				map.put(main_type_name, 1);
-				}
-				ans.put(streetName, map);
-				
-			}else
-			{
-				main_type_name = data.getMain_type_name();
-				if(streetName!=null) {
-					if(ans.containsKey(streetName)) {
-						map = ans.get(streetName);
-						
-					    //exist type name;
-						if(map.containsKey(main_type_name)) {
-							map.put(main_type_name, map.get(main_type_name)+1);
-						}else if(main_type_name!=null){//not exist
-							map.put(main_type_name, 1);
-						}
-					}else {
-						map = new HashMap<String, Integer>();
-						ans.put(streetName, map);
-						
-					}
-				}
+		input.put("begin_time", (String) today.get("begin_time"));
+		input.put("end_time", (String) today.get("end_time"));
+		List<HashMap<String, Object>> list = null;
+		Set<String> keySet = ans.keySet();
+		for(Iterator<String> it = keySet.iterator();it.hasNext();) {
+			String streetName = it.next();
+			input.put("street", streetName);
+			list = livelihoodMapper.Streettoday((HashMap<String, String>) input);
+			System.out.println(list);
+			Map<String,Integer> second = ans.get(streetName);
+		for(HashMap<String, Object> out:list) {
+			String main_type_name = (String) out.get("SUB_TYPE_NAME");
+			if(main_type_name.equals("notknown"))continue;
+			String count = out.get("count").toString();
+			int num = Integer.parseInt(count);
+			second.put(main_type_name, num);
 			}
-			
 		}
 		return ans;
 	}
@@ -454,6 +426,9 @@ public class LivelihoodService implements ILivelihoodService {
 			if(data.getEvent_type_name().matches("(.*)违法(.*)")) {
 				option = 1;
 			}
+			if(data.getMain_type_name().matches("(.*)违法(.*)")) {
+				option = 1;
+			}
 			if(data.getSub_type_name().matches("(.*)色情(.*)")) {
 				option = 1;
 			}
@@ -461,7 +436,6 @@ public class LivelihoodService implements ILivelihoodService {
 			count++;
 			}
 		}
-		
 		return specialEvent;
 	}
 	

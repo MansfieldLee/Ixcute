@@ -98,16 +98,9 @@
 
                     </form>
                 </div>
-                <div>
-                	<p><a href='../Reg/reg.html'><span id='reg'>马上注册</span></a><a href='#'><span id='forget'> 忘记密码？</span></a></p>
-                </div>
             </div>
         </div>
         <div id='footer'>
-        	<p>
-            <a href='#'>意见反馈</a>&nbsp;|&nbsp;<a href='#'>联系我们</a>&nbsp;|&nbsp;<a href='#'>民事活动</a>&nbsp;|&nbsp;
-            <a href='#'>政府决策</a>&nbsp;|&nbsp;<a href='#'>两会在线了解</a>
-            </p>
             <p>Copyright &copy; 2019 Ixcute.All Rights Reserved.</p>
             <p>Version 1.0 &reg;2019.9.17</p>
         </div>
