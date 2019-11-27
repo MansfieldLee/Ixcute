@@ -26,8 +26,8 @@ public class LivelihoodController {
 			@RequestParam("year") String endYear,@RequestParam("month") String endMonth,@RequestParam("day") String endDay) {
 		
 		Map<String,String> map = new HashMap<String, String>();
-		String begin_time  = getTime(beginYear,beginMonth,beginDay);
-		String end_time = getTime(endYear,endMonth,endDay);
+		String begin_time  = beginYear+"-"+beginMonth+"-"+beginDay;
+		String end_time = endYear+"-"+endMonth+"-"+endDay;
 		//String end_time = "2018-12.30";
 		System.out.println("begin_time:"+begin_time);
 		System.out.println("end_time"+end_time);

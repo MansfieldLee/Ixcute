@@ -27,8 +27,6 @@ public class AuthorizedInterceptor implements HandlerInterceptor{
     	Cookie[] cookies = request.getCookies();
 		String uri = request.getRequestURI();
 		PrintWriter out = null;
-		System.out.println("uri:"+uri);
-		System.out.println(request.getParameter("user") + "-" +request.getParameter("psd") + "-"+request.getParameter("checkcode"));
 		if(uri.equals("/IxcuteWeb/LoginServlet"))
 		{
 			return true;

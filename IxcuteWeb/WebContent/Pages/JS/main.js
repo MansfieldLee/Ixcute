@@ -112,7 +112,6 @@ $(document).ready(function(){
                     riNum=saliDate[2]-1;
                 }
             }
-            $("#endTime").val(nianNum+"-"+yueNum+"-"+riNum)
             // console.log(nianNum,yueNum,riNum)
         }
     });
@@ -352,6 +351,7 @@ function canvas_change(){
 				console.log(dataType);
 				var colors = 0x24f213;
 				for(var i=0;i<dataType.length;i++){
+					console.log(dataType[i],sery);
 					colors += 0x234567;
 					colors = colors & 0xffffff;
 					var temp = dataType[i]
@@ -504,7 +504,7 @@ function canvas_change(){
 		//console.log(sery);
 	    var edubalance = echarts.init(document.getElementById('edubalance'));
 		bar_option_month.series.push(sery);
-		if(bar_option_month.legend.data.length<25){
+		if(bar_option_month.legend.data.length<20){
 			bar_option_month.legend.data.push(dataType);
 		}
 		edubalance.setOption(bar_option_month);
@@ -534,6 +534,21 @@ function canvas_change(){
 		var year = endTime[0];
 		var month = endTime[1];
 		var day = endTime[2];
+		if(year1 > year){
+			alert("时间选择错误");
+			return;
+		} else if(year1 == year){
+			if(month1 > month){
+				alert("时间选择错误");
+				return;
+			}
+			else if(month1 == month){
+				if(day1 > day){
+					alert("时间选择错误");
+					return;
+				}
+			}
+		}
 		console.log(year,month,day,year1,month1,day1);
 		if (window.XMLHttpRequest) {xmlhttp_time=new XMLHttpRequest();}
 		
