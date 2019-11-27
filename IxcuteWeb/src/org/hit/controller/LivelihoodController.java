@@ -51,7 +51,7 @@ public class LivelihoodController {
 		System.out.println("end_time"+end_time);
 		map.put("begin_time",begin_time);
 		map.put("end_time",end_time);
-		Map<String, Integer> result = livelihoodService.queryDataPropertiesByDate(map);
+		Map<String, Integer> result = livelihoodService.queryDataPropertieToday(map);
 		System.out.println("\n");
 		System.out.println(result);
 		return result;
