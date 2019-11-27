@@ -166,6 +166,12 @@
 			return;
 		}
 		
+		var zh_test = /[\u4e00-\u9fa5]/g;
+		if(zh_test.test(name) || zh_test.test(pwd)){
+			alert("用户名和密码不能有中文");
+			return;
+		}
+		
 		$.ajax({
 		    url:"registerServlet",     //请求后台的地址
 		    type:"post",    //请求方式

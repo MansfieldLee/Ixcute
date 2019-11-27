@@ -46,13 +46,23 @@
          	<div><button class="menu-button" id="situation-button" onclick='javascript:myshow("situation","4")'><span class="glyphicon glyphicon-stats"></span> &nbsp; 事件结办情况</button></div>
        </div>
      
+     	<div class="warning-news-scroll" id='warning_event'>
+
+		    <div  class="warning-scroll-box">
+		        <!--异常-->
+		        <div class="roll">
+		            <ul id='each_warning_event'>
+		            </ul>
+		        </div>
+		    </div>
+		</div>
+     
      	<div class="news-scroll" id='sc'>
 
 		    <div  class="scroll-box">
-		        <!--滚动的新闻-->
+		        <!--未结办-->
 		        <div class="roll">
 		            <ul id='scroller'>
-		                
 		            </ul>
 		        </div>
 		    </div>
@@ -64,39 +74,39 @@
     		<div id='content_map' class='table'>
                 <div class="border-container" style="height:95%">
                 	<div style="height:100%" id='ps'>
-                		<div style="margin-left:25%;font-size:2em"">坪山区热点地区</div>
+                		<div style="text-align:center;font-size:2em">坪山区热点地区</div>
                     	<div id="mapadd_nav" style="height:95%" class='map'></div>	
                 	</div>
 					<div id='longtian_nav'>
 						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
-						<div style="margin-left:25%;font-size:2em"">龙田街道</div>
+						<div style="text-align:center;font-size:2em"">龙田街道</div>
 						<div id='longtian' style='height:400px;'></div>
 					</div>
                     
 					<div id='kengzi_nav'>
 						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
-						<div style='margin-left:25%;font-size:2em'>坑梓街道</div>
+						<div style='text-align:center;font-size:2em'>坑梓街道</div>
 						<div id='kengzi' style='height:400px;'></div>
 					</div>
                     
 					<div id='pingshanjiedao_nav'>
 						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
-						<div style='margin-left:25%;font-size:2em'>坪山街道</div>
+						<div style='text-align:center;font-size:2em'>坪山街道</div>
 						<div id='pingshanjiedao' style='height:400px;'></div>
 					</div>
 					<div id='biling_nav'>
 						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
-						<div style='margin-left:25%;font-size:2em'>碧岭街道</div>
+						<div style='text-align:center;font-size:2em'>碧岭街道</div>
 						<div id='biling' style='height:400px;'></div>
 					</div>
 					<div id='maluan_nav'>
 						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
-						<div style='margin-left:25%;font-size:2em'>马峦街道</div>
+						<div style='text-align:center;font-size:2em'>马峦街道</div>
 						<div id='maluan' style='height:400px;'></div>
 					</div>
 					<div id='shijing_nav'>
 						<a href='javascript:show_map("mapadd")'class='map'>&lt;-返回</a>
-						<div style='margin-left:25%;font-size:2em'>石井街道</div>
+						<div style='text-align:center;font-size:2em'>石井街道</div>
 						<div id='shijing' style='height:400px;'></div>
 					</div>
                 </div>
