@@ -172,7 +172,6 @@ document.getElementById('time_box').onmousewheel = function(){
 	function createShowingTable(){
 		var tableStr = "";
 		var excp = '';
-		console.log(all_event);
 	    for (var i = 0; i < 10 && event_point < event_len; i++, event_point++) {
 	    	var NO = event_point;
 	    	if(all_event[NO].事件类型 != 'abnormal')
@@ -383,6 +382,7 @@ function canvas_change(){
 				}
 				console.log(dataType);
 				var colors = 0x24f213;
+				var series = [];
 				for(var i=0;i<dataType.length;i++){
 					colors += 0x234567;
 					colors = colors & 0xffffff;
@@ -413,9 +413,10 @@ function canvas_change(){
 							
 					};
 					//console.log(dataType[i],sery);
-					paint_bar(dataType[i],sery);
+					series.push(sery);
 					//console.log(i);
 				}
+				paint_bar(dataType,series);
 			}
 			else{
 				alert("连接失败");
@@ -454,6 +455,8 @@ function canvas_change(){
 				}
 				console.log(dataType);
 				var colors = 0x24f213;
+				var series = [];
+				var dataType_20 = [];
 				for(var i=0;i<dataType.length;i++){
 					console.log(dataType[i],sery);
 					colors += 0x234567;
@@ -485,9 +488,13 @@ function canvas_change(){
 							
 					};
 					//console.log(dataType[i],sery);
-					paint_bar_month(dataType[i],sery);
+					series.push(sery);
+					if(dataType_20.length<=20){
+						dataType_20.push(dataType[i]);
+					}
 					//console.log(i);
 				}
+				paint_bar_month(dataType_20,series);
 			}
 			else{
 				alert("连接失败");
@@ -604,20 +611,18 @@ function canvas_change(){
 	        color:"yellow",
 	        series: []
 	    };
-	function paint_bar_month(dataType,sery){
+	function paint_bar_month(dataType_20,series){
 		//console.log(sery);
 	    var edubalance = echarts.init(document.getElementById('edubalance'));
-		bar_option_month.series.push(sery);
-		if(bar_option_month.legend.data.length<20){
-			bar_option_month.legend.data.push(dataType);
-		}
+		bar_option_month.series = series;
+		bar_option_month.legend.data = dataType_20
 		edubalance.setOption(bar_option_month);
 	}
-	function paint_bar(dataType,sery){
+	function paint_bar(dataType,series){
 		//console.log(sery);
 	    var edubalance = echarts.init(document.getElementById('edubalance'));
-		bar_option.series.push(sery);
-		bar_option.legend.data.push(dataType);
+		bar_option.series = series;
+		bar_option.legend.data = dataType;
 		edubalance.setOption(bar_option);
 	}
 
