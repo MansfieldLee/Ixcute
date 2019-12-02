@@ -135,12 +135,12 @@ document.getElementById('time_box').onmousewheel = function(){
 
 //异常事件列表
 	
-	function finish_event(event){
+	function finish_event(id){
 		var tableStr = "";
-	 	if(event.事件类型)
-	 		event.事件类型 = '普通';
-    	else
-    		event.事件类型 = '异常'
+		var excp = '';
+		event = all_event[id];
+	 	if(event.事件类型 != 'abnormal')
+    		excp = '异常';
       	tableStr += "<tr><td width='10%'>" + event.时间 + "</td>"
           + "<td width='10%'>" + event.街道 + "</td>"
           + "<td width='15%'>" + event.社区 + "</td>"
@@ -148,48 +148,46 @@ document.getElementById('time_box').onmousewheel = function(){
           + "<td width='10%'>" + event.小类名称 + "</td>"
           + "<td width='10%'>" + event.性质 + "</td>"
           + "<td width='10%'>" + event.处置部门 + "</td>"
-          + "<td width='10%'>" + event.事件类型 + "</td>"
-          + "<td width='15%'>"
-          + "<button class='btn btn-success' onclick='javascript:finish_one(" + event.id + ")'>标记为已结办</button> "
-          + "</td>" + "</tr>";
+          + "<td width='10%'>" + excp + "</td>"
+          + "<td width='15%'>"+ "</td>" + "</tr>";
+          //+ "<button class='btn btn-success' onclick='javascript:finish_one(" + event.id + ")'>标记为已结办</button> "
+          
 	 	$("#dataTable").html(tableStr);
 	 	
-		$("#pie-button").addClass("menu-button");
-		$("#bar-button").addClass("menu-button");
-		$("#map-button").addClass("menu-button");
-		$("#situation-button").addClass("menu-button");
-		$("#eventlist-button").addClass("menu-button-keep");
+		$('.table').hide();
 		$("#event_table").show();
-	}
-
-	function event_list_page(){
-		
-		event_len = all_event.length;
-     	event_point = 0;
-     	createShowingTable();
+		$("#content_eventlist").show();
 	}
 
 	var all_event;
 	var event_len;
 	var event_point = 0;
+	function event_list_page(){
+		
+     	event_point = 1;
+     	console.log(event_len);
+     	createShowingTable();
+	}
+
 	function createShowingTable(){
 		var tableStr = "";
-
+		var excp = '';
 	    for (var i = 0; i < 10 && event_point < event_len; i++, event_point++) {
-	    	if(all_event[event_point].事件类型 != 'abnormal')
-	    		all_event[event_point].事件类型 = '普通';
+	    	var NO = event_point;
+	    	if(all_event[NO].事件类型 != 'abnormal')
+	    		excp = '异常';
 	    	else
-	    		all_event[event_point].事件类型 = '异常'
-	      	tableStr += "<tr><td width='10%'>" + all_event[event_point].时间 + "</td>"
-	          + "<td width='10%'>" + all_event[event_point].街道 + "</td>"
-	          + "<td width='15%'>" + all_event[event_point].社区 + "</td>"
-	          + "<td width='15%'>" + all_event[event_point].来源 + "</td>"
-	          + "<td width='15%'>" + all_event[event_point].小类名称 + "</td>"
-	          + "<td width='5%'>" + all_event[event_point].性质 + "</td>"
-	          + "<td width='10%'>" + all_event[event_point].处置部门 + "</td>"
-	          + "<td width='10%'>" + all_event[event_point].事件类型 + "</td>"
+	    		excp = '';
+	      	tableStr += "<tr><td width='10%'>" + all_event[NO].时间.split('.')[0] + "</td>"
+	          + "<td width='10%'>" + all_event[NO].街道 + "</td>"
+	          + "<td width='15%'>" + all_event[NO].社区 + "</td>"
+	          + "<td width='15%'>" + all_event[NO].来源 + "</td>"
+	          + "<td width='15%'>" + all_event[NO].小类名称 + "</td>"
+	          + "<td width='5%'>" + all_event[NO].性质 + "</td>"
+	          + "<td width='10%'>" + all_event[NO].处置部门 + "</td>"
+	          + "<td width='10%'>" + excp + "</td>"
 	          + "<td width='10%'>"
-	          + "<button class='btn btn-success' onclick='javascript:finish_one(" + all_event[event_point].id + ")'>标记为已结办</button> "
+	          + "<button class='btn btn-success' onclick='javascript:finish_one(" + all_event[NO].id + ")'>标记为已结办</button> "
 	          + "</td>" + "</tr>";
 	    }
 	    event_point--;
@@ -201,7 +199,7 @@ document.getElementById('time_box').onmousewheel = function(){
 			alert("已经是最前面了哦");
 		}
 		else{
-			user_point -= ( 10 + parseInt(event_point % 10) );
+			event_point -= ( 10 + parseInt(event_point % 10) );
 			createShowingTable(all_event);
 		}
 	}
@@ -405,6 +403,7 @@ function canvas_change(){
 				}
 				console.log(dataType);
 				var colors = 0x24f213;
+				var series = [];
 				for(var i=0;i<dataType.length;i++){
 					colors += 0x234567;
 					colors = colors & 0xffffff;
@@ -435,9 +434,10 @@ function canvas_change(){
 							
 					};
 					//console.log(dataType[i],sery);
-					paint_bar(dataType[i],sery);
+					series.push(sery);
 					//console.log(i);
 				}
+				paint_bar(dataType,series);
 			}
 			else{
 				alert("连接失败");
@@ -476,6 +476,8 @@ function canvas_change(){
 				}
 				console.log(dataType);
 				var colors = 0x24f213;
+				var series = [];
+				var dataType_20 = [];
 				for(var i=0;i<dataType.length;i++){
 					console.log(dataType[i],sery);
 					colors += 0x234567;
@@ -507,9 +509,13 @@ function canvas_change(){
 							
 					};
 					//console.log(dataType[i],sery);
-					paint_bar_month(dataType[i],sery);
+					series.push(sery);
+					if(dataType_20.length<=20){
+						dataType_20.push(dataType[i]);
+					}
 					//console.log(i);
 				}
+				paint_bar_month(dataType_20,series);
 			}
 			else{
 				alert("连接失败");
@@ -626,20 +632,18 @@ function canvas_change(){
 	        color:"yellow",
 	        series: []
 	    };
-	function paint_bar_month(dataType,sery){
+	function paint_bar_month(dataType_20,series){
 		//console.log(sery);
 	    var edubalance = echarts.init(document.getElementById('edubalance'));
-		bar_option_month.series.push(sery);
-		if(bar_option_month.legend.data.length<20){
-			bar_option_month.legend.data.push(dataType);
-		}
+		bar_option_month.series = series;
+		bar_option_month.legend.data = dataType_20
 		edubalance.setOption(bar_option_month);
 	}
-	function paint_bar(dataType,sery){
+	function paint_bar(dataType,series){
 		//console.log(sery);
 	    var edubalance = echarts.init(document.getElementById('edubalance'));
-		bar_option.series.push(sery);
-		bar_option.legend.data.push(dataType);
+		bar_option.series = series;
+		bar_option.legend.data = dataType;
 		edubalance.setOption(bar_option);
 	}
 
