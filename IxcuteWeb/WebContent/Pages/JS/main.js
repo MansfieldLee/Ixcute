@@ -138,7 +138,7 @@ document.getElementById('time_box').onmousewheel = function(){
 	function finish_event(event){
 		var tableStr = "";
 	 	if(event.事件类型)
-	 		event.事件类型 = '';
+	 		event.事件类型 = '普通';
     	else
     		event.事件类型 = '异常'
       	tableStr += "<tr><td width='10%'>" + event.时间 + "</td>"
@@ -163,20 +163,6 @@ document.getElementById('time_box').onmousewheel = function(){
 	}
 
 	function event_list_page(){
-//		$.ajax({
-//	        url : "NoDeal",
-//	        type : "POST",
-//	        success : function(data) {
-//	          //调用创建表和填充动态填充数据的方法.
-//	         	all_event = data;
-//	         	event_len = all_event.length;
-//	         	event_point = 0;
-//	      	    createShowingTable(all_event);
-//	      	  },
-//	      	  error : function(){
-//	     	  	alert("出错！！");
-//	      	  }
-//	    });
 		
 		event_len = all_event.length;
      	event_point = 0;
@@ -191,7 +177,7 @@ document.getElementById('time_box').onmousewheel = function(){
 
 	    for (var i = 0; i < 10 && event_point < event_len; i++, event_point++) {
 	    	if(all_event[event_point].事件类型 != 'abnormal')
-	    		all_event[event_point].事件类型 = '';
+	    		all_event[event_point].事件类型 = '普通';
 	    	else
 	    		all_event[event_point].事件类型 = '异常'
 	      	tableStr += "<tr><td width='10%'>" + all_event[event_point].时间 + "</td>"
@@ -232,7 +218,28 @@ document.getElementById('time_box').onmousewheel = function(){
 
 	
 	function finish_one(event_id){
-		
+		$.ajax({
+		    url:"",     //请求后台的地址
+		    type:"post",    //请求方式
+		    data:{    //这里是你要传给后台的data值
+		        "event_id":event_id
+		    },
+
+		    dataType:"json",    //数据类型为json类型
+		    success:function(result){    //成功时返回的data值，注意这个data是后台返回的值，上面的data是要传给后台的值
+		        if(result){    //如果后台返回的data.SuccessCode不等于0执行后面的语句
+		            alert("成功");
+		            event_list_page();
+		        }else{
+					alert("失败");
+		        }
+		    },
+
+		    error:function(result){   //请求失败执行的操作
+		     	  	alert("出错！！");
+		    }
+
+		});
 	}
 
 
